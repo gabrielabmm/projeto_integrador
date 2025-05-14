@@ -16,7 +16,6 @@ CREATE TYPE escolaridade AS ENUM (
   'Ensino Superior Completo'
 );
 
-
 CREATE TABLE paciente_infos (
   id SERIAL PRIMARY KEY, 
 
@@ -29,7 +28,9 @@ CREATE TABLE paciente_infos (
   ddd CHAR(2) NOT NULL, 
   telefone CHAR(9) NOT NULL, 
   nacionalidade VARCHAR(100) NOT NULL, 
-  uf tipo_uf NOT NULL, 
+  uf tipo_uf NOT NULL,
+  raca_cor raca_cor,
+  escolaridade escolaridade, 
 
   nome_mae VARCHAR(150), 
   logradouro VARCHAR(255), 
