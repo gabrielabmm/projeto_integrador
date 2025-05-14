@@ -1,42 +1,45 @@
 CREATE TYPE tipo_uf AS ENUM (
-  'AC','AL','AP','AM','BA','CE','DF','ES','GO','MA',
-  'MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN',
-  'RS','RO','RR','SC','SP','SE','TO'
+  'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA',
+  'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN',
+  'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
 );
 
 CREATE TYPE raca_cor AS ENUM (
- 	'Branca', 'Preta', 'Parda', 'Indigena', 'Outros'  
+  'Branca', 'Preta', 'Parda', 'Indigena', 'Outros'
 );
 
-
 CREATE TYPE escolaridade AS ENUM (
- 'Analfabeta', 'Ensino Fundamental Incompleto', 'Ensino Fundamental Completo', 'Ensino Médio Completo', 'Ensino Superior Completo'  
+  'Analfabeta', 
+  'Ensino Fundamental Incompleto', 
+  'Ensino Fundamental Completo', 
+  'Ensino Médio Completo', 
+  'Ensino Superior Completo'
 );
 
 
 CREATE TABLE paciente_infos (
-  id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY, 
 
-  cartao_sus VARCHAR(15) NOT NULL,
-  cpf_paciente CHAR(11) NOT NULL,
-  nome_completo VARCHAR(150) NOT NULL,
-  data_nascimento DATE NOT NULL,
-  idade INT NOT NULL,
-  cep VARCHAR(8) NOT NULL,
-  ddd INT NOT NULL,
-  telefone VARCHAR(9) NOT NULL,
-  nacionalidade VARCHAR(100) NOT NULL,
-  uf tipo_uf NOT NULL,
+  cartao_sus VARCHAR(15) NOT NULL, 
+  cpf_paciente CHAR(11) NOT NULL, 
+  nome_completo VARCHAR(150) NOT NULL, 
+  data_nascimento DATE NOT NULL, 
+  idade INT GENERATED ALWAYS AS (DATE_PART('year', AGE(data_nascimento))) STORED,
+  cep CHAR(8) NOT NULL,
+  ddd CHAR(2) NOT NULL, 
+  telefone CHAR(9) NOT NULL, 
+  nacionalidade VARCHAR(100) NOT NULL, 
+  uf tipo_uf NOT NULL, 
 
-  nome_mae VARCHAR,
-  logradouro VARCHAR,
-  numero_residencia VARCHAR,
-  complemento VARCHAR,
-  nome_social VARCHAR,
-  setor VARCHAR,
-  cod_municipio VARCHAR,
-  municipio VARCHAR,
-  ponto_referencia VARCHAR,
+  nome_mae VARCHAR(150), 
+  logradouro VARCHAR(255), 
+  numero_residencia VARCHAR(20), 
+  complemento VARCHAR(100), 
+  nome_social VARCHAR(150), 
+  setor VARCHAR(100), 
+  cod_municipio CHAR(7), 
+  municipio VARCHAR(100), 
+  ponto_referencia VARCHAR(255), 
 
   CONSTRAINT un_cartao_sus_cpf_paciente UNIQUE (cartao_sus, cpf_paciente)
 );
