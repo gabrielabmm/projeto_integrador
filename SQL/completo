@@ -117,7 +117,7 @@ CREATE TYPE tipo_usuario AS ENUM ('paciente', 'profissional');
 CREATE TABLE usuario (
   id SERIAL PRIMARY KEY,
   tipo tipo_usuario NOT NULL,
-  ref_id INTEGER NOT NULL,  -- paciente_infos.id OU profissional_saude.id
+  ref_id INTEGER NOT NULL,  
   CPF CHAR(11) NOT NULL UNIQUE,
   senha TEXT NOT NULL 
 );
