@@ -82,18 +82,18 @@ CREATE TABLE exame_citopatologico (
   id_profissional INTEGER REFERENCES profissional_saude(id),
   paciente_id INTEGER REFERENCES paciente_infos(id),
 
-  motivo_exame tipo_exame,
-  primeira_vez_exame resposta_simples,
-  usa_diu resposta_simples,
-  usa_anticoncepcional resposta_simples,
-  esta_gestante resposta_simples,
-  usa_hormonio resposta_simples,
-  ja_fez_radioterapia resposta_simples,
+  motivo_exame tipo_exame NOT NULL,
+  primeira_vez_exame resposta_simples NOT NULL,
+  usa_diu resposta_simples NOT NULL,
+  usa_anticoncepcional resposta_simples NOT NULL,
+  esta_gestante resposta_simples NOT NULL,
+  usa_hormonio resposta_simples NOT NULL,
+  ja_fez_radioterapia resposta_simples NOT NULL,
 
   data_ultima_menstruacao DATE,
-  esta_menopausa resposta_menopausa,
-  teve_corrimento resposta_corrimento,
-  teve_sangramento_anormal resposta_sangramento,
+  esta_menopausa resposta_menopausa NOT NULL,
+  teve_corrimento resposta_corrimento NOT NULL,
+  teve_sangramento_anormal resposta_sangramento NOT NULL,
 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
