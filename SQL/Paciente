@@ -23,7 +23,6 @@ CREATE TABLE paciente_infos (
   cpf_paciente CHAR(11) NOT NULL, 
   nome_completo VARCHAR(150) NOT NULL, 
   data_nascimento DATE NOT NULL, 
-  idade INT GENERATED ALWAYS AS (DATE_PART('year', AGE(data_nascimento))) STORED,
   cep CHAR(8) NOT NULL,
   ddd CHAR(2) NOT NULL, 
   telefone CHAR(9) NOT NULL, 
