@@ -1,0 +1,81 @@
+/* Fonte base e centralização */
+/* Configura o corpo da página */
+body {
+    font-family: 'Roboto', sans-serif; /* fonte principal */
+    background-color: #f7f9f9; /* cor do fundo da tela */
+    display: flex; /* ativa o flexbox para centralizar */
+    justify-content: center; /* centraliza horizontalmente */
+    align-items: center; /* centraliza verticalmente */
+    height: 100vh; /* altura total da tela */
+    margin: 0; /* tira margem padrão do navegador */
+}
+
+/* Caixa branca central com sombra e borda arredondada */
+#campos-beneficiario {
+    background-color: white; /* fundo branco da caixa */
+    padding: 40px; /* espaço interno da caixa */
+    border-radius: 14px; /* cantos arredondados */
+    box-shadow: 0 5px 14px rgba(49, 49, 49, 0.842); /* sombra ao redor */
+    width: 400px; /* largura da caixa */
+    box-sizing: border-box; /* inclui padding e borda dentro da largura total */
+}
+
+/* Link de voltar no topo */
+.voltar {
+    font-size: 16px; /* tamanho da fonte do link */
+    text-decoration: none; /* tira o sublinhado do link */
+    color: rgb(0, 0, 0); /* cor preta para o texto */
+    display: block; /* faz o link ocupar uma linha inteira */
+    margin-bottom: 18px; /* espaço embaixo do link */
+}
+
+/* Título principal */
+h1 {
+    font-weight: bold; /* deixa em negrito */
+    font-size: 28px; /* tamanho grande */
+    margin: 0 0 14px 0; /* margem inferior para separar do texto */
+}
+
+/* Texto explicando o que fazer */
+p {
+    font-size: 16px; /* tamanho da letra do parágrafo */
+    margin-bottom: 24px; /* espaço depois do parágrafo */
+}
+
+/* Texto acima do campo de email */
+label {
+    font-weight: 500; /* um pouco mais forte */
+    display: block; /* quebra linha */
+    margin-bottom: 8px; /* espaço depois do label */
+    font-size: 16px; /* tamanho da fonte */
+}
+
+/* Campo onde o usuário digita o email */
+input[type="email"] {
+    width: 100%; /* ocupa toda a largura disponível */
+    padding: 14px; /* espaço dentro do campo */
+    border: 1px solid #bbb; /* borda cinza clara */
+    border-radius: 8px; /* bordas arredondadas */
+    background-color: #b7e9b4; /* fundo verde claro */
+    font-size: 16px; /* tamanho do texto digitado */
+    margin-bottom: 24px; /* espaço abaixo do campo */
+    box-sizing: border-box; /* considera padding e borda dentro da largura */
+}
+
+/* Botão para enviar o código */
+button[type="submit"] {
+    width: 100%; /* ocupa toda a largura */
+    background-color: #48AD45; /* verde do botão */
+    color: white; /* texto branco */
+    padding: 14px; /* espaço interno */
+    border: none; /* sem borda */
+    border-radius: 20px; /* bordas arredondadas */
+    font-weight: bold; /* texto em negrito */
+    cursor: pointer; /* mostra o cursor de clique */
+    font-size: 16px; /* tamanho da fonte */
+}
+
+/* Efeito quando o mouse passa por cima do botão */
+button[type="submit"]:hover {
+    background-color: #3a933a; /* muda para um verde mais escuro */
+}
