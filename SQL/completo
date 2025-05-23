@@ -124,7 +124,7 @@ CREATE TABLE usuario (
   senha TEXT NOT NULL 
 );
 
-ALTER TABLE usuarios ADD CONSTRAINT senha CHECK (
+ALTER TABLE usuario ADD CONSTRAINT senha CHECK (
   senha ~ '[A-Z]'
   AND senha ~ '[a-z]'
   AND senha ~ '[0-9]'
