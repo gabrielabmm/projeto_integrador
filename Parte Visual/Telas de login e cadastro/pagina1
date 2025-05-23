@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+  <!-- importando fontes-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@400&display=swap" />
+</head>
+<body>
+
+  <!-- Dividindo tudo em classes para facilitar o css -->
+    <a href="#" class="voltar">&lt; Voltar</a>
+
+    <div class="header-login">
+        <img src="logo.png" class="logo" alt="Logo do SIDCC" />
+        <h1 class="titulo">
+          <!-- cada letra separada para colorir de cores diferes -->
+            <span class ="letra-s">S</span> 
+            <span class ="letra-i">I</span> 
+            <span class ="letra-d">D</span> 
+            <span class ="letra-c">C</span> 
+            <span class ="letra-c">C</span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <form action="">
+            <div class="tipo-usuario">
+                <label>
+                  <!-- radio para marcar -->
+                    <input type="radio" name="tipo" checked />
+                    <span class="check check-beneficiario">✔</span>
+                    Sou beneficiário
+                </label>
+
+                <label>
+                    <input type="radio" name="tipo" />
+                    <span class="check check-instituicao">✔</span>
+                    Sou instituição
+                </label>
+            </div>
+
+            <label for="login">Login:</label> <input type="text" id="login" placeholder="Seu login aqui" />
+            <label for="senha">Senha:</label> <input type="password" id="senha" placeholder="Sua senha aqui" />
+            
+            <button type="submit">Continuar</button>
+
+            <p class="links-adicionais">
+                <a href="#">Esqueci minha senha</a> | 
+                <a href="#">Ainda não sou cadastrado</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Script para gerenciar a seleção dos radio buttons (o marcador amarelo)
+        document.querySelectorAll('input[name="tipo"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Remove a classe 'selected' de todos os marcadores
+                document.querySelectorAll('.check').forEach(box => {
+                    box.classList.remove('selected');
+                });
+
+                // Adiciona a classe 'selected' ao marcador do radio selecionado
+                if (this.checked) {
+                    this.nextElementSibling.classList.add('selected');
+                }
+            });
+        });
+        // Acionar o evento change na carga da página para o radio button checked por padrão
+        document.querySelector('input[name="tipo"]:checked').dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>
