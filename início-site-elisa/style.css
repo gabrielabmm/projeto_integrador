@@ -507,3 +507,108 @@ body {
 .terms-section ul li {
     margin-bottom: 8px;
 }
+/* Estilos específicos para a página de Política de Privacidade */
+.page-update-date { /* Estilo para a data de atualização */
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 10px; /* Espaço antes do conteúdo principal da política */
+    font-style: italic;
+}
+
+.content-wrapper { /* O <article> que envolve todas as seções da política/termos */
+    margin-top: 10px;
+}
+
+.content-wrapper > p:first-of-type { /* O primeiro parágrafo introdutório */
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+.content-section { /* Estilo para cada seção principal (1. Informações, 2. Como Utilizamos...) */
+    margin-bottom: 30px;
+}
+
+.content-section h2 {
+    font-size: 1.6em;
+    color: #000;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.content-section h3 { /* Para subtítulos dentro de uma seção */
+    font-size: 1.3em;
+    color: #111;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.content-section p {
+    font-size: 1em;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 15px;
+}
+.content-section p:last-child {
+    margin-bottom: 0;
+}
+
+.content-section ul {
+    list-style: disc;
+    padding-left: 25px;
+    margin-top: 0; 
+    margin-bottom: 15px;
+    line-height: 1.7;
+    color: #444;
+}
+
+.content-section ul li {
+    margin-bottom: 8px;
+}
+/* Estilos específicos para a página de FAQ*/
+.faq-page h1 { /* Estilo para o título principal "Dúvidas Frequentes (FAQ)" */
+    font-size: 2.5em;   /* Tamanho grande, como no PDF */
+    font-weight: bold;  /* Negrito */
+    color: #222;       /* Cor escura */
+    margin-bottom: 25px; /* Espaço abaixo do título principal */
+}
+
+.faq-section {
+    margin-bottom: 30px; /* Espaço entre cada conjunto de pergunta e resposta */
+}
+
+.faq-section h2 { /* Para os títulos das perguntas*/
+    font-size: 1.6em;  /* Tamanho da fonte para as perguntas, ajuste conforme o PDF */
+    font-weight: bold; /* Perguntas em negrito */
+    color: #333333;   
+    margin-bottom: 10px; /* Espaço entre a pergunta e o início da resposta */
+    line-height: 1.3;  /* Espaçamento entre linhas se a pergunta tiver mais de uma linha */
+}
+
+.faq-section p {
+    font-size: 1em;    /* Tamanho padrão para o texto das respostas */
+    line-height: 1.6;  
+    color: #444444;    
+    margin-bottom: 10px; /* Espaçamento padrão abaixo dos parágrafos de resposta */
+}
+
+.faq-section p:last-of-type { /* Se o parágrafo for o último elemento da resposta */
+    margin-bottom: 0;
+}
+
+.faq-section ul {
+    list-style-type: disc; /* Marcador de bolinha (•)*/
+    padding-left: 25px;    /* Recuo para a lista */
+    margin-top: 5px;       /* Espaço se a lista vier após um parágrafo introdutório */
+    margin-bottom: 0;      /* Se a lista for o último elemento da resposta */
+    color: #444444;
+    line-height: 1.6;
+}
+
+.faq-section ul li {
+    margin-bottom: 8px; /* Espaço entre os itens da lista */
+}
+.faq-section ul li:last-child {
+    margin-bottom: 0;
+}
