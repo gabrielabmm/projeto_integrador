@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Código</title>    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="campos-email-esqueci-senha">
+        <a href="esqueci-senha.html" class="voltar">&lt; Voltar</a>
+
+        <h1>Redefinição de Senha!</h1>
+
+        <p>Insira aqui o código recebido
+anteriormente por email.</p>
+
+        <label for="codigoInput">Código:</label>
+        <input type="text" id="codigoInput" placeholder="Ex: 123456" required maxlength="6">
+        <span class="error-message" id="codigoError"></span>
+        
+        <div class="success-message" id="codigoSuccessMessage" style="display: none;">
+            Código válido! Redirecionando...
+        </div>
+
+        <button type="submit" id="verificarCodigoBtn">Verificar Código</button>
+        
+        <div class="reenviar-codigo-container">
+            <button type="button" id="reenviarCodigoBtn" class="small-blue-button" disabled>
+                Reenviar Código (<span id="countdown">60</span>s)
+            </button>
+            <span class="reenviar-info" id="reenviarInfo"></span>
+        </div>
+    </div>
+
+    <script src="geral.js"></script>
+</body>
+</html>
