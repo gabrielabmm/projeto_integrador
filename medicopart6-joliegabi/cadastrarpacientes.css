@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ccc;
+}
+
+.grupo-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+
+.logo {
+  height: 40px;
+}
+
+
+.icone-perfil {
+  width: 32px;
+  height: 32px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.conteudo {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.conteudo h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.cartao {
+  display: flex;
+  background-color: #b7e3b7;
+  padding: 30px;
+  border-radius: 20px;
+  gap: 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  background: #eee;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.nome {
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.botao {
+  background-color: #2e8b57;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.botao:hover {
+  background-color: #267448;
+}
+
+.info-formulario {
+  flex: 1;
+}
+
+.info-formulario h3 {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.grade-formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 20px;
+  margin-bottom: 25px;
+}
+
+.grade-formulario label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.grade-formulario input {
+  padding: 10px 14px;
+  border-radius: 20px; 
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.grade-formulario input::placeholder {
+  color: #2e8b57; 
+  opacity: 1; 
+}
+
+.largura-total {
+  grid-column: span 2;
+}
+
+.botao {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  width: 100%;
+  padding-right: 40px;
+}
+
+
+
