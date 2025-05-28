@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDCC</title>
+    <link rel="stylesheet" href="resultados-exame.css">
+</head>
+
+<body>
+    <section class="lista-cartao-exame">
+        <!-- EM ANÁLISE -->
+            <article class="cartao-exame">
+                <!-- Status do exame -->
+                <header class="cartao-exame__cabecalho">
+                    <div class="cartao-exame__status">
+                        <!-- Indicador do status -->
+                        <span class="cartao-exame__indicador-status cartao-exame__indicador-status--analise"></span>
+                        <!-- Texto destacado -->
+                        <strong class="cartao-exame__texto-status">Em análise</strong>
+                    </div>
+                    <span class="cartao-exame__protocolo">N° de protocolo: 000080</span>
+                </header>
+
+                <!-- Informações do exame -->
+                <div class="cartao-exame__info">
+                    <p><strong>Médico: </strong> Maria da Silva</p>
+                    <p><strong>Exame: </strong> Papanicolau</p>
+                    <p><strong>Laboratório: </strong> LabHealth</p>
+                    <p><strong>Data da coleta: </strong> 20/05/2025</p>
+                </div>
+
+                <!-- Botões -->
+                <footer class="cartao-exame__acoes">
+                    <button class="cartao-exame__botao cartao-exame__botao--desabilitado">Baixar resultado</button>
+                    <button class="cartao-exame__botao cartao-exame__botao--desabilitado">Mais detalhes</button>
+                </footer>
+            </article>
+
+
+            <!-- DISPONÍVEL -->
+            <article class="cartao-exame">
+                <!-- Status do exame -->
+                <header class="cartao-exame__cabecalho">
+                    <div class="cartao-exame__status">
+                        <!-- Indicador do status -->
+                        <span class="cartao-exame__indicador-status cartao-exame__indicador-status--disponivel"></span>
+                        <!-- Texto destacado -->
+                        <strong class="cartao-exame__texto-status">Disponível</strong>
+                    </div>
+                    <span class="cartao-exame__protocolo">N° de protocolo: 091207</span>
+                </header>
+
+                <!-- Informações do exame -->
+                <div class="cartao-exame__info">
+                    <p><strong>Médico: </strong> Ana Lopes</p>
+                    <p><strong>Exame: </strong> Papanicolau</p>
+                    <p><strong>Laboratório: </strong> LabHealth</p>
+                    <p><strong>Data da coleta: </strong> 12/06/2024</p>
+                </div>
+
+                <!-- Botões -->
+                <footer class="cartao-exame__acoes">
+                    <button class="cartao-exame__botao cartao-exame__botao--habilitado">Baixar resultado</button>
+                    <button class="cartao-exame__botao cartao-exame__botao--habilitado">Mais detalhes</button>
+                </footer>
+            </article>
+    </section>
+</body>
+</html>
