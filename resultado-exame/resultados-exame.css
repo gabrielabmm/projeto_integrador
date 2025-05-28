@@ -45,6 +45,7 @@
   background-color: var(--bg-primario);
   padding: 15px 0;
   border-bottom: 1px solid var(--divisoria);
+  /* Mantém o cabeçalho na posição durante a rolagem */
   position: sticky;
   top: 0;
 }
