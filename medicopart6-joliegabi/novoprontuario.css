@@ -1,0 +1,170 @@
+body {
+  margin: 0px;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+.back-link__voltar {
+  align-items: center;
+  color: #48AD45;
+  font-weight: bold;
+  margin: 30px;
+  text-decoration: none;
+}
+
+.title {
+  align-items: right;
+  color: #48AD45;
+  margin: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #B0E3AE;
+  border-radius: 50px;
+  padding-left: 20px;
+  margin: 30px;
+  overflow: hidden;
+  width: 400px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.search-bar__input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 16px;
+  color: #3A5A40;
+}
+
+.search-bar__input::placeholder {
+  color: #557C55;
+  opacity: 1;
+}
+
+.search-bar__button {
+  background-color: #B0E3AE;
+  border: none;
+  padding: 13px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-bar__button:hover {
+  background-color: #B0E3AE;
+}
+
+.search-bar__icon {
+  display: block;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  height: 40px;
+}
+
+.menu a {
+  margin: 0 10px;
+  text-decoration: underline;
+  color: #000;
+}
+
+.icone-perfil {
+  height: 30px;
+  vertical-align: top;
+}
+
+.botao-perfil button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rodape {
+  background-color: #b0e3ae;
+  border-top: 1px solid #ccc;
+  padding: 40px 10%;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.rodape-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.coluna {
+  flex-basis: 30%;
+  margin-bottom: 20px;
+  min-width: 150px;
+}
+
+.coluna h4 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #000;
+  font-weight: bold;
+}
+
+.coluna ul {
+  list-style: none;
+  padding: 0;
+}
+
+.coluna ul li {
+  margin-bottom: 8px;
+}
+
+.coluna ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.coluna ul li a:hover {
+  text-decoration: underline;
+}
+
+.redes-sociais a {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.redes-sociais img {
+  width: 24px;
+  height: 24px;
+}
+
+.links-e-perfil {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  margin: 0px;
+}
