@@ -1,22 +1,21 @@
-/* Estilos Gerais  */
 body {
-    font-family: Arial, sans-serif; /* Fonte similar à da imagem, ajuste se necessário */
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #333; /* Cor de texto padrão */
+    color: #333;
 }
 
 .container {
     width: 90%;
-    max-width: 1100px; /* Ajuste conforme o layout */
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-/* Estilos do Cabeçalho */
+
 .site-header {
-    background-color: #fff; /* Fundo branco */
+    background-color: #fff;
     padding: 15px 0;
-    border-bottom: 1px solid #eee; /* Linha divisória sutil */
+    border-bottom: 1px solid #eee;
 }
 
 .header-container {
@@ -24,72 +23,71 @@ body {
     align-items: center;
 }
 
-/* Estilo opcional para o container do texto do logo, se você usou .logo-text-sidcc */
+
 .logo-text-sidcc {
-    font-weight: bold; /* Exemplo: deixar o texto em negrito */
-    font-size: 24px;   /* Exemplo: ajustar o tamanho da fonte do texto */
-    /* Mantenha o alinhamento com a imagem, se necessário */
-    vertical-align: middle; /* Tenta alinhar o texto com o meio da imagem */
-    margin-left: 8px; /* Espaço entre a imagem e o texto colorido */
+    font-weight: bold;
+    font-size: 24px;  
+    vertical-align: middle;
+    margin-left: 8px;
 }
 
-/* Cores para cada letra de SIDCC */
+
 .logo-text-sidcc .char-s {
-    color: #48AD45; /* Verde - Exemplo de cor */
+    color: #48AD45;
 }
 
 .logo-text-sidcc .char-i {
-    color: #F9BD14; /* Amarelo - Exemplo de cor */
+    color: #F9BD14;
 }
 
 .logo-text-sidcc .char-d {
-    color: #2864AE; /* Azul - Exemplo de cor */
+    color: #2864AE;
 }
 
 .logo-text-sidcc .char-c1 {
-    color: #000; /* Preto*/
+    color: #000;
 }
 
 .logo-text-sidcc .char-c2 {
-    color: #000; /* Preto */
+    color: #000;
 }
 
-/* Ajuste para o alinhamento vertical se a imagem e o texto não estiverem alinhados */
+
 .logo {
     display: flex;
     align-items: center;
-    margin-right: auto; /* ADICIONE ESTA LINHA! */
+    margin-right: auto;
 }
 
 .logo img {
-    height: 40px; /* Ajuste a altura da sua imagem de logo conforme necessário */
+    height: 40px;
     width: auto;
 }
 .main-nav{
     margin-right: 20px;
 }
 .main-nav ul {
-    display: flex;     
+    display: flex;   
     list-style: none;
     padding: 0;
-    margin: 0;     
+    margin: 0;   
 }
 .main-nav ul li {
     margin-left: 20px; 
 }
-                           
+                               
 .main-nav ul li:first-child {
     margin-left: 0;
 }
 
 .main-nav ul li a {
     text-decoration: none;
-    color: #636363; /* Cor dos links de navegação */
+    color: #636363;
     font-weight: bold;
 }
 
 .main-nav ul li a:hover {
-    color: #000; /* Cor ao passar o mouse */
+    color: #000;
 }
 
 .btn {
@@ -101,16 +99,16 @@ body {
 }
 
 .btn-login {
-    background-color: #48AD45; /* Verde do botão login */
+    background-color: #48AD45;
     color: #fff;
 }
 
 .btn-login:hover {
-    background-color: #3c8040; /* Verde um pouco mais escuro ao passar o mouse */
+    background-color: #3c8040;
 }
-/* Estilos do Rodapé */
+
 .site-footer {
-    background-color: #B0E3AE; /* Verde bem claro do rodapé */
+    background-color: #B0E3AE;
     padding: 40px 0;
     color: #333;
     font-size: 14px;
@@ -119,11 +117,11 @@ body {
 .footer-container {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap; /* Para responsividade */
+    flex-wrap: wrap;
 }
 
 .footer-logo-social {
-    flex-basis: 25%; /* Ajuste conforme necessário */
+    flex-basis: 25%;
     margin-bottom: 20px;
 }
 
@@ -139,19 +137,19 @@ body {
 }
 
 .social-icons img {
-    width: 24px; /* Tamanho dos ícones sociais */
+    width: 24px;
     height: 24px;
 }
 
 .footer-links {
     display: flex;
     justify-content: space-between;
-    flex-basis: 70%; /* Ajuste conforme necessário */
+    flex-basis: 70%;
     flex-wrap: wrap;
 }
 
 .footer-column {
-    flex-basis: 30%; /* Para três colunas */
+    flex-basis: 30%;
     margin-bottom: 20px;
     min-width: 150px;
 }
@@ -159,7 +157,7 @@ body {
 .footer-column h4 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #000; /* Títulos das colunas um pouco mais escuros */
+    color: #000;
     font-weight: bold;
 }
 
@@ -183,7 +181,7 @@ body {
     text-decoration: underline;
 }
 
-/* Ajustes para telas menores (exemplo) */
+
 @media (max-width: 768px) {
     .header-container {
         flex-direction: column;
@@ -218,16 +216,16 @@ body {
         flex-direction: column;
     }
 }
-/* --- ESTILOS ESPECÍFICOS PARA A PÁGINA INICIAL --- */
+
 
 .home-page .hero-section {
-    text-align: left; /* Título principal alinhado à esquerda, como na imagem */
-    margin-bottom: 5px; /* Espaço abaixo do título/subtítulo */
+    text-align: left;
+    margin-bottom: 5px;
 }
 
 .home-page .hero-section h1 {
-    font-size: 2.8em; /* Tamanho grande para o título principal */
-    color: #222;     /* Cor escura para o título */
+    font-size: 2.8em;
+    color: #222;  
     margin-bottom: 10px;
     line-height: 1.2;
 }
@@ -235,27 +233,24 @@ body {
 .home-page .hero-section .subtitle {
     font-size: 1.2em;
     color: #555;
-    max-width: 700px; /* Limita a largura do subtítulo para melhor leitura */
+    max-width: 700px;
 }
 .home-page .main-content-columns {
-    position: relative; /* MUITO IMPORTANTE: Torna este o container de referência
-                           para o posicionamento absoluto da coluna da imagem. */
+    position: relative;
     padding-top: 2px;
-    padding-bottom: 20px; /* Adiciona um respiro na seção */
-    min-height: 500px; /* Uma altura mínima para a seção, ajuste conforme
-                          o tamanho da sua imagem e conteúdo. Isso ajuda a
-                          conter a imagem posicionada absolutamente. */
+    padding-bottom: 20px;
+    min-height: 500px;
 }
 
 .home-page .text-column {
-    width: 60%;         /* A coluna de texto ocupará cerca de 60% da largura. */
-    position: relative; /* Para que o z-index funcione corretamente. */
-    z-index: 2;         /* Garante que a coluna de texto fique NA FRENTE da imagem. */
-    background-color: rgba(255, 255, 255, 0.0); /* Fundo transparente para o texto*/
-    padding-right: 30px; /* Adiciona um espaço à direita do texto para não encostar*/
+    width: 60%;   
+    position: relative;
+    z-index: 2;   
+    background-color: rgba(255, 255, 255, 0.0);
+    padding-right: 30px;
 }
 
-/* Estilos para os Blocos de Conteúdo na Coluna de Texto (sem grandes mudanças aqui) */
+
 .home-page .content-block {
     margin-bottom: 30px;
 }
@@ -281,55 +276,45 @@ body {
 
 
 .home-page .image-column {
-    position: absolute; /* Tira a coluna da imagem do fluxo normal do documento. */
-    top: 0;             /* Alinha ao topo da seção .main-content-columns. */
-    right: 0;           /* Alinha à direita da seção .main-content-columns. */
-    width: 75%;         /* A "área" da imagem ocupará cerca de 50% da largura.
-                           Ajuste esta porcentagem para controlar o tamanho e sobreposição. */
-    height: 100%;       /* Tenta ocupar toda a altura da seção .main-content-columns. */
-    z-index: 1;         /* Garante que a coluna da imagem fique ATRÁS da .text-column. */
-    display: flex;      /* Usado para alinhar a <img> dentro desta coluna. */
-    align-items: flex-end; /* Alinha a imagem na PARTE INFERIOR da .image-column.
-                               Isso pode ajudar a simular o efeito da imagem original
-                               onde a doutora parece estar "em pé" na base. */
-    justify-content: center; /* Centraliza a imagem horizontalmente se ela for menor que a .image-column. */
+    position: absolute;
+    top: 0;      
+    right: 0;      
+    width: 75%;   
+    height: 100%;   
+    z-index: 1;   
+    display: flex;   
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .home-page .image-column img {
-    max-width: 100%;    /* A imagem não ultrapassará a largura da .image-column. */
-    height: auto;       /* Mantém a proporção da imagem ao ajustar a largura. */
-                        /* Para fazer a imagem 'ficar maior' e potencialmente 'vazar'
-                           verticalmente para baixo, você pode experimentar com: */
-    /* max-height: 110%; */ /* Exemplo: permite que a imagem seja 10% mais alta que a .image-column */
-    /* object-fit: contain; */ /* Garante que toda a imagem seja visível, mesmo que não preencha o espaço */
+    max-width: 100%;  
+    height: auto;   
 }
 
 
-/* --- Media Query para Responsividade --- */
-/* Em telas menores, provavelmente vamos querer que a imagem volte para o fluxo normal,
-   abaixo do texto, para evitar sobreposições complicadas. */
-@media (max-width: 992px) { /* Ajuste este ponto de quebra conforme necessário */
+
+@media (max-width: 992px) {
     .home-page .text-column {
-        width: 100%;        /* Coluna de texto ocupa toda a largura. */
-        padding-right: 0;   /* Remove o padding extra. */
+        width: 100%;   
+        padding-right: 0;  
     }
 
     .home-page .image-column {
-        position: relative; /* Volta a imagem para o fluxo normal do documento. */
-        width: 80%;         /* Largura da imagem em telas menores. */
-        height: auto;       /* Altura automática. */
-        margin: 30px auto 0 auto; /* Centraliza a imagem e adiciona espaço acima. */
-        order: 2;           /* Se você quiser que a imagem venha depois do texto. */
-        align-items: center; /* Centraliza a imagem verticalmente. */
+        position: relative;
+        width: 80%;    
+        height: auto;   
+        margin: 30px auto 0 auto;
+        order: 2;    
+        align-items: center;
     }
 
     .home-page .image-column img {
-        max-height: 400px; /* Limita a altura máxima da imagem em telas menores. */
-        /* max-width: 100%; */ /* Garante que não ultrapasse a .image-column */
+        max-height: 400px;
     }
 
     .home-page .main-content-columns {
-        min-height: unset; /* Remove a altura mínima em telas menores */
+        min-height: unset;
     }
 }
 
@@ -338,31 +323,30 @@ body {
         max-height: 350px;
     }
 }
-/* --- ESTILOS DO BANNER DE COOKIES --- */
+
 .cookie-banner {
     position: fixed;
-    top: 0; /* Para posicionar no topo da página */
+    top: 0;
     left: 0;
     width: 100%;
-    background-color: #f1f1f1; /* Cor de fundo cinza claro/branco para o banner */
+    background-color: #f1f1f1;
     padding: 15px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Sombra sutil abaixo do banner */
-    z-index: 2000; /* Z-index alto para garantir que fique sobre todos os outros elementos */
-    display: none; /* Inicialmente escondido. O JavaScript irá controlar a exibição. */
-    font-size: 14px; /* Tamanho de fonte base para o banner */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 2000;
+    display: none;
+    font-size: 14px;
 }
 
-.cookie-banner-content { /* Usa a classe .container para alinhar e limitar a largura */
+.cookie-banner-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Para quebrar em telas menores */
-    gap: 15px; /* Espaço entre o texto e os botões quando lado a lado */
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .cookie-text {
-    flex: 1 1 60%; /* Permite que o texto cresça mas tenha uma base de 60% */
-    /* max-width: 700px; */ /* Uma largura máxima se necessário */
+    flex: 1 1 60%;
 }
 
 .cookie-text p {
@@ -374,11 +358,11 @@ body {
 }
 
 .cookie-text strong {
-    font-size: 1.1em; /* Destaca o título "Permitir cookies no site" */
+    font-size: 1.1em;
 }
 
 .cookie-text a {
-    color: #4CAF50; /* Cor verde do tema para o link */
+    color: #4CAF50;
     text-decoration: underline;
 }
 .cookie-text a:hover {
@@ -387,74 +371,71 @@ body {
 
 .cookie-buttons {
     display: flex;
-    flex-wrap: nowrap; /* Para não quebrar os botões em linhas separadas */
-    gap: 10px; /* Espaço entre os botões */
-    flex: 0 0 auto; /* Não permite que os botões cresçam, apenas ocupem o espaço necessário */
+    flex-wrap: nowrap;
+    gap: 10px;
+    flex: 0 0 auto;
 }
 
-.btn-cookie { /* Estilos base para os botões do banner, herdando de .btn se você tiver */
+.btn-cookie {
     padding: 8px 18px;
     border: none;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 0.9em; /* Um pouco menor que o texto base da página */
+    font-size: 0.9em;
     text-transform: uppercase;
 }
 
 .btn-cookie-decline {
-    background-color: #A5D6A7; /* Verde claro, como na referência */
-    color: #1B5E20;            /* Texto verde escuro para contraste */
+    background-color: #A5D6A7;
+    color: #1B5E20;     
 }
 .btn-cookie-decline:hover {
-    background-color: #97cba9; /* Um pouco mais escuro no hover */
+    background-color: #97cba9;
 }
 
 .btn-cookie-accept {
-    background-color: #4CAF50; /* Verde principal do site */
+    background-color: #4CAF50;
     color: white;
 }
 .btn-cookie-accept:hover {
-    background-color: #45a049; /* Verde principal um pouco mais escuro no hover */
+    background-color: #45a049;
 }
 
-/* Responsividade para o banner de cookies */
+
 @media (max-width: 768px) {
     .cookie-banner-content {
-        flex-direction: column; /* Empilha texto e botões */
+        flex-direction: column;
         text-align: center;
     }
     .cookie-text {
-        margin-bottom: 15px; /* Espaço entre o texto e os botões quando empilhados */
-        flex-basis: 100%; /* Ocupa toda a largura */
+        margin-bottom: 15px;
+        flex-basis: 100%;
     }
     .cookie-buttons {
-        justify-content: center; /* Centraliza os botões */
+        justify-content: center;
     }
 }
-.page-content { /* Você já deve ter esta classe */
+.page-content {
     padding-top: 0px;
-    padding-bottom: 60px; /* Aumentei um pouco o padding inferior para mais respiro */
+    padding-bottom: 60px;
     min-height: 60vh;
 }
 
-.page-content h1 { /* Você já deve ter esta classe */
+.page-content h1 {
     font-size: 2.5em;
     color: #333;
-    margin-bottom: 10px; /* Reduzido para aproximar do subtítulo */
-    /* border-bottom: 2px solid #4CAF50; */ /* Removido ou ajustado se não quiser a linha em todas as páginas */
-    /* padding-bottom: 10px; */
+    margin-bottom: 10px;
 }
 
-.page-top-actions { /* Para o botão Voltar */
+.page-top-actions {
     text-align: right;
     margin-top: 15px;
-    margin-bottom: 0px; /* Espaço entre o botão Voltar e o título H1 */
+    margin-bottom: 0px;
 }
 
 .btn-voltar { 
     display: inline-block;
-    /* margin-bottom: 20px; Removido daqui, controlado pelo .page-top-actions */
     color: #4CAF50;
     text-decoration: none;
     font-weight: bold;
@@ -468,51 +449,48 @@ body {
     text-decoration: none;
 }
 
-/* --- ESTILOS UNIFICADOS PARA PÁGINAS DE CONTEÚDO (Termos, Política, FAQ) --- */
 
-/* Estilo para a data de atualização e outras informações abaixo do H1 */
+
 .page-update-date {
     font-size: 0.9em;
-    color: #666;      /* Cor da Política de Privacidade */
+    color: #666;    
     margin-bottom: 10px;
-    line-height: 1.6;   /* Adicionado para consistência, ajuste se necessário */
-    font-style: italic; /* Estilo da Política de Privacidade */
+    line-height: 1.6;  
+    font-style: italic;
 }
-/* Remove margem extra do último parágrafo de informação antes do conteúdo principal */
+
 .page-content > .page-update-date:last-of-type {
-    margin-bottom: 20px; /* Espaço antes do .content-wrapper */
+    margin-bottom: 20px;
 }
 
 
-/* Wrapper para todo o conteúdo textual da página (o <article>) */
+
 .content-wrapper {
-    margin-top: 10px; /* Espaço acima do primeiro parágrafo/seção */
+    margin-top: 10px;
 }
 
-/* Primeiro parágrafo introdutório dentro do content-wrapper */
+
 .content-wrapper > p:first-of-type {
     margin-bottom: 30px;
     line-height: 1.6;
-    font-size: 1.1em; /* Texto introdutório um pouco maior */
+    font-size: 1.1em;
 }
 
-/* Para cada seção de conteúdo (ex: "1. Objetivo", "2. Informações") */
+
 .content-section {
-    margin-bottom: 30px; /* Espaço entre as seções */
+    margin-bottom: 30px;
 }
 
 .content-section h2 {
     font-size: 1.6em;
-    color: #000;         /* Cor do título da seção (da Política) */
-    font-weight: bold;    /* Adicionado para garantir negrito se não herdado */
-    margin-bottom: 15px;  /* Espaço abaixo do título da seção */
-    padding-bottom: 5px;  /* Espaço entre o texto do título e a borda, se houver */
-    border-bottom: 1px solid #eee; /* Linha sutil abaixo do título da seção (da Política).
-                                       Se não quiser a linha em NENHUMA das páginas, mude para "none".
-                                       Se quiser a linha mais escura (#444) que estava nos Termos, mude aqui. */
+    color: #000;    
+    font-weight: bold;  
+    margin-bottom: 15px; 
+    padding-bottom: 5px; 
+    border-bottom: 1px solid #eee;
 }
 
-.content-section h3 { /* Para subtítulos dentro de uma seção (ex: "a) Dados...") */
+.content-section h3 {
     font-size: 1.3em;
     color: #111;
     font-weight: bold;
@@ -522,8 +500,8 @@ body {
 
 .content-section p {
     font-size: 1em;
-    line-height: 1.7;   /* Espaçamento entre linhas para parágrafos */
-    color: #444;       /* Cor do texto do parágrafo */
+    line-height: 1.7;  
+    color: #444;   
     margin-bottom: 15px;
 }
 .content-section p:last-child {
@@ -532,13 +510,13 @@ body {
 
 .content-section ul {
     list-style: disc;
-    padding-left: 25px;   /* Recuo da lista */
-    margin-top: 10px;     /* Ajustado: antes era 0 na Política, 10 nos Termos. 10 pode ser melhor após um <p>. */
+    padding-left: 25px;  
+    margin-top: 10px;   
     margin-bottom: 15px;
-    line-height: 1.7;   /* Espaçamento entre linhas para itens da lista */
-    color: #444;       /* Cor do texto da lista */
+    line-height: 1.7;  
+    color: #444;   
 }
 
 .content-section ul li {
-    margin-bottom: 8px; /* Espaço entre itens da lista */
+    margin-bottom: 8px;
 }
