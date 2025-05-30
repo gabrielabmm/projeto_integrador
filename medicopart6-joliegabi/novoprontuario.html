@@ -27,15 +27,15 @@
   </header>
 
   <body>
-    <div class="title">
-        <h2>Novo prontuário</h2>
-    </div>
-    
-    <div class="back-link">
-        <a href="index.html"class="back-link__voltar">&lt; Voltar</a>
-    </div>
+    <div class="linha-topo">
+  <h1 class="title">Novo prontuário</h1>
+  <a href="#" class="back-link">< Voltar</a>
+</div>
+
     
     <div class="search-bar">
+  
+        
   <input type="text" class="search-bar__input" placeholder="Pesquise por um nome ou cartão SUS*">
   <button type="button" class="search-bar__button" aria-label="Pesquisar">
     <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -44,6 +44,32 @@
     </svg>
   </button>
 </div>
+
+<div class="container-botoes">
+    <button id="btnProntuario" class="botao-toggle ativo">Prontuário</button>
+    <button id="btnExame" class="botao-toggle">Pedido de Exame</button>
+  </div>
+
+  <script>
+    const btnProntuario = document.getElementById("btnProntuario");
+    const btnExame = document.getElementById("btnExame");
+
+    btnProntuario.addEventListener("click", () => {
+      btnProntuario.classList.add("ativo");
+      btnExame.classList.remove("ativo");
+    });
+
+    btnExame.addEventListener("click", () => {
+      btnExame.classList.add("ativo");
+      btnProntuario.classList.remove("ativo");
+    });
+  </script>
+ 
+<div class="caixa-prontuario">
+  <textarea id="campoProntuario" placeholder="Digite informações clínicas, observações ou outras anotações médicas..."></textarea>
+  <button id="botaoEnviar" disabled>Enviar</button>
+</div>
+
   </body>
 
   <footer class="rodape">
@@ -83,6 +109,22 @@
 
     </div>
   </footer>
+
+  <script>
+  const campo = document.getElementById('campoProntuario');
+  const botao = document.getElementById('botaoEnviar');
+
+  campo.addEventListener('input', () => {
+    if (campo.value.trim() !== '') {
+      botao.classList.add('ativo');
+      botao.disabled = false;
+    } else {
+      botao.classList.remove('ativo');
+      botao.disabled = true;
+    }
+  });
+</script>
+
 
 </body>
 </html>
