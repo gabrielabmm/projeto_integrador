@@ -9,173 +9,199 @@
 
 <body>
 
-  <header class="topo">
-    <img src="logo.png" alt="Logo SIDCC" class="logo" />
-    <nav class="menu">
-      <div class="links-e-perfil">
-        <a href="#">Início</a>
-        <a href="#">Sobre</a>
-        <a href="#">SAC</a>
-        <form action="/perfil" method="get" class="botao-perfil">
-          <button type="submit">
-            <img src="perfil.png" alt="Perfil" class="icone-perfil" />
-          </button>
-        </form>
-      </div>
-    </nav>
-  </header>
+    <header class="topo">
+        <img src="logo.png" alt="Logo SIDCC" class="logo" />
+        <nav class="menu">
+            <div class="links-e-perfil">
+                <a href="#">Início</a>
+                <a href="#">Sobre</a>
+                <a href="#">SAC</a>
+                <form action="/perfil" method="get" class="botao-perfil">
+                    <button type="submit">
+                        <img src="perfil.png" alt="Perfil" class="icone-perfil" />
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
 
 <main>
 
-  <section class="secao-agendamento">
-    <div class="topo-agendamento">
-      <div class="titulo-com-voltar">
-        <h2>Agendamento de Exames</h2>
-        <a href="#" class="back-link">&lt; Voltar</a>
-      </div>
-      <button class="btn-primary" id="btnAgendarExames">Agendar Exames</button>
+    <section class="secao-agendamento">
+        <div class="topo-agendamento">
+            <div class="titulo-com-voltar">
+                <h2>Agendamento de Exames</h2>
+                <a href="#" class="back-link">&lt; Voltar</a>
+            </div>
+            <button class="btn-primary" id="btnAgendarExames">Agendar Exames</button>
+        </div>
+
+        </section>
+
+    <div id="dateModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Selecionar Data</h3>
+            </div>
+            <div class="date-picker-content">
+                <p class="current-date-display">Terça-feira, 20 de maio de 2025</p>
+                <div class="calendar-nav">
+                    <span class="nav-arrow prev-month">&lt;</span>
+                    <span class="month-year">Maio 2025</span>
+                    <span class="nav-arrow next-month">&gt;</span>
+                </div>
+                <div class="calendar-grid">
+                    <span class="day-label">D</span>
+                    <span class="day-label">S</span>
+                    <span class="day-label">T</span>
+                    <span class="day-label">Q</span>
+                    <span class="day-label">Q</span>
+                    <span class="day-label">S</span>
+                    <span class="day-label">S</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-text" id="cancelDateSelection">Cancelar</button>
+                <button class="btn-text" id="okDateSelection">OK</button>
+            </div>
+        </div>
     </div>
 
-    <div class="modal-actions">
-      <button class="btn-text" id="cancelDateSelection">Cancelar</button>
-      <button class="btn-text" id="okDateSelection">OK</button>
-    </div>
-  </section>
 
-  <section class="secao-exames-agendados">
-    <h2 class="titulo-principal">Exames Agendados:</h2>
-  </section>
-  <div class="exam-card confirmed">
-    <div class="status-header">
-        <span class="status-dot"></span>
-        <p class="status-text">Confirmado</p>
-        <p class="protocol">Nº de protocolo: 091207</p>
-    </div>
-    <div class="exam-details">
-        <div class="detail-item">
-            <p class="label">Médico:</p>
-            <p class="value">Ana Lopes</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Exame:</p>
-            <p class="value">Preventivo</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Laboratório:</p>
-            <p class="value">LabHealth</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Data da coleta:</p>
-            <p class="value">12/06/2024</p>
-        </div>
-    </div>
-    <div class="exam-actions">
-        <button class="btn contact-btn">Contato</button>
-        <button class="btn details-btn">Mais detalhes</button>
-    </div>
-</div>
 
-<div class="exam-card confirmed">
-    <div class="status-header">
-        <span class="status-dot"></span>
-        <p class="status-text">Confirmado</p>
-        <p class="protocol">Nº de protocolo: 090909</p>
-    </div>
-    <div class="exam-details">
-        <div class="detail-item">
-            <p class="label">Médico:</p>
-            <p class="value">Joana Sousa</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Exame:</p>
-            <p class="value">Ultrassom</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Laboratório:</p>
-            <p class="value">SaúdeIdeal</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Data da coleta:</p>
-            <p class="value">14/05/2024</p>
-        </div>
-    </div>
-    <div class="exam-actions">
-        <button class="btn contact-btn">Contato</button>
-        <button class="btn details-btn">Mais detalhes</button>
-    </div>
-</div>
+    <section class="secao-exames-agendados">
+        <h2 class="titulo-principal">Exames Agendados:</h2>
+    </section>
 
-<div class="exam-card cancelled">
-    <div class="status-header">
-        <span class="status-dot"></span>
-        <p class="status-text">Cancelado</p>
-        <p class="protocol">Nº de protocolo: 012345</p>
+    <div class="exam-card confirmed">
+        <div class="status-header">
+            <span class="status-dot"></span>
+            <p class="status-text">Confirmado</p>
+            <p class="protocol">Nº de protocolo: 091207</p>
+        </div>
+        <div class="exam-details">
+            <div class="detail-item">
+                <p class="label">Médico:</p>
+                <p class="value">Ana Lopes</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Exame:</p>
+                <p class="value">Preventivo</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Laboratório:</p>
+                <p class="value">LabHealth</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Data da coleta:</p>
+                <p class="value">12/06/2024</p>
+            </div>
+        </div>
+        <div class="exam-actions">
+            <button class="btn contact-btn">Contato</button>
+            <button class="btn details-btn">Mais detalhes</button>
+        </div>
     </div>
-    <div class="exam-details">
-        <div class="detail-item">
-            <p class="label">Médico:</p>
-            <p class="value">Maria Joaquina</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Exame:</p>
-            <p class="value">Preventivo</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Laboratório:</p>
-            <p class="value">LabHealth</p>
-        </div>
-        <div class="detail-item">
-            <p class="label">Data da coleta:</p>
-            <p class="value">10/05/2024</p>
-        </div>
-    </div>
-    <div class="exam-actions">
-        <button class="btn contact-btn">Contato</button>
-        <button class="btn details-btn">Mais detalhes</button>
-    </div>
-</div>
 
-</div>
+    <div class="exam-card confirmed">
+        <div class="status-header">
+            <span class="status-dot"></span>
+            <p class="status-text">Confirmado</p>
+            <p class="protocol">Nº de protocolo: 090909</p>
+        </div>
+        <div class="exam-details">
+            <div class="detail-item">
+                <p class="label">Médico:</p>
+                <p class="value">Joana Sousa</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Exame:</p>
+                <p class="value">Ultrassom</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Laboratório:</p>
+                <p class="value">SaúdeIdeal</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Data da coleta:</p>
+                <p class="value">14/05/2024</p>
+            </div>
+        </div>
+        <div class="exam-actions">
+            <button class="btn contact-btn">Contato</button>
+            <button class="btn details-btn">Mais detalhes</button>
+        </div>
+    </div>
 
+    <div class="exam-card cancelled">
+        <div class="status-header">
+            <span class="status-dot"></span>
+            <p class="status-text">Cancelado</p>
+            <p class="protocol">Nº de protocolo: 012345</p>
+        </div>
+        <div class="exam-details">
+            <div class="detail-item">
+                <p class="label">Médico:</p>
+                <p class="value">Maria Joaquina</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Exame:</p>
+                <p class="value">Preventivo</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Laboratório:</p>
+                <p class="value">LabHealth</p>
+            </div>
+            <div class="detail-item">
+                <p class="label">Data da coleta:</p>
+                <p class="value">10/05/2024</p>
+            </div>
+        </div>
+        <div class="exam-actions">
+            <button class="btn contact-btn">Contato</button>
+            <button class="btn details-btn">Mais detalhes</button>
+        </div>
+    </div>
 
 </main>
 
 <footer class="rodape">
-  <div class="rodape-conteudo">
-    <div class="coluna">
-      <h4>SIDCC</h4>
-      <div class="redes-sociais">
-        <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384031.png" alt="Facebook" /></a>
-        <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384028.png" alt="Instagram" /></a>
-        <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384014.png" alt="LinkedIn" /></a>
-      </div>
-    </div>
+    <div class="rodape-conteudo">
+        <div class="coluna">
+            <h4>SIDCC</h4>
+            <div class="redes-sociais">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384031.png" alt="Facebook" /></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384028.png" alt="Instagram" /></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384014.png" alt="LinkedIn" /></a>
+            </div>
+        </div>
 
-    <div class="coluna">
-      <h4>Institucional</h4>
-      <ul>
-        <li><a href="#">SAC</a></li>
-      </ul>
-    </div>
+        <div class="coluna">
+            <h4>Institucional</h4>
+            <ul>
+                <li><a href="#">SAC</a></li>
+            </ul>
+        </div>
 
-    <div class="coluna">
-      <h4>Ajuda</h4>
-      <ul>
-        <li><a href="#">Dúvidas frequentes</a></li>
-        <li><a href="#">Acessibilidade</a></li>
-      </ul>
-    </div>
+        <div class="coluna">
+            <h4>Ajuda</h4>
+            <ul>
+                <li><a href="#">Dúvidas frequentes</a></li>
+                <li><a href="#">Acessibilidade</a></li>
+            </ul>
+        </div>
 
-    <div class="coluna">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="#">Termos de uso</a></li>
-        <li><a href="#">Política de privacidade</a></li>
-      </ul>
-    </div>
+        <div class="coluna">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Termos de uso</a></li>
+                <li><a href="#">Política de privacidade</a></li>
+            </ul>
+        </div>
 
-  </div>
+    </div>
 </footer>
 
+<script src="agendar.js"></script>
 </body>
 </html>
