@@ -500,7 +500,7 @@ body {
 .titulo-com-voltar {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 1155px;
 }
 
 .titulo-com-voltar h2 {
@@ -511,7 +511,7 @@ body {
 
 .back-link {
     text-decoration: none;
-    color: var(--medium-grey);
+    color: var(--primary-green);
     font-size: 1em;
 }
 
@@ -535,7 +535,7 @@ h1 {
 }
 
 .exam-card {
-    background-color: #fff;
+    background-color: #F1F1F1;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 0 auto 20px auto; 
@@ -549,22 +549,31 @@ h1 {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    color: #fff;
+    color: #F1F1F1;
     font-weight: bold;
 }
 
 .exam-card.confirmed .status-header {
-    background-color: #4CAF50; 
+    background-color: #F1F1F1;
+; 
 }
 
 .exam-card.cancelled .status-header {
-    background-color: #f44336; 
+    background-color: #F1F1F1; 
 }
 
-.status-dot {
+.status-dot-confirmado {
     width: 10px;
     height: 10px;
-    background-color: #fff;
+    background-color: #5ea143;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status-dot-cancelado {
+    width: 10px;
+    height: 10px;
+    background-color: #e21313;
     border-radius: 50%;
     margin-right: 10px;
 }
@@ -572,6 +581,7 @@ h1 {
 .status-text {
     flex-grow: 1; 
     margin: 0;
+    color: #000;
 }
 
 .protocol {
@@ -582,7 +592,7 @@ h1 {
 
 .exam-details {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Layout responsivo em colunas */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     gap: 15px;
     padding: 15px 20px;
     border-bottom: 1px solid #eee;}
@@ -617,21 +627,21 @@ h1 {
 }
 
 .contact-btn {
-    background-color: #4CAF50; 
+    background-color: #48AD45; 
     color: white;
 }
 
 .contact-btn:hover {
-    background-color: #45a049;
+    background-color: #48AD45;
 }
 
 .details-btn {
-    background-color: #4CAF50;
+    background-color: #48AD45;
     color: white;
 }
 
 .details-btn:hover {
-    background-color: #45a049;
+    background-color: #48AD45;
 }
 
 
