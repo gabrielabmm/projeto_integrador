@@ -343,3 +343,24 @@ button {
 .footer {
   margin: 0px;
 }
+
+.hidden {
+  display: none;
+}
+
+
+main {
+  display: flex; 
+  justify-content: center; 
+  padding: 20px; 
+}
+
+form {
+  padding: 20px;
+  max-height: 85vh;
+  overflow-y: auto;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 8px; 
+}
