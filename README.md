@@ -1,4 +1,5 @@
 SIDCC - Sistema Integrado de Dados para o Câncer do Colo do Útero
+
 O SIDCC é um sistema desenvolvido com o intuito de auxiliar profissionais de saúde no rastreamento, acompanhamento clínico e armazenamento seguro de informações relacionadas à prevenção e ao tratamento do câncer do colo do útero. Inspirado nas diretrizes do Instituto Nacional de Câncer (INCA) e do Ministério da Saúde, o SIDCC visa otimizar o fluxo de trabalho em unidades de saúde, laboratórios e hospitais.
 
 🎯 Objetivo
