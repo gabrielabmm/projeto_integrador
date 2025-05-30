@@ -38,19 +38,28 @@
     <!-- BODY -->
     <section class="resultados-exame">
         <!-- TÍTULO DA PÁGINA -->
-        <h2 class="resultados-exame__titulo resultados-exame__titulo--texto">Resultados de exames</h2>
-        <li class="resultados-exame__titulo resultados-exame__titulo--voltar"><a href=""><i class="resultados-exame__titulo resultados-exame__titulo--voltar fa-solid fa-angle-left"></i> Voltar</li></a> <!-- colocar o link da página do usuário -->
+        <div class="flex align-center justify-between mb5">
+
+            <h2 class="resultados-exame__titulo resultados-exame__titulo--texto">Resultados de exames</h2>
+            <li class="resultados-exame__titulo resultados-exame__titulo--voltar ">
+              <a href="#" class="link">
+                <i class="resultados-exame__titulo resultados-exame__titulo--voltar fa-solid fa-angle-left"></i>
+                Voltar
+              </a>
+            </li>
+        </div>
+
 
         <!-- FILTRO DE DATA E BUSCA POR MÉDICO/EXAME -->
         <div class="busca">
             <!-- Inputs de data -->
             <div class="busca--fundo busca__data">
                 <label class="busca__texto">Data de início: </label>
-                <input type="date" placeholder="DD/MM/AAAA">
+                <input type="date">
             </div>
             <div class="busca--fundo busca__data">
                 <label class="busca__texto">Data final: </label>
-                <input type="date" placeholder="DD/MM/AAAA">
+                <input type="date">
             </div>
 
             <!-- Input de pesquisa -->
