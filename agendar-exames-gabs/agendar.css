@@ -97,7 +97,9 @@ body {
 .titulo-principal {
     font-size: 1.6em;
     color: var(--primary-green);
-    margin: 50px 50px;
+    margin: 60px auto 10px auto;
+    text-align: left; 
+    max-width: 1500px;
 }
 
 .section-header {
@@ -536,9 +538,10 @@ h1 {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    overflow: hidden; 
-    border: 1px solid #ddd; 
+    margin: 0 auto 20px auto; 
+    overflow: hidden;
+    border: 1px solid #ddd;
+    max-width: 1500px; 
 }
 
 
@@ -646,10 +649,3 @@ h1 {
         width: 100%; 
     }
 }
-
-
-
-
-
-
-
