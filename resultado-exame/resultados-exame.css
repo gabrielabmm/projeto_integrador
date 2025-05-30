@@ -166,6 +166,32 @@
   gap: 2px;
 }
 
+.flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.mb4 {
+  margin-bottom: 1.5rem;
+}
+
+.mb5 {
+  margin-bottom: 3rem;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--verde);
+  font-weight: bold;
+}
+
 /* FILTRO DE DATA E BUSCA POR MÉDICO/EXAME */
 .busca {
   display: grid;
