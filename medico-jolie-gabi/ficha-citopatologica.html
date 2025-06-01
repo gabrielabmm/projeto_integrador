@@ -1,485 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Ficha de Cadastro</title>
-  <link rel="stylesheet" href="ficha-citpatologica.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dúvidas Frequentes - SIDCC</title> 
+    <link rel="stylesheet" href="sem-login.css">
 </head>
+
 <body>
-
-  <header class="topo">
-        <div class="logo">
-            <img src="../imagens/logo.png" alt="Logo SIDCC">
-            <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
-                    class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
-            </span>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../imagens/logo.png" alt="Logo SIDCC">
+                <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span></span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html">Sobre</a></li> 
+                    <li><a href="sac.html">SAC</a></li>
+                </ul>
+            </nav>
+            <div class="login-button">
+                <a href="#" class="btn btn-login">Login</a>
+            </div>
         </div>
-    <nav class="menu">
-      <div class="links-e-perfil">
-        <a href="#">Início</a>
-        <a href="#">Sobre</a>
-        <a href="#">SAC</a>
-        <form action="/perfil" method="get" class="botao-perfil">
-          <button type="submit">
-            <img src="perfil.png" alt="Perfil" class="icone-perfil" />
-          </button>
-        </form>
-      </div>
-    </nav>
-  </header>
-
-  <div class="linha-topo">
-    <h1 class="title">Novo prontuário</h1>
-    <a href="#" class="back-link">< Voltar</a>
-  </div>
-
-  <div class="search-bar">
-    <input type="text" class="search-bar__input" placeholder="Pesquise por um nome ou cartão SUS*">
-    <button type="button" class="search-bar__button" aria-label="Pesquisar">
-      <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-    </button>
-  </div>
-
-  <div class="container-botoes">
-    <button id="btnProntuario" class="botao-toggle ativo">Prontuário</button>
-    <button id="btnFichaCitopatologica" class="botao-toggle">Ficha Citopatológica</button>
-  </div>
-
- <div id="prontuarioFormContainer" class="form-section">
-  <main>
-    <form>
-      <header>
-        <div class="left-header">Dados do Prontuário</div>
-      </header>
-      <fieldset>
-        <legend>Informações do Paciente</legend>
-        <label for="nomePacienteProntuario">Nome do Paciente:</label>
-        <input type="text" id="nomePacienteProntuario" class="text-input" placeholder="Digite o nome completo">
-
-        <label for="dataNascimentoProntuario">Data de Nascimento:</label>
-        <input type="date" id="dataNascimentoProntuario" class="text-input">
-
-        <label for="obsGeraisProntuario">Observações Gerais do Prontuário:</label>
-        <textarea id="obsGeraisProntuario" class="text-area" rows="5" placeholder="Adicione observações relevantes para o prontuário geral"></textarea>
-      </fieldset>
-
-      <fieldset>
-          <legend>Resultados do Exame Citopatológico Atual</legend>
-
-          <label for="statusExameProntuario">Status do Exame:</label>
-          <select id="statusExameProntuario" name="status_exame" class="text-input">
-              <option value="">Selecione o status</option>
-              <option value="aprovado">Aprovado</option>
-              <option value="rejeitado">Rejeitado</option>
-              <option value="pendente">Pendente</option>
-          </select>
-
-          <label for="resultadoExameProntuario">Resultado:</label>
-          <textarea id="resultadoExameProntuario" name="resultado" class="text-area" rows="5" placeholder="Descreva o resultado do exame"></textarea>
-
-          <label for="motivoRejeicaoProntuario">Motivo da Rejeição (se aplicável):</label>
-          <textarea id="motivoRejeicaoProntuario" name="motivo_rejeicao" class="text-area" rows="3" placeholder="Informe o motivo da rejeição, se o status for 'Rejeitado'"></textarea>
-
-          <label for="observacoesExameProntuario">Observações Específicas do Exame:</label>
-          <textarea id="observacoesExameProntuario" name="observacoes" class="text-area" rows="4" placeholder="Adicione observações adicionais sobre este exame"></textarea>
-
-          <label for="dataAvaliacaoProntuario">Data da Avaliação:</label>
-          <input type="date" id="dataAvaliacaoProntuario" name="data_avaliacao" class="text-input">
-
-          <label for="profissionalResponsavelProntuario">Profissional Responsável:</label>
-          <input type="text" id="profissionalResponsavelProntuario" name="profissional_responsavel" class="text-input" placeholder="Nome do profissional que avaliou">
-      </fieldset>
-
-      <div class="buttons">
-        <button type="submit">Salvar Prontuário</button>
-      </div>
-    </form>
-  </main>
-</div>
-
-  <div id="fichaCitopatologicaFormContainer" class="form-section hidden">
-    <header>
-      <div class="left-header">MINISTÉRIO DA SAÚDE</div>
-      <div class="right-header">
-        FICHA DE CADASTRAMENTO INDIVIDUAL<br>
-        Programa de Saúde da Família / Sistema de Informação da Atenção Básica
-      </div>
     </header>
 
-    <main>
-      <form>
-        <fieldset>
-          <label>UF:</label>
-          <div class="char-input uf">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Nº Protocolo:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>CNES da Unidade:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Unidade de Saúde:</label>
-          <input type="text" class="text-input">
-
-          <label>Município:</label>
-          <input type="text" class="text-input">
-
-          <label>Prontuário:</label>
-          <input type="text" class="text-input">
-        </fieldset>
-
-        <fieldset>
-          <legend>Dados Pessoais</legend>
-
-          <label>Cartão SUS:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Nome completo:</label>
-          <input type="text" class="text-input">
-
-          <label>Nome da mãe:</label>
-          <input type="text" class="text-input">
-
-          <label>Nome social:</label>
-          <input type="text" class="text-input">
-
-          <label>CPF:</label>
-          <div class="char-input">
-
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Nacionalidade:</label>
-          <input type="text" class="text-input">
-
-          <label>Data de nascimento:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
-            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
-            <input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1">
-          </div>
-
-          <label>Idade:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Raça/Cor:</label>
-          <input type="radio" name="raca" value="branca"> Branca
-          <input type="radio" name="raca" value="preta"> Preta
-          <input type="radio" name="raca" value="parda"> Parda
-          <input type="radio" name="raca" value="amarela"> Amarela
-          <input type="radio" name="raca" value="indigena"> Indígena/etnia
-          <input type="text" class="text-input">
-        </fieldset>
-
-        <fieldset>
-          <legend>Dados Residenciais</legend>
-
-          <label>Logradouro:</label>
-          <input type="text" class="text-input">
-
-          <label>Número:</label>
-          <input type="text" class="text-input">
-
-          <label>Complemento:</label>
-          <input type="text" class="text-input">
-
-          <label>Bairro:</label>
-          <input type="text" class="text-input">
-
-          <label>UF:</label>
-          <div class="char-input uf">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Código do Município:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Município:</label>
-          <input type="text" class="text-input">
-
-          <label>CEP:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>DDD:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Telefone:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-          </div>
-
-          <label>Ponto de Referência:</label>
-          <input type="text" class="text-input">
-
-          <label>Escolaridade:</label>
-          <input type="radio" name="escolaridade" value="analfabeta"> Analfabeta
-          <input type="radio" name="escolaridade" value="ensinofundincomp"> Ensino fundamental incompleto
-          <input type="radio" name="escolaridade" value="ensinofundcomp"> Ensino fundamental completo
-          <input type="radio" name="escolaridade" value="ensinomediocomp"> Ensino médio completo
-          <input type="radio" name="escolaridade" value="ensinosuperiorcomp"> Ensino superior completo
-
-        </fieldset>
-
-        <fieldset>
-          <legend>Anamnese</legend>
-
-          <label>Motivo do exame:</label>
-          <input type="radio" name="motivo" value="rastreamento"> Rastreamento
-          <input type="radio" name="motivo" value="repeticao"> Repetição(exame alterado ASCUS/baixo grau)
-          <input type="radio" name="motivo" value="seguimento"> Seguimento(pós dianóstico colposcópico/tratamento)
-
-
-          <label>Fez o exame preventivo alguma vez?</label>
-          <input type="radio" name="examepreventivo" value="sim"> Sim
-          <input type="radio" name="examepreventivo" value="nao"> Não
-          <input type="radio" name="examepreventivo" value="nao sabe"> Não sabe
-
-          <label>Quando fez o último exame?</label>
-          <input type="text" class="text-input">
-
-          <label>Usa DIU?</label>
-          <input type="radio" name="diu" value="sim"> Sim
-          <input type="radio" name="diu" value="nao"> Não
-          <input type="radio" name="diu" value="nao sabe"> Não sabe
-
-          <label>Está grávida?</label>
-          <input type="radio" name="gravida" value="sim"> Sim
-          <input type="radio" name="gravida" value="nao"> Não
-          <input type="radio" name="gravida" value="nao sabe"> Não sabe
-
-          <label>Usa pílula anticoncepcional?</label>
-          <input type="radio" name="pilulaanticoncep" value="sim"> Sim
-          <input type="radio" name="pilulaanticoncep" value="nao"> Não
-          <input type="radio" name="pilulaanticoncep" value="nao sabe"> Não sabe
-
-          <label>Usa hormônio/remédio para menopausa?</label>
-          <input type="radio" name="hormonio" value="sim"> Sim
-          <input type="radio" name="hormonio" value="nao"> Não
-          <input type="radio" name="hormonio" value="nao sabe"> Não sabe
-
-          <label>Já fez tratamento com radioterapia?</label>
-          <input type="radio" name="radioterapia" value="sim"> Sim
-          <input type="radio" name="radioterapia" value="nao"> Não
-          <input type="radio" name="radioterapia" value="nao sabe"> Não sabe
-
-          <label>Quando foi a última menstruação?</label>
-          <input type="text" class="text-input">
-
-          <label>Sangramento após relações sexuais?</label>
-          <input type="radio" name="sangramentorelacoes" value="sim"> Sim
-          <input type="radio" name="sangramentorelacoes" value="nao"> Não
-          <input type="radio" name="sangramentorelacoes" value="nao sabe"> Não sabe
-
-          <label>Sangramento após a menopausa?</label>
-          <input type="radio" name="sangramentomenopausa" value="sim"> Sim
-          <input type="radio" name="sangramentomenopausa" value="nao"> Não/não sabe/não lembra/não está na menopausa
-        </fieldset>
-
-        <fieldset>
-          <legend>Exame Clínico</legend>
-
-          <label>Inspeção do colo:</label>
-          <input type="radio" name="inspecaodocolo" value="normal"> Normal
-          <input type="radio" name="inspecaodocolo" value="ausente"> Ausente(anomalias congênitas ou retirado cirurgicamente)
-          <input type="radio" name="inspecaodocolo" value="alterado"> Alterado
-          <input type="radio" name="inspecaodocolo" value="colonaovisualizado"> Colo não visualizado
-
-          <label>Sinais sugestivos de doenças sexualmente transmissíveis?</label>
-          <input type="radio" name="doencasexual" value="sim"> Sim
-          <input type="radio" name="doencasexual" value="nao"> Não
-
-
-          <label>Data da coleta:</label>
-          <div class="char-input">
-            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
-            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
-            <input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1">
-          </div>
-
-          <label>Responsável:</label>
-          <input type="text" class="text-input">
-        </fieldset>
-
-        <div class="buttons">
-          <button type="submit">Salvar</button>
-          <button type="button" onclick="window.print()">Imprimir</button>
+    <main class="container page-content faq-page">
+        <div class="page-top-actions">
+            <a href="javascript:history.back()" class="btn-voltar">&lt; Voltar</a>
         </div>
-      </form>
-    </main>
-  </div>
 
-  <footer class="rodape">
-    <div class="rodape-conteudo">
+        <h1>Dúvidas Frequentes (FAQ)</h1>
+            
+        <section class="content-section">
+            <h2>1. Objetivo da Plataforma</h2> <p>O SIDCC é o Sistema Integrado de Dados do Câncer Cervical. Ele foi desenvolvido para registrar, acompanhar e gerenciar informações relacionadas à triagem, diagnóstico e tratamento de pacientes com lesões precursoras ou câncer de colo do útero. </p>
+        </section>
 
-      <div class="coluna">
-        <h4>SIDCC</h4>
-        <div class="redes-sociais">
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384031.png" alt="Facebook" /></a>
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384028.png" alt="Instagram" /></a>
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384014.png" alt="LinkedIn" /></a>
+        <section class="content-section">
+            <h2>2. Quem pode acessar o SIDCC?</h2>
+            <p>O acesso ao SIDCC é restrito a profissionais de saúde autorizados, unidades de saúde cadastradas, gestores municipais e estaduais, conforme as permissões definidas pelo sistema.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>3. Que tipo de informações são armazenadas no SIDCC?</h2>
+            <p>O sistema armazena dados como:</p>
+            <ul>
+                <li>Resultados de exames citopatológicos e histopatológicos;</li>
+                <li>Informações de colposcopia e biópsias;</li>
+                <li>Dados demográficos das pacientes;</li>
+                <li>Informações sobre o tratamento e acompanhamento clínico.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>4. O SIDCC substitui o SISCAN?</h2>
+            <p>Não. O SIDCC é uma iniciativa inspirada no SISCAN, com foco específico no câncer de colo do útero. Pode ser utilizado de forma complementar, conforme a política de saúde da instituição ou município.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>5. Os dados das pacientes são protegidos?</h2>
+            <p>Sim. O SIDCC segue as normas da Lei Geral de Proteção de Dados (LGPD) e outras legislações de sigilo médico, garantindo a segurança e confidencialidade das informações inseridas. </p>
+        </section>
+
+        <section class="content-section">
+            <h2>6. Como cadastrar uma paciente no sistema?</h2>
+            <p>O cadastro é feito por profissionais autorizados, por meio de fomulário eletrônuco dentro da plataforma, inserindo informações pessoais e dados clínicos de cada paciente.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>7. Como recuperar o acesso ao sistema caso eu perca minha senha?</h2>
+            <p>Você pode clicar em “Esqueci minha senha” na página de login. Um e-mail com instruções será enviado para o endereço de e-mail cadastrado. </p>
+        </section>
+
+        <section class="content-section">
+            <h2>8. Como posso obter suporte técnico para o SIDCC?</h2>
+            <p>Você pode entrar em contato com a equipe de suporte pelo e-mail a partir do SAC. </p>
+        </section>
+
+        </main>  <footer class="site-footer">
+    <div class="container footer-container">
+        <div class="footer-logo-social">
+            <div class="logo">
+                SIDCC
+            </div>
+            <div class="social-icons">
+                <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+                <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+                <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
+                </div>
         </div>
-      </div>
-
-      <div class="coluna">
-        <h4>Institucional</h4>
-        <ul>
-          <li><a href="#">SAC</a></li>
-        </ul>
-      </div>
-
-      <div class="coluna">
-        <h4>Ajuda</h4>
-        <ul>
-          <li><a href="#">Dúvidas frequentes</a></li>
-          <li><a href="#">Acessibilidade</a></li>
-        </ul>
-      </div>
-
-      <div class="coluna">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Termos de uso</a></li>
-          <li><a href="#">Política de privacidade</a></li>
-        </ul>
-      </div>
-
+        <div class="footer-links">
+            <div class="footer-column">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="sac.html">SAC</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Ajuda</h4>
+                <ul>
+                    <li><a href="faq.html">Dúvidas frequentes</a></li>
+                    <li><a href="#">Acessibilidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="termos-de-uso.html">Termos de uso</a></li>
+                    <li><a href="politica-de-privacidade.html">Política de privacidade</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </footer>
-
-  <script>
-    document.querySelectorAll('.char-input input').forEach((input, index, inputs) => {
-      input.addEventListener('input', () => {
-        if (input.value.length === input.maxLength) {
-          const next = inputs[index + 1];
-          if (next) next.focus();
-        }
-      });
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && input.value === '') {
-          const prev = inputs[index - 1];
-          if (prev) prev.focus();
-        }
-      });
-    });
-
-   
-    const btnProntuario = document.getElementById("btnProntuario");
-    const btnFichaCitopatologica = document.getElementById("btnFichaCitopatologica");
-    const prontuarioFormContainer = document.getElementById("prontuarioFormContainer");
-    const fichaCitopatologicaFormContainer = document.getElementById("fichaCitopatologicaFormContainer");
-
-    function showProntuarioForm() {
-      prontuarioFormContainer.classList.remove("hidden");
-      fichaCitopatologicaFormContainer.classList.add("hidden");
-      btnProntuario.classList.add("ativo");
-      btnFichaCitopatologica.classList.remove("ativo");
-    }
-
-    function showFichaCitopatologicaForm() {
-      fichaCitopatologicaFormContainer.classList.remove("hidden");
-      prontuarioFormContainer.classList.add("hidden");
-      btnFichaCitopatologica.classList.add("ativo");
-      btnProntuario.classList.remove("ativo");
-    }
-
-    btnProntuario.addEventListener("click", showProntuarioForm);
-    btnFichaCitopatologica.addEventListener("click", showFichaCitopatologicaForm);
-
-    document.addEventListener("DOMContentLoaded", showProntuarioForm);
-  </script>
-</body>
+</footer>
+    </body>
 </html>
