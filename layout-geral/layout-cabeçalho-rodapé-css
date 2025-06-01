@@ -17,6 +17,9 @@ body {
     background-color: #fff; /* Fundo branco */
     padding: 15px 0;
     border-bottom: 1px solid #eee; /* Linha divisória sutil */
+    /* Mantém o cabeçalho na posição durante a rolagem */
+    position: sticky;
+    top: 0;
 }
 
 .header-container {
