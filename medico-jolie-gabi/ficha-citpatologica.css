@@ -121,8 +121,42 @@ button {
   border-bottom: 1px solid #ddd;
 }
 
+.logo-text-sidcc {
+  font-weight: bold;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.logo-text-sidcc .char-s {
+  color: #48AD45;
+}
+
+.logo-text-sidcc .char-i {
+  color: #F9BD14;
+}
+
+.logo-text-sidcc .char-d {
+  color: #2864AE;
+}
+
+.logo-text-sidcc .char-c1 {
+  color: #000;
+}
+
+.logo-text-sidcc .char-c2 {
+  color: #000;
+}
+
 .logo {
-  height: 40px;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
 }
 
 .menu a {
