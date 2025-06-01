@@ -401,79 +401,80 @@ input[type="text"]::placeholder {
 
 /*FOOTER*/
 .site-footer {
-  background-color: var(--bg-terciario);
-  padding: 40px 0;
-  color: var(--texto-primario);
-  font-size: 14px;
+    background-color: #B0E3AE; /* Verde bem claro do rodapé */
+    padding: 40px 0;
+    color: #333;
+    font-size: 14px;
 }
 
 .footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Para responsividade */
 }
 
 .footer-logo-social {
-  flex-basis: 25%;
-  margin-bottom: 20px;
+    flex-basis: 25%; /* Ajuste conforme necessário */
+    margin-bottom: 20px;
 }
 
 .footer-logo-social .logo {
-  margin-bottom: 15px;
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--preto);
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
 }
 
 .social-icons a {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .social-icons img {
-  width: 24px;
-  height: 24px;
+    width: 24px; /* Tamanho dos ícones sociais */
+    height: 24px;
 }
 
 .footer-links {
-  display: flex;
-  justify-content: space-between;
-  flex-basis: 70%;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 70%; /* Ajuste conforme necessário */
+    flex-wrap: wrap;
 }
 
 .footer-column {
-  flex-basis: 30%;
-  margin-bottom: 20px;
-  min-width: 150px;
+    flex-basis: 30%; /* Para três colunas */
+    margin-bottom: 20px;
+    min-width: 150px;
 }
 
 .footer-column h4 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: var(--preto);
-  font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #000; /* Títulos das colunas um pouco mais escuros */
+    font-weight: bold;
 }
 
 .footer-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-column ul li {
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .footer-column ul li a {
-  text-decoration: none;
-  color: var(--footer);
+    text-decoration: none;
+    color: #5e5d5d;
 }
 
 .footer-column ul li a:hover {
-  color: var(--preto);
-  text-decoration: underline;
+    color: #000000;
+    text-decoration: underline;
 }
 
 body {
     font-family: 'Instrument Sans', sans-serif;
 }
+
