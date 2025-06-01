@@ -435,72 +435,86 @@ body {
     }
 }
 
-.rodape {
-    background-color: #b0e3ae;
-    border-top: 1px solid #ccc;
-    padding: 40px 10%;
-    font-size: 14px;
+.site-footer {
+    background-color: #B0E3AE; /* Verde bem claro do rodapé */
+    padding: 40px 0;
     color: #333;
-  }
-  
-  .rodape-conteudo {
+    font-size: 14px;
+}
+
+.footer-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-  }
-  
-  .coluna {
-    flex-basis: 30%;
+    flex-wrap: wrap; /* Para responsividade */
+}
+
+.footer-logo-social {
+    flex-basis: 25%; /* Ajuste conforme necessário */
+    margin-bottom: 20px;
+}
+
+.footer-logo-social .logo {
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.social-icons a {
+    margin-right: 10px;
+}
+
+.social-icons img {
+    width: 24px; /* Tamanho dos ícones sociais */
+    height: 24px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 70%; /* Ajuste conforme necessário */
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex-basis: 30%; /* Para três colunas */
     margin-bottom: 20px;
     min-width: 150px;
-  }
-  
-  .coluna h4 {
-    font-size: 16px;
-    margin-top:0;
+}
+
+.footer-column h4 {
+    margin-top: 0;
     margin-bottom: 15px;
-    color:#000;
+    color: #000; /* Títulos das colunas um pouco mais escuros */
     font-weight: bold;
-  }
-  
-  .coluna ul {
+}
+
+.footer-column ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .coluna ul li {
+    margin: 0;
+}
+
+.footer-column ul li {
     margin-bottom: 8px;
-  }
-  
-  .coluna ul li a {
-    color: #333;
+}
+
+.footer-column ul li a {
     text-decoration: none;
-  }
-  
-  .coluna ul li a:hover {
+    color: #5e5d5d;
+}
+
+.footer-column ul li a:hover {
+    color: #000000;
     text-decoration: underline;
-  }
-  
-  .redes-sociais a {
-    margin-right: 10px;
-    display: inline-block;
-  }
-  
-  .redes-sociais img {
-    width: 24px;
-    height: 24px;
-  }
-  
+}
   .links-e-perfil {
     display: flex;
     align-items: center;
     gap: 15px;
   }
   
-  .menu {
-    display: flex;
-    align-items: center;
-  }
+
 
   .topo-agendamento {
     display: flex;
@@ -556,15 +570,7 @@ body {
 .back-link:hover {
     text-decoration: underline;
 }
-.container {
-    width: 100%;
-    max-width: 400px;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin: 0 auto;
-}
+
 
 h1 {
     color: #333;
