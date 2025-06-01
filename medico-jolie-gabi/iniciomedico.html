@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SISCC</title>
-  <link rel="stylesheet" href="iniciomedico.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -31,10 +31,17 @@
     <section class="painel-esquerdo">
       <h2>Olá, Maria!</h2>
 
-      <div class="busca-wrapper">
-        <input type="text" placeholder="Pesquisar" />
-        <button type="submit" class="botao-busca">🔍</button>
-      </div>
+       <div class="search-bar">
+  
+        
+  <input type="text" class="search-bar__input" placeholder="Pesquise por um nome ou cartão SUS*">
+  <button type="button" class="search-bar__button" aria-label="Pesquisar">
+    <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </button>
+</div>
 
       <button class="botao-principal">Novo prontuário</button>
       <button class="botao-principal">Meu calendário</button>
