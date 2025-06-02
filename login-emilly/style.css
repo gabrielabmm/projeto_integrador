@@ -158,7 +158,7 @@ label {
 /* --- Quadros de login e senha --- */
 input[type="text"],
 input[type="password"],
-input[type="text"] {
+input[type="text"] { /* Esta linha tem input[type="text"] duplicado, mas mantendo conforme original */
     background-color: #b0e3ae;
     color: rgba(20, 20, 20, 0.795);
     width: calc(100% - 20px);
@@ -215,7 +215,7 @@ p a:hover {
 
 input[type="email"],
 input[type="text"],
-input[type="password"] {
+input[type="password"] { /* Estilo geral para inputs, pode sobrescrever o anterior se a especificidade for igual ou maior */
     width: 100%;
     padding: 14px;
     border: 1px solid #bbb;
@@ -371,7 +371,7 @@ input.invalid {
 .pagina-esqueci-senha h1 {
     font-weight: bold;      
     font-size: 28px;         
-    margin: 0 0 14px 0;      
+    margin: 0 0 14px 0;     
 }
 
 
@@ -384,7 +384,7 @@ input.invalid {
 .pagina-esqueci-senha label {
     font-weight: 500;       
     display: block;          
-    margin-bottom: 8px;      
+    margin-bottom: 8px;     
     font-size: 16px;        
 }
 #campos-email-esqueci-senha {
@@ -396,15 +396,15 @@ input.invalid {
     box-sizing: border-box; 
 }
 #campos-email-esqueci-senha p{
-    font-size: 17px;         
-    margin-bottom: 24px;  
-      
+    font-size: 17px;        
+    margin-bottom: 24px;   
+    
 }
 
 #campos-email-esqueci-senha h1{
-    font-size: 25px;         
-    margin-bottom: 24px;  
-      
+    font-size: 25px;        
+    margin-bottom: 24px;   
+    
 }
 
 #campos-redefinida {
@@ -418,8 +418,8 @@ input.invalid {
 
 #campos-redefinida p{
     font-size: 17px;        
-    margin-bottom: 24px;  
-      
+    margin-bottom: 24px;   
+    
 }
 
 #campos-redefinida .button-link {
@@ -439,4 +439,79 @@ input.invalid {
     text-decoration: none; /* Remove sublinhado padrão do link */
     box-sizing: border-box;
     transition: background-color 0.3s ease;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1; /* Ocupa o espaço vertical disponível */
+    margin-top: 40px; /* Espaço para o link voltar */
+}
+
+.card {
+    background-color: #fff;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 480px;
+    text-align: left;
+}
+
+.card h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 18px;
+    color: #2c3e50;
+    text-align: center; /* Centralizado como na imagem */
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.card p:nth-of-type(2) { /* "Insira o seu CEP..." */
+    margin-bottom: 25px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+.gear {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border: 10px solid #ccc;
+  border-top: 10px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+p {
+  font-size: 1.2rem;
+  color: #555;
 }
