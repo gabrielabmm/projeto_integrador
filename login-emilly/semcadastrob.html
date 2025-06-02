@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primeiro Acesso - Localizar UBS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+   crossorigin=""/>
+
+  <link rel="stylesheet" href="style.css">
+  <style>
+     #map { height: 400px; background-color: #f0f0f0; } 
+  </style>
+</head>
+<body>
+  <a href="escolher-tipo-usuario.html" class="voltar">< Voltar</a>
+
+  <div class="card-container">
+    <div class="card">
+      <h1>Primeiro acesso</h1>
+      <p>O cadastro só pode ser realizado em uma UBS.</p>
+      <p>Insira o seu CEP e localize a mais próxima:</p>
+      
+      <form id="cep-form">
+        <div class="cep-field-wrapper">
+          <label for="cep" class="cep-label">Cep:</label>
+          <div class="cep-input-container">
+            <input type="text" id="cep" name="cep" placeholder="00000-000" pattern="\d{5}-\d{3}" title="Digite o CEP no formato 00000-000" required>
+            <button type="submit" id="buscar-cep-btn" aria-label="Buscar CEP">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      <div id="map"></div> 
+      
+      <ul id="ubs-list"></ul>
+    </div>
+  </div>
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+   crossorigin=""></script>
+
+  <script src="mapa.js"></script> 
+</body>
+</html>
