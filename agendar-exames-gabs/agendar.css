@@ -400,6 +400,30 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.modal-body {
+    padding: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--dark-grey);
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-grey);
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; 
+}
+
 @media (min-width: 768px) {
     .exame-card {
         flex-direction: row;
@@ -514,7 +538,6 @@ body {
     gap: 15px;
   }
   
-
 
   .topo-agendamento {
     display: flex;
