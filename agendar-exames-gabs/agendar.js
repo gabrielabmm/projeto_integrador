@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btnAgendarExames = document.getElementById('btnAgendarExames');
     const dateModal = document.getElementById('dateModal');
-    const examModal = document.getElementById('examModal');
+    const ubsTimeModal = document.getElementById('ubsTimeModal'); // Get the new modal
 
     const currentDayDisplay = document.querySelector('.current-date-display');
     const prevMonthBtn = document.querySelector('.prev-month');
@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarGrid = document.querySelector('.calendar-grid');
     const cancelDateSelectionBtn = document.getElementById('cancelDateSelection');
     const okDateSelectionBtn = document.getElementById('okDateSelection');
+    const cancelUbsTimeSelectionBtn = document.getElementById('cancelUbsTimeSelection'); // New button
+    const confirmAppointmentBtn = document.getElementById('confirmAppointment'); // New button
+    const selectUbs = document.getElementById('selectUbs'); // New select element
+    const selectTime = document.getElementById('selectTime'); // New select element
 
     let currentDate = new Date();
     let activeDate = new Date(); // Dia inicialmente selecionado será o dia atual
@@ -81,12 +85,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    
+    function getFormattedDate(date) {
+        const dayOfWeek = dayNames[date.getDay()];
+        const dayOfMonth = date.getDate();
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        return `${dayOfWeek}, ${dayOfMonth} de ${month} de ${year}`;
+    }
+
     function updateCurrentDateDisplay(date) {
         const dayOfWeek = dayNames[date.getDay()];
         const dayOfMonth = date.getDate();
         const month = monthNames[date.getMonth()];
         const year = date.getFullYear();
-        currentDayDisplay.textContent = `${dayOfWeek}, ${dayOfMonth} de ${month} de ${year}`;
+         currentDayDisplay.textContent = getFormattedDate(date);
     }
 
     if (btnAgendarExames) {
@@ -128,9 +141,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (okDateSelectionBtn) {
         okDateSelectionBtn.addEventListener('click', () => {
             closeModal(dateModal);
-            openModal(examModal);
+            openModal(ubsTimeModal); 
         });
     }
+
+    if (cancelUbsTimeSelectionBtn) {
+        cancelUbsTimeSelectionBtn.addEventListener('click', () => {
+            closeModal(ubsTimeModal); 
+        });
+    }
+
+   if (confirmAppointmentBtn) {
+        confirmAppointmentBtn.addEventListener('click', () => {
+            const selectedUbs = selectUbs.value;
+            const selectedTime = selectTime.value;
+            const formattedDate = getFormattedDate(activeDate);
+
+            if (selectedUbs && selectedTime) {
+                alert(`Agendamento confirmado para:\nData: ${formattedDate}\nUBS: ${selectedUbs}\nHorário: ${selectedTime}`);
+                closeModal(ubsTimeModal);
+            } else {
+                alert('Por favor, selecione a UBS e o horário.');
+            }
+        });
+    }
+
 
     if (dateModal) {
         dateModal.addEventListener('click', (e) => {
@@ -140,18 +175,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (examModal) {
-        examModal.addEventListener('click', (e) => {
-            if (e.target === examModal) {
-                closeModal(examModal);
+    
+    if (ubsTimeModal) {
+        ubsTimeModal.addEventListener('click', (e) => {
+            if (e.target === ubsTimeModal) {
+                closeModal(ubsTimeModal);
             }
-        });
-
-        const radioOptions = examModal.querySelectorAll('input[name="examType"]');
-        radioOptions.forEach(radio => {
-            radio.addEventListener('change', () => {
-                // console.log(`Exame selecionado: ${radio.value}`);
-            });
         });
     }
 
