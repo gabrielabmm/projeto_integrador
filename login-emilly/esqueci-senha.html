@@ -16,10 +16,8 @@
 
         <p>Informe um email e enviaremos um código para a recuperação da sua senha.</p>
 
-        <form id="emailForm"> 
-            <label for="emailInput">Email:</label>
-            <input type="email" id="emailInput" placeholder="Seu email aqui" required>
-            <div class="error-message" id="emailError"></div>
+        <form id="emailForm" action="codigoemail.html" method="get"> <label for="emailInput">Email:</label>
+            <input type="email" id="emailInput" name="emailInput" placeholder="Seu email aqui" required> <div class="error-message" id="emailError"></div>
             <div class="success-message" id="emailSuccessMessage" style="display: none;"></div> 
             
             <button type="submit" id="enviarCodigoBtn">Enviar código</button> 
