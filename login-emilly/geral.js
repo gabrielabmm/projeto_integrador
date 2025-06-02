@@ -1,463 +1,590 @@
 (function() {
-    'use strict'; // Ajuda a pegar erros comuns
+    'use strict';
 
-    // === Conteúdo de cadastro.js (para cadastro.html) ===
-    (function() {
-        // Condição para executar apenas na página de cadastro
-        // Verifica a existência de um elemento chave do formulário de cadastro
-        if (document.getElementById('crm') && document.querySelector('form[id="cadastroForm"]')) { // Adicionei um ID ao form para especificidade
-            console.log('Executando scripts para: Cadastro');
+    const dadosPacienteAutenticado = {
+        nomeCompleto: "Maria Linda da Silva",
+        primeiroNome: "Maria",
+        dataNascimento: "01/01/1985",
+        endereco: {
+            cep: "12345-678",
+            cidade: "Exemplópolis",
+            logradouro: "Rua dos bobos, n°0"
+        },
+        cpf: "012.345.678-90",
+        cartaoSUS: "123.4567.7890.1234",
+        online: {
+            email: "maria88@linda.com.br",
+            login: "linda.silva",
+            senha: "Pi2025"
+        },
+        rg: "00.000.000-0",
+        sexo: "Feminino",
+        celular: "(11) 98765-4321",
+        telefone: "(11) 1234-5678",
+        escolaridade: "Superior Completo"
+    };
 
-            const form = document.querySelector('form[id="cadastroForm"]'); // Seja específico se houver múltiplos forms
-            const crmInput = document.getElementById('crm');
-            const cnesInput = document.getElementById('cnes'); // Se este campo for opcional e puder não existir, ajuste a lógica
-            const emailInput = document.getElementById('email'); // Se 'email' for um ID comum, considere um ID mais específico como 'cadastroEmail'
-            const senhaInput = document.getElementById('senha'); // Idem para 'senha', considere 'cadastroSenha'
-            const sucessoContainer = document.getElementById('sucessoContainer');
+    const dadosInstituicaoAutenticada = {
+    nomeInstituicao: "Dra. Joana",
+    cnes: "1234567",
+    crmCorenResponsavel: "CRM/SP 123456",
+    cnpj: "12.345.678/0001-99",
+    email: "contato@clinicajoana.com",
+    celular: "(11) 91234-5678",
+    telefone: "(11) 5555-1234",
+    cep: "01000-001",
+    cidade: "São Paulo",
+    endereco: "Rua da Clínica, Bairro Saúde",
+    numero: "100",
+    complemento: "Andar 5, Sala 502",
+    bairro: "Saúde",
+    online: {
+        senha: "Pi2025"
+    }
+};
 
-            // Certifique-se de que todos os elementos existem antes de adicionar listeners
-            if (form && crmInput && emailInput && senhaInput && sucessoContainer) {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
+    function calcularIdade(dataNascimentoString) {
+        if (!dataNascimentoString || !/^\d{2}\/\d{2}\/\d{4}$/.test(dataNascimentoString)) { return "N/D"; }
+        const partesData = dataNascimentoString.split('/');
+        const diaNasc = parseInt(partesData[0], 10);
+        const mesNasc = parseInt(partesData[1], 10) - 1;
+        const anoNasc = parseInt(partesData[2], 10);
+        const dataNascDate = new Date(anoNasc, mesNasc, diaNasc);
+        if (isNaN(dataNascDate.getTime())) return "N/D";
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - dataNascDate.getFullYear();
+        const m = hoje.getMonth() - dataNascDate.getMonth();
+        if (m < 0 || (m === 0 && hoje.getDate() < dataNascDate.getDate())) { idade--; }
+        return idade >= 0 ? idade : "N/D";
+    }
 
-                    const crm = crmInput.value.trim();
-                    const cnes = cnesInput ? cnesInput.value.trim() : ''; // Trata cnesInput opcional
-                    const email = emailInput.value.trim();
-                    const senha = senhaInput.value.trim();
+    const headerIconePerfilTrigger = document.getElementById('headerIconePerfilTrigger');
+    const perfilDropdownOverlay = document.getElementById('perfilDropdownOverlay');
+    const fecharDropdownBtn = document.getElementById('fecharDropdownBtn');
+    const dropdownFotoPerfil = document.getElementById('dropdownFotoPerfil');
+    const dropdownNomeCompleto = document.getElementById('dropdownNomeCompleto');
+    const dropdownDataNascimento = document.getElementById('dropdownDataNascimento');
+    const dropdownIdade = document.getElementById('dropdownIdade');
+    const dropdownCEP = document.getElementById('dropdownCEP');
+    const dropdownCPF = document.getElementById('dropdownCPF');
+    const dropdownCartaoSUS = document.getElementById('dropdownCartaoSUS');
 
-                    if (!crm || !email || !senha) {
-                        alert('Por favor, preencha todos os campos obrigatórios (CRM, Email, Senha).');
-                        return;
-                    }
+    const linkSairDaConta = document.getElementById('linkSairDaConta');
+    const confirmLogoutModalElement = document.getElementById('confirmLogoutModal');
+    const confirmLogoutModalButtonElement = document.getElementById('confirmLogoutModalButton');
+    const cancelLogoutModalButtonElement = document.getElementById('cancelLogoutModalButton');
 
-                    if (senha.length < 6) {
-                        alert('A senha deve ter no mínimo 6 caracteres.');
-                        return;
-                    }
-
-                    form.style.display = 'none';
-                    sucessoContainer.style.display = 'flex';
-                });
-            } else {
-                console.warn('Elementos do formulário de cadastro não encontrados.');
+    function togglePerfilDropdown() {
+        if (!perfilDropdownOverlay || !dadosPacienteAutenticado) return;
+        const isVisivel = perfilDropdownOverlay.classList.contains('visivel');
+        if (isVisivel) {
+            perfilDropdownOverlay.classList.remove('visivel');
+        } else {
+            if (dropdownNomeCompleto) dropdownNomeCompleto.textContent = dadosPacienteAutenticado.nomeCompleto || "Nome não disponível";
+            if (dropdownDataNascimento) dropdownDataNascimento.textContent = dadosPacienteAutenticado.dataNascimento || "N/D";
+            if (dropdownIdade) {
+                const idade = calcularIdade(dadosPacienteAutenticado.dataNascimento);
+                dropdownIdade.textContent = idade + (idade !== "N/D" ? " anos" : "");
             }
+            if (dropdownCEP && dadosPacienteAutenticado.endereco) dropdownCEP.textContent = dadosPacienteAutenticado.endereco.cep || "N/D";
+            else if (dropdownCEP) dropdownCEP.textContent = "N/D";
+            if (dropdownCPF) dropdownCPF.textContent = dadosPacienteAutenticado.cpf || "N/D";
+            if (dropdownCartaoSUS) dropdownCartaoSUS.textContent = dadosPacienteAutenticado.cartaoSUS || "N/D";
+            
+            perfilDropdownOverlay.classList.add('visivel');
+        }
+    }
 
-            // Função voltarParaInicio: Se usada por onclick="voltarParaInicio()" no HTML,
-            // descomente a linha abaixo. Caso contrário, pode ser interna ou removida se não usada.
-            // window.voltarParaInicio = function() {
-            //     window.location.href = 'index.html';
-            // };
-            // Se for um botão específico na página de cadastro com um ID, faça assim:
-            // const btnVoltarInicioCadastro = document.getElementById('btnVoltarInicioCadastro');
-            // if (btnVoltarInicioCadastro) {
-            //     btnVoltarInicioCadastro.addEventListener('click', function() {
-            //         window.location.href = 'index.html';
-            //     });
-            // }
+    if (headerIconePerfilTrigger) {
+        headerIconePerfilTrigger.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            event.stopPropagation();
+            togglePerfilDropdown();
+        });
+    }
 
+    if (fecharDropdownBtn) {
+        fecharDropdownBtn.addEventListener('click', togglePerfilDropdown);
+    }
+
+    document.addEventListener('click', function(event) {
+        if (perfilDropdownOverlay && perfilDropdownOverlay.classList.contains('visivel')) {
+            if (headerIconePerfilTrigger && !perfilDropdownOverlay.contains(event.target) && !headerIconePerfilTrigger.contains(event.target)) {
+                perfilDropdownOverlay.classList.remove('visivel');
+            }
+        }
+    });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && perfilDropdownOverlay && perfilDropdownOverlay.classList.contains('visivel')) {
+            perfilDropdownOverlay.classList.remove('visivel');
+        }
+    });
+
+    if (linkSairDaConta && confirmLogoutModalElement && confirmLogoutModalButtonElement && cancelLogoutModalButtonElement) {
+        linkSairDaConta.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (perfilDropdownOverlay && perfilDropdownOverlay.classList.contains('visivel')) {
+                perfilDropdownOverlay.classList.remove('visivel');
+            }
+            confirmLogoutModalElement.classList.add('visivel');
+        });
+
+        cancelLogoutModalButtonElement.addEventListener('click', function() {
+            confirmLogoutModalElement.classList.remove('visivel');
+        });
+
+        confirmLogoutModalButtonElement.addEventListener('click', function() {
+            localStorage.removeItem('pacienteLogadoIdentificador');
+            window.location.href = "escolher-tipo-usuario.html";
+        });
+
+        confirmLogoutModalElement.addEventListener('click', function(event) {
+            if (event.target === confirmLogoutModalElement) {
+                confirmLogoutModalElement.classList.remove('visivel');
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && confirmLogoutModalElement.classList.contains('visivel')) {
+                confirmLogoutModalElement.classList.remove('visivel');
+            }
+        });
+    }
+
+    function preencherFormularioInterna() {
+        const dados = dadosPacienteAutenticado;
+        const tituloNomeElemento = document.getElementById('titulo-nome');
+        if (tituloNomeElemento) {
+            tituloNomeElemento.textContent = dados.primeiroNome || (dados.nomeCompleto ? dados.nomeCompleto.split(' ')[0] : 'Usuário');
+        }
+        const nomePerfilElemento = document.getElementById('nome-perfil');
+        if (nomePerfilElemento) {
+            nomePerfilElemento.textContent = dados.nomeCompleto || 'Nome não disponível';
+        }
+        const nomeInput = document.getElementById('nome');
+        const emailInput = document.getElementById('email');
+        const cpfInput = document.getElementById('cpf');
+        const celularInput = document.getElementById('celular');
+        const telefoneInput = document.getElementById('telefone');
+        const escolaridadeInput = document.getElementById('escolaridade');
+        const cepInput = document.getElementById('cep');
+        const cidadeInput = document.getElementById('cidade');
+        const enderecoInput = document.getElementById('endereco');
+
+        if (nomeInput) nomeInput.value = dados.nomeCompleto || '';
+        if (emailInput && dados.online) emailInput.value = dados.online.email || '';
+        if (cpfInput) cpfInput.value = dados.cpf || '';
+        if (celularInput) celularInput.value = dados.celular || '';
+        if (telefoneInput) telefoneInput.value = dados.telefone || '';
+        if (escolaridadeInput) escolaridadeInput.value = dados.escolaridade || '';
+        if (cepInput && dados.endereco) cepInput.value = dados.endereco.cep || '';
+        if (cidadeInput && dados.endereco) cidadeInput.value = dados.endereco.cidade || '';
+        if (enderecoInput && dados.endereco) enderecoInput.value = dados.endereco.logradouro || '';
+
+        const camposDoFormulario = document.querySelectorAll('.info-formulario input');
+        const botaoEditar = document.querySelector('.info-formulario .botao.editar');
+        const infoFormularioDiv = document.querySelector('.info-formulario');
+
+        if (!infoFormularioDiv) return;
+
+        let botoesAcaoContainer = infoFormularioDiv.querySelector('.acoes-formulario');
+        if (botoesAcaoContainer) botoesAcaoContainer.remove();
+
+        botoesAcaoContainer = document.createElement('div');
+        botoesAcaoContainer.className = 'acoes-formulario';
+        botoesAcaoContainer.style.marginTop = '15px';
+        botoesAcaoContainer.style.display = 'flex';
+        botoesAcaoContainer.style.gap = '10px';
+        botoesAcaoContainer.innerHTML = `
+            <button type="submit" class="botao salvar">Salvar Alterações</button>
+            <button type="button" class="botao cancelar-edicao">Cancelar</button>
+        `;
+        if (botaoEditar && botaoEditar.parentNode === infoFormularioDiv) {
+             infoFormularioDiv.insertBefore(botoesAcaoContainer, botaoEditar);
+        } else {
+             infoFormularioDiv.appendChild(botoesAcaoContainer);
+        }
+
+        const botaoSalvar = botoesAcaoContainer.querySelector('.salvar');
+        const botaoCancelarEdicao = botoesAcaoContainer.querySelector('.cancelar-edicao');
+
+        camposDoFormulario.forEach(input => input.disabled = true);
+        if(botaoEditar) botaoEditar.style.display = 'inline-block';
+        botoesAcaoContainer.style.display = 'none';
+
+        if (botaoEditar) {
+            botaoEditar.onclick = function() {
+                camposDoFormulario.forEach(input => input.disabled = false);
+                botaoEditar.style.display = 'none';
+                botoesAcaoContainer.style.display = 'flex';
+                if (nomeInput) nomeInput.focus();
+            };
+        } else {
+             camposDoFormulario.forEach(input => input.disabled = false);
+             botoesAcaoContainer.style.display = 'flex';
+        }
+
+        if (botaoSalvar) {
+            botaoSalvar.onclick = function(event) {
+                event.preventDefault();
+                if(nomeInput) dadosPacienteAutenticado.nomeCompleto = nomeInput.value;
+                if(emailInput && dadosPacienteAutenticado.online) dadosPacienteAutenticado.online.email = emailInput.value;
+                if(cpfInput) dadosPacienteAutenticado.cpf = cpfInput.value;
+                if(celularInput) dadosPacienteAutenticado.celular = celularInput.value;
+                if(telefoneInput) dadosPacienteAutenticado.telefone = telefoneInput.value;
+                if(escolaridadeInput) dadosPacienteAutenticado.escolaridade = escolaridadeInput.value;
+                if(dadosPacienteAutenticado.endereco) {
+                    if(cepInput) dadosPacienteAutenticado.endereco.cep = cepInput.value;
+                    if(cidadeInput) dadosPacienteAutenticado.endereco.cidade = cidadeInput.value;
+                    if(enderecoInput) dadosPacienteAutenticado.endereco.logradouro = enderecoInput.value;
+                }
+                alert('Dados salvos!');
+                window.location.href = "inicio.html";
+            };
+        }
+
+        if (botaoCancelarEdicao) {
+            botaoCancelarEdicao.onclick = function() {
+                alert('Edição cancelada.');
+                if (typeof window.preencherFormulario === 'function') {
+                    window.preencherFormulario();
+                }
+            };
+        }
+
+        const fotoPerfilElement = document.querySelector('.cartao .perfil .avatar img');
+        if (fotoPerfilElement) {
+            fotoPerfilElement.style.cursor = 'pointer';
+            fotoPerfilElement.title = 'Clique para alterar a foto';
+            fotoPerfilElement.addEventListener('click', function() {
+                const desejaAlterar = window.confirm("Deseja alterar a foto de perfil?");
+                if (desejaAlterar) {
+                    alert("Funcionalidade para alterar a foto acionada.\n(Em uma implementação real, aqui abriria um seletor de arquivos.)");
+                }
+            });
+        }
+    }
+    window.preencherFormulario = preencherFormularioInterna;
+
+    function preencherFormularioInstituicaoInterna() {
+    const nomeInst = dadosInstituicaoAutenticada.nomeInstituicao || "Nome da Instituição";
+
+    const saudacaoNomeEl = document.getElementById('saudacao-nome');
+    if (saudacaoNomeEl) {
+        saudacaoNomeEl.textContent = nomeInst;
+    }
+
+    const nomeExibicaoPerfilEl = document.getElementById('nome-exibicao-perfil');
+    if (nomeExibicaoPerfilEl) {
+        nomeExibicaoPerfilEl.textContent = nomeInst;
+    }
+
+    const idsDosCamposParaPreencher = [
+        'nomeInstituicao', 'cnes', 'crmCorenResponsavel', 'cnpj',
+        'email', 'celular', 'telefone', 'cep', 'cidade',
+        'endereco', 'numero', 'complemento', 'bairro'
+    ];
+
+    idsDosCamposParaPreencher.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.value = dadosInstituicaoAutenticada[id] || '';
+        }
+    });
+
+    const camposDoFormulario = document.querySelectorAll('.info-formulario input[type="text"], .info-formulario input[type="email"], .info-formulario input[type="tel"]');
+    const botaoEditar = document.querySelector('.info-formulario .botao.editar');
+    const botaoSalvar = document.querySelector('.info-formulario .botao.salvar');
+
+    if (botaoEditar && botaoSalvar && camposDoFormulario.length > 0) {
+        camposDoFormulario.forEach(input => input.disabled = true);
+        botaoEditar.style.display = 'inline-block';
+        botaoSalvar.style.display = 'none';
+
+        botaoEditar.onclick = function() {
+            camposDoFormulario.forEach(input => input.disabled = false);
+            botaoEditar.style.display = 'none';
+            botaoSalvar.style.display = 'inline-block';
+            camposDoFormulario[0].focus();
+        };
+
+        botaoSalvar.onclick = function(event) {
+            event.preventDefault();
+
+            idsDosCamposParaPreencher.forEach(id => {
+                const inputElement = document.getElementById(id);
+                if (inputElement && dadosInstituicaoAutenticada.hasOwnProperty(id)) {
+                    dadosInstituicaoAutenticada[id] = inputElement.value;
+                } else if (inputElement) {
+                    dadosInstituicaoAutenticada[id] = inputElement.value;
+                }
+            });
+
+            alert('Dados da instituição salvos!');
+              window.location.href = "iniciomedico.html";
+        
+            camposDoFormulario.forEach(input => input.disabled = true);
+            botaoSalvar.style.display = 'none';
+            botaoEditar.style.display = 'inline-block';
+        };
+    } else {
+        if (!botaoEditar) console.error("Botão Editar não encontrado para o formulário da instituição.");
+        if (!botaoSalvar) console.error("Botão Salvar não encontrado para o formulário da instituição.");
+        if (camposDoFormulario.length === 0) console.error("Nenhum campo de formulário encontrado para a instituição.");
+    }
+
+    const fotoPerfilElement = document.querySelector('.cartao .perfil .avatar img');
+    if (fotoPerfilElement) {
+        fotoPerfilElement.style.cursor = 'pointer';
+        fotoPerfilElement.title = 'Clique para alterar a foto';
+        fotoPerfilElement.addEventListener('click', function() {
+            const desejaAlterar = window.confirm("Deseja alterar a foto de perfil da instituição/profissional?");
+            if (desejaAlterar) {
+                alert("Funcionalidade para alterar a foto acionada.\n(Em uma implementação real, aqui abriria um seletor de arquivos.)");
+            }
+        });
+    }
+}
+window.preencherFormularioInstituicao = preencherFormularioInstituicaoInterna;
+
+    (function() {
+        if (document.getElementById('crm') && document.querySelector('form[id="cadastroForm"]')) {
         }
     })();
 
-    // === Conteúdo de codigoemail.js (para codigoemail.html) ===
     (function() {
-        // Condição para executar apenas na página de verificação de código
-        if (document.getElementById('codigoInput') && document.getElementById('verificarCodigoBtn')) {
-            console.log('Executando scripts para: Código Email');
+        const codigoInput = document.getElementById('codigoInput');
+        const codigoError = document.getElementById('codigoError');
+        const codigoSuccessMessage = document.getElementById('codigoSuccessMessage');
+        const reenviarCodigoBtn = document.getElementById('reenviarCodigoBtn');
+        const countdownSpan = document.getElementById('countdown');
+        const formVerificarCodigo = document.getElementById('form-verificar-codigo');
 
-            const codigoInput = document.getElementById('codigoInput');
-            const codigoError = document.getElementById('codigoError');
-            const codigoSuccessMessage = document.getElementById('codigoSuccessMessage');
-            const verificarCodigoBtn = document.getElementById('verificarCodigoBtn');
-            const reenviarCodigoBtn = document.getElementById('reenviarCodigoBtn');
-            const reenviarInfoSpan = document.getElementById('reenviarInfo'); // Pode ser nulo se o span do contador estiver dentro do botão
-
-            let countdownTime = 60;
+        if (formVerificarCodigo && codigoInput && reenviarCodigoBtn && countdownSpan) {
             let countdownInterval;
+            let tempoRestante = 60;
 
-            function isValidCodeFormat(code) {
-                const codeRegex = /^\d{6}$/;
-                return codeRegex.test(code);
-            }
-
-            function showCodigoError(message) {
-                if(codigoInput) codigoInput.classList.add('invalid');
-                if(codigoError) {
-                    codigoError.textContent = message;
-                    codigoError.style.display = 'block';
-                }
-                if(codigoSuccessMessage) codigoSuccessMessage.style.display = 'none';
-            }
-
-            function hideCodigoError() {
-                if(codigoInput) codigoInput.classList.remove('invalid');
-                if(codigoError) {
-                    codigoError.textContent = '';
-                    codigoError.style.display = 'none';
-                }
-            }
-
-            function showCodigoSuccess() {
-                if(codigoSuccessMessage) codigoSuccessMessage.style.display = 'block';
-                hideCodigoError();
-            }
-
-            function hideCodigoSuccess() {
-                if(codigoSuccessMessage) codigoSuccessMessage.style.display = 'none';
-            }
-
-            function startCountdown() {
-                if (!reenviarCodigoBtn) return; // Se o botão não existe, não faz nada
-
+            function iniciarContadorReenvio() {
+                tempoRestante = 60;
                 reenviarCodigoBtn.disabled = true;
-                reenviarCodigoBtn.innerHTML = `Reenviar Código (<span id="countdown">${countdownTime}</span>s)`;
-                if (reenviarInfoSpan) reenviarInfoSpan.textContent = 'Aguarde antes de reenviar.';
-                
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                }
-
+                countdownSpan.textContent = tempoRestante;
+                if (countdownInterval) clearInterval(countdownInterval);
                 countdownInterval = setInterval(() => {
-                    countdownTime--;
-                    const countdownSpanElement = reenviarCodigoBtn.querySelector('#countdown');
-                    if (countdownSpanElement) countdownSpanElement.textContent = countdownTime;
-
-                    if (countdownTime <= 0) {
+                    tempoRestante--;
+                    countdownSpan.textContent = tempoRestante;
+                    if (tempoRestante <= 0) {
                         clearInterval(countdownInterval);
                         reenviarCodigoBtn.disabled = false;
-                        reenviarCodigoBtn.textContent = 'Reenviar Código';
-                        if (reenviarInfoSpan) reenviarInfoSpan.textContent = '';
-                        countdownTime = 60;
+                        countdownSpan.textContent = '';
                     }
                 }, 1000);
             }
+            iniciarContadorReenvio();
 
-            if (reenviarCodigoBtn) { // Só inicia se o botão de reenviar existir
-                 startCountdown();
-            }
+            reenviarCodigoBtn.addEventListener('click', function() {
+                alert('Código reenviado! (Simulação)');
+                iniciarContadorReenvio();
+            });
 
-            if (codigoInput) {
-                codigoInput.addEventListener('input', function() {
-                    const codigoValue = codigoInput.value.trim();
-                    if (codigoValue === '') {
-                        hideCodigoError();
-                        hideCodigoSuccess();
-                    } else if (!isValidCodeFormat(codigoValue)) {
-                        showCodigoError('O código deve ter 6 dígitos.');
-                        hideCodigoSuccess();
-                    } else {
-                        hideCodigoError();
+            formVerificarCodigo.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if(codigoError) codigoError.textContent = '';
+                if(codigoSuccessMessage) codigoSuccessMessage.style.display = 'none';
+
+                const codigoDigitado = codigoInput.value.trim();
+                const codigoCorreto = "123456";
+
+                if (codigoDigitado === "") {
+                    if(codigoError) codigoError.textContent = "Por favor, insira o código.";
+                    if(codigoError && codigoError.style) codigoError.style.display = 'block';
+                    codigoInput.focus();
+                    return;
+                }
+
+                if (codigoDigitado === codigoCorreto) {
+                    if(codigoSuccessMessage) {
+                        codigoSuccessMessage.textContent = 'Código válido! Redirecionando...';
+                        codigoSuccessMessage.style.display = 'block';
                     }
-                });
-            }
+                    if(codigoError && codigoError.style) codigoError.style.display = 'none';
+                    setTimeout(function() {
+                        window.location.href = 'escolher-nova-senha.html';
+                    }, 1500);
+                } else {
+                    if(codigoError) codigoError.textContent = "Código incorreto. Tente novamente.";
+                    if(codigoError && codigoError.style) codigoError.style.display = 'block';
+                    codigoInput.focus();
+                }
+            });
+        }
+    })();
 
-            if (verificarCodigoBtn) {
-                verificarCodigoBtn.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const codigoValue = codigoInput.value.trim();
+    (function() {
+        const formElement = document.getElementById('novaSenhaForm');
+        const novaSenhaInputElement = document.getElementById('novaSenhaInput');
 
-                    if (codigoValue === '') {
-                        showCodigoError('Por favor, insira o código.');
-                        hideCodigoSuccess();
-                    } else if (!isValidCodeFormat(codigoValue)) {
-                        showCodigoError('O código deve ter 6 dígitos.');
-                        hideCodigoSuccess();
+        if (formElement && novaSenhaInputElement) {
+            const confirmaSenhaInputElement = document.getElementById('confirmaSenhaInput');
+            const novaSenhaErrorElement = document.getElementById('novaSenhaError');
+            const confirmaSenhaErrorElement = document.getElementById('confirmaSenhaError');
+
+            formElement.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (novaSenhaErrorElement) {
+                    novaSenhaErrorElement.textContent = '';
+                    novaSenhaErrorElement.style.display = 'none';
+                }
+                if (confirmaSenhaErrorElement) {
+                    confirmaSenhaErrorElement.textContent = '';
+                    confirmaSenhaErrorElement.style.display = 'none';
+                }
+
+                const novaSenhaValue = novaSenhaInputElement.value;
+                const confirmaSenhaValue = confirmaSenhaInputElement ? confirmaSenhaInputElement.value : ''; 
+                
+                let isFormValid = true;
+                const MIN_SENHA_LENGTH = 6;
+
+                if (novaSenhaValue === '') {
+                    if (novaSenhaErrorElement) {
+                        novaSenhaErrorElement.textContent = 'Por favor, insira a nova senha.';
+                        novaSenhaErrorElement.style.display = 'block';
                     } else {
-                        const isCodeCorrectFromServer = (codigoValue === '123456'); // SIMULAÇÃO
-                        if (isCodeCorrectFromServer) {
-                            hideCodigoError();
-                            showCodigoSuccess();
-                            // Em vez de 'redefinicao.html', o fluxo comum seria para a página de definir nova senha.
-                            // Você mencionou que `nova-senha.js` é para `escolher-nova-senha.html`.
-                            // O `redefinir-senha.js` é para `esqueci-senha.html`.
-                            // O fluxo geralmente é: esqueci-senha -> codigo-email -> escolher-nova-senha.
-                            // Verifique o nome correto da página aqui.
-                            window.location.href = 'escolher-nova-senha.html'; // Ajuste conforme o seu fluxo
+                        alert("Por favor, insira a nova senha.");
+                    }
+                    isFormValid = false;
+                } else if (novaSenhaValue.length < MIN_SENHA_LENGTH) {
+                    if (novaSenhaErrorElement) {
+                        novaSenhaErrorElement.textContent = `A nova senha deve ter no mínimo ${MIN_SENHA_LENGTH} caracteres.`;
+                        novaSenhaErrorElement.style.display = 'block';
+                    } else {
+                        alert(`A nova senha deve ter no mínimo ${MIN_SENHA_LENGTH} caracteres.`);
+                    }
+                    isFormValid = false;
+                }
+
+                if (novaSenhaValue !== '' && confirmaSenhaValue === '') {
+                    if (confirmaSenhaErrorElement) {
+                        confirmaSenhaErrorElement.textContent = 'Por favor, confirme a nova senha.';
+                        confirmaSenhaErrorElement.style.display = 'block';
+                    } else {
+                        alert("Por favor, confirme a nova senha.");
+                    }
+                    isFormValid = false; 
+                }
+
+                if (novaSenhaValue !== '' && novaSenhaValue.length >= MIN_SENHA_LENGTH && confirmaSenhaValue !== '') {
+                    if (novaSenhaValue !== confirmaSenhaValue) {
+                        if (confirmaSenhaErrorElement) {
+                            confirmaSenhaErrorElement.textContent = 'As senhas não coincidem.';
+                            confirmaSenhaErrorElement.style.display = 'block';
                         } else {
-                            showCodigoError('Código incorreto. Tente novamente.');
-                            hideCodigoSuccess();
+                            alert("As senhas não coincidem.");
+                        }
+                        isFormValid = false;
+                    }
+                }
+                
+                if (isFormValid) {
+                    if (typeof dadosPacienteAutenticado !== 'undefined' && dadosPacienteAutenticado && dadosPacienteAutenticado.online) {
+                        dadosPacienteAutenticado.online.senha = novaSenhaValue;
+                    }
+                    window.location.href = 'redefinida-sucesso.html';
+                } else {
+                    if (novaSenhaErrorElement && novaSenhaErrorElement.style.display === 'block') {
+                        novaSenhaInputElement.focus();
+                    } else if (confirmaSenhaErrorElement && confirmaSenhaErrorElement.style.display === 'block' && confirmaSenhaInputElement) {
+                        confirmaSenhaInputElement.focus();
+                    } else {
+                        novaSenhaInputElement.focus();
+                    }
+                }
+            });
+        }
+    })();
+
+    (function() {
+        if (document.getElementById('emailForm') && document.getElementById('emailInput')) {
+        }
+    })();
+
+    (function() {
+    })();
+
+    (function() {
+        const formLoginUsuario = document.getElementById('formLoginUsuario');
+        if (formLoginUsuario) {
+            const mensagemErroLoginEl = document.getElementById('mensagem-login-erro');
+            formLoginUsuario.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const tipoSelecionadoRadio = document.querySelector('input[name="tipo"]:checked');
+                if (!tipoSelecionadoRadio) {
+                    if (mensagemErroLoginEl) {
+                        mensagemErroLoginEl.textContent = "Por favor, selecione o tipo de usuário.";
+                        mensagemErroErroLoginEl.style.display = 'block';
+                    }
+                    return;
+                }
+                const tipoSelecionado = tipoSelecionadoRadio.value;
+                if (mensagemErroLoginEl) {
+                    mensagemErroLoginEl.textContent = '';
+                    mensagemErroLoginEl.style.display = 'none';
+                }
+                if (tipoSelecionado === 'beneficiario') {
+                    const loginInput = document.getElementById('beneficiario-login');
+                    const senhaInput = document.getElementById('beneficiario-senha');
+                    if (!loginInput || !senhaInput) { console.error("Inputs beneficiário não encontrados"); return; }
+                    const loginDigitado = loginInput.value.trim();
+                    const senhaDigitada = senhaInput.value.trim();
+                    if (loginDigitado === "" || senhaDigitada === "") {
+                        if(mensagemErroLoginEl) {
+                           mensagemErroLoginEl.textContent = "Por favor, preencha login e senha.";
+                           mensagemErroLoginEl.style.display = 'block';
+                        }
+                        return;
+                    }
+                    if (dadosPacienteAutenticado && dadosPacienteAutenticado.online &&
+                        loginDigitado === dadosPacienteAutenticado.online.login &&
+                        senhaDigitada === dadosPacienteAutenticado.online.senha) {
+                        localStorage.setItem('pacienteLogadoIdentificador', dadosPacienteAutenticado.online.login);
+                        window.location.href = "INICIO.html";
+                    } else {
+                        if(mensagemErroLoginEl) {
+                           mensagemErroLoginEl.textContent = "Login ou senha incorretos para beneficiário.";
+                           mensagemErroLoginEl.style.display = 'block';
                         }
                     }
-                });
-            }
-
-            if (reenviarCodigoBtn) {
-                reenviarCodigoBtn.addEventListener('click', function() {
-                    alert('Solicitando novo código...'); // Simulação
-                    // Lógica de reenvio (ex: fetch para API)
-                    // const userEmail = sessionStorage.getItem('resetEmail');
-                    // Adicionar lógica real de reenvio aqui se necessário
-                    startCountdown(); // Reinicia o contador
-                });
-            }
-        }
-    })();
-
-    // === Conteúdo de nova-senha.js (para escolher-nova-senha.html) ===
-    (function() {
-        // Condição para executar apenas na página de definir nova senha
-        if (document.getElementById('novaSenhaForm') && document.getElementById('novaSenhaInput')) {
-            console.log('Executando scripts para: Escolher Nova Senha');
-
-            const novaSenhaInput = document.getElementById('novaSenhaInput');
-            const confirmaSenhaInput = document.getElementById('confirmaSenhaInput');
-            const novaSenhaError = document.getElementById('novaSenhaError');
-            const confirmaSenhaError = document.getElementById('confirmaSenhaError');
-            const senhaSuccessMessage = document.getElementById('senhaSuccessMessage');
-            // const definirSenhaBtn = document.getElementById('definirSenhaBtn'); // Não usado diretamente no código fornecido, o submit é no form
-            const novaSenhaForm = document.getElementById('novaSenhaForm');
-
-            function showErrorMessage(element, message) {
-                if(element) {
-                    element.textContent = message;
-                    element.style.display = 'block';
-                }
-            }
-
-            function hideErrorMessage(element) {
-                if(element) {
-                    element.textContent = '';
-                    element.style.display = 'none';
-                }
-            }
-
-            function showSuccessMessage(message) {
-                if(senhaSuccessMessage) {
-                    senhaSuccessMessage.textContent = message;
-                    senhaSuccessMessage.style.display = 'block';
-                }
-                hideErrorMessage(novaSenhaError);
-                hideErrorMessage(confirmaSenhaError);
-            }
-
-            function hideSuccessMessage() {
-                if(senhaSuccessMessage) senhaSuccessMessage.style.display = 'none';
-            }
-            
-            function validatePasswords() {
-                const novaSenhaValue = novaSenhaInput.value;
-                const confirmaSenhaValue = confirmaSenhaInput.value;
-
-                hideErrorMessage(novaSenhaError);
-                hideErrorMessage(confirmaSenhaError);
-                novaSenhaInput.classList.remove('invalid');
-                confirmaSenhaInput.classList.remove('invalid');
-                hideSuccessMessage(); 
-
-                if (novaSenhaValue.length > 0 && novaSenhaValue.length < 6) { 
-                    showErrorMessage(novaSenhaError, 'A senha deve ter no mínimo 6 caracteres.');
-                    novaSenhaInput.classList.add('invalid');
-                }
-
-                if (confirmaSenhaValue.length > 0 && novaSenhaValue !== confirmaSenhaValue) {
-                    showErrorMessage(confirmaSenhaError, 'As senhas não coincidem.');
-                    confirmaSenhaInput.classList.add('invalid');
-                }
-            }
-
-            if (novaSenhaInput) novaSenhaInput.addEventListener('input', validatePasswords);
-            if (confirmaSenhaInput) confirmaSenhaInput.addEventListener('input', validatePasswords);
-
-            if (novaSenhaForm) {
-                novaSenhaForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); 
-
-                    const novaSenhaValue = novaSenhaInput.value;
-                    const confirmaSenhaValue = confirmaSenhaInput.value;
-                    let hasFinalError = false; 
-
-                    hideErrorMessage(novaSenhaError);
-                    hideErrorMessage(confirmaSenhaError);
-                    novaSenhaInput.classList.remove('invalid');
-                    confirmaSenhaInput.classList.remove('invalid');
-                    hideSuccessMessage();
-
-                    if (novaSenhaValue === '') {
-                        showErrorMessage(novaSenhaError, 'Por favor, insira sua nova senha.');
-                        novaSenhaInput.classList.add('invalid');
-                        hasFinalError = true;
-                    } else if (novaSenhaValue.length < 6) { 
-                        showErrorMessage(novaSenhaError, 'A senha deve ter no mínimo 6 caracteres.');
-                        novaSenhaInput.classList.add('invalid');
-                        hasFinalError = true;
+                } else if (tipoSelecionado === 'instituicao') {
+                    const cnesInput = document.getElementById('instituicao-cnes');
+                    const crmInput = document.getElementById('instituicao-crm');
+                    const senhaInstInput = document.getElementById('instituicao-senha-inst');
+                    if (!cnesInput || !crmInput || !senhaInstInput) { console.error("Inputs instituição não encontrados"); return; }
+                    const cnesDigitado = cnesInput.value.trim();
+                    const crmDigitado = crmInput.value.trim();
+                    const senhaInstDigitada = senhaInstInput.value.trim();
+                    if (cnesDigitado === "" || crmDigitado === "" || senhaInstDigitada === "") {
+                           if(mensagemErroLoginEl) {
+                               mensagemErroLoginEl.textContent = "Por favor, preencha CNES, CRM/COREN e Senha.";
+                               mensagemErroLoginEl.style.display = 'block';
+                           }
+                           return;
                     }
-
-                    if (confirmaSenhaValue === '') {
-                        showErrorMessage(confirmaSenhaError, 'Por favor, confirme sua senha.');
-                        confirmaSenhaInput.classList.add('invalid');
-                        hasFinalError = true;
-                    } else if (novaSenhaValue !== confirmaSenhaValue) {
-                        showErrorMessage(confirmaSenhaError, 'As senhas não coincidem.');
-                        confirmaSenhaInput.classList.add('invalid');
-                        hasFinalError = true;
-                    }
-
-                    if (hasFinalError) {
-                        return; 
-                    }
-
-                    showSuccessMessage('Senha redefinida com sucesso!');
-                    alert('Senha redefinida com sucesso! Redirecionando...');
-                    
-                    // O script original redirecionava para 'nova-senha.html'.
-                    // Se 'escolher-nova-senha.html' é onde o form está, para onde deve ir após o sucesso?
-                    // Talvez para uma página de "sucesso" final, ou para a página de login.
-                    // Ajuste 'pagina-de-sucesso-final.html' para o destino correto.
-                    setTimeout(() => {
-                        window.location.href = 'redefinida-sucesso.html'; // Ou login.html, ou uma página de sucesso dedicada
-                    }, 1500);
-                });
-            }
-        }
-    })();
-
-    // === Conteúdo de redefinir-senha.js (para esqueci-senha.html) ===
-    (function() {
-        // Condição para executar apenas na página de "esqueci a senha" (onde se insere o email)
-        if (document.getElementById('emailForm') && document.getElementById('emailInput')) {
-            console.log('Executando scripts para: Esqueci Senha (Redefinir Senha)');
-
-            const emailInput = document.getElementById('emailInput'); 
-            const emailError = document.getElementById('emailError');
-            const emailSuccessMessage = document.getElementById('emailSuccessMessage'); 
-            // const enviarCodigoBtn = document.getElementById('enviarCodigoBtn'); // O listener é no form
-            const emailForm = document.getElementById('emailForm'); 
-
-            function isValidEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-
-            function showEmailError(message) {
-                if(emailInput) emailInput.classList.add('invalid');
-                if(emailError) {
-                    emailError.textContent = message;
-                    emailError.style.display = 'block';
-                }
-                if(emailSuccessMessage) emailSuccessMessage.style.display = 'none'; 
-            }
-
-            function hideEmailError() {
-                if(emailInput) emailInput.classList.remove('invalid');
-                if(emailError) {
-                    emailError.textContent = '';
-                    emailError.style.display = 'none';
-                }
-            }
-
-            function showEmailSuccess(message) {
-                if(emailSuccessMessage) {
-                    emailSuccessMessage.textContent = message;
-                    emailSuccessMessage.style.display = 'block';
-                }
-                hideEmailError();
-            }
-
-            if (emailInput) {
-                emailInput.addEventListener('input', function() {
-                    const emailValue = emailInput.value.trim();
-                    if (emailValue === '') {
-                        hideEmailError();
-                        if(emailSuccessMessage) emailSuccessMessage.style.display = 'none'; 
-                    } else if (!isValidEmail(emailValue)) {
-                        showEmailError('Por favor, insira um e-mail válido.');
+                    if (dadosInstituicaoAutenticada && dadosInstituicaoAutenticada.online &&
+                        cnesDigitado === dadosInstituicaoAutenticada.cnes &&
+                        crmDigitado === dadosInstituicaoAutenticada.crmCorenResponsavel &&
+                        senhaInstDigitada === dadosInstituicaoAutenticada.online.senha) {
+                        localStorage.setItem('instituicaoLogadaIdentificador', dadosInstituicaoAutenticada.cnes);
+                        window.location.href = "iniciomedico.html";
                     } else {
-                        hideEmailError(); 
-                        if(emailSuccessMessage) emailSuccessMessage.style.display = 'none'; 
+                        if(mensagemErroLoginEl) {
+                           mensagemErroLoginEl.textContent = "CNES, CRM/COREN ou Senha incorretos para instituição.";
+                           mensagemErroLoginEl.style.display = 'block';
+                        }
                     }
-                });
-            }
-
-            if (emailForm) {
-                emailForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); 
-                    const emailValue = emailInput.value.trim();
-
-                    if (emailValue === '') {
-                        showEmailError('Por favor, insira seu e-mail.');
-                        return; 
-                    }
-                    if (!isValidEmail(emailValue)) {
-                        showEmailError('Por favor, insira um e-mail válido.');
-                        return; 
-                    }
-
-                    showEmailSuccess('E-mail válido! Enviando código...'); 
-                    alert(`Um código de verificação foi enviado para ${emailValue}.`); 
-                    sessionStorage.setItem('resetEmail', emailValue); 
-                    window.location.href = 'codigoemail.html'; 
-                });
-            }
+                }
+            });
         }
     })();
 
-    // === Conteúdo de script.js (POTENCIALMENTE para escolher-tipo-usuario.html ou outra página com form de email) ===
-    (function() {
-        // Condição para executar: verifica se os elementos específicos deste script existem
-        const emailInputGlobal = document.getElementById('email'); // ID diferente do redefinir-senha.js
-        const enviarCodigoBtnGlobal = document.getElementById('enviarCodigoBtn'); // Mesmo ID de botão do redefinir-senha.js
-
-        if (emailInputGlobal && enviarCodigoBtnGlobal) {
-            console.log('Executando scripts para: Script.js (escolher-tipo-usuario? ou login?)');
-
-            const emailErrorGlobal = document.getElementById('emailError'); // Precisa existir no HTML desta página
-
-            function isValidEmailGlobal(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-
-            function showEmailErrorGlobal(message) {
-                if(emailInputGlobal) emailInputGlobal.classList.add('invalid');
-                if(emailErrorGlobal) {
-                    emailErrorGlobal.textContent = message;
-                    emailErrorGlobal.style.display = 'block';
-                }
-            }
-
-            function hideEmailErrorGlobal() {
-                if(emailInputGlobal) emailInputGlobal.classList.remove('invalid');
-                if(emailErrorGlobal) {
-                    emailErrorGlobal.textContent = '';
-                    emailErrorGlobal.style.display = 'none';
-                }
-            }
-            
-            // A função hideEmailSuccess() era chamada no script original mas não definida.
-            // Se precisar dela, defina-a aqui ou certifique-se de que é uma função global.
-            // function hideEmailSuccessGlobal() { /* ... lógica ... */ }
-
-
-            emailInputGlobal.addEventListener('input', function() {
-                const emailValue = emailInputGlobal.value.trim();
-                if (emailValue === '') {
-                    hideEmailErrorGlobal();
-                } else if (!isValidEmailGlobal(emailValue)) {
-                    showEmailErrorGlobal('Por favor, insira um e-mail válido (ex: seu.email@exemplo.com).');
-                } else {
-                    hideEmailErrorGlobal();
-                }
-            });
-
-            enviarCodigoBtnGlobal.addEventListener('click', function(event) {
-                event.preventDefault();
-                const emailValue = emailInputGlobal.value.trim();
-
-                if (emailValue === '') {
-                    showEmailErrorGlobal('O campo de e-mail é obrigatório.');
-                } else if (!isValidEmailGlobal(emailValue)) {
-                    showEmailErrorGlobal('Por favor, insira um e-mail válido (ex: seu.email@exemplo.com).');
-                } else {
-                    hideEmailErrorGlobal();
-                    // hideEmailSuccess(); // Esta função não está definida aqui. Removi a chamada.
-                                        // Se houver uma mensagem de sucesso para esconder, adicione a lógica ou defina a função.
-                    console.log('E-mail válido em script.js, redirecionando para codigoemail.html');
-                    window.location.href = 'codigoemail.html';
-                }
-            });
-        } else {
-            // Este console.log ajudará a identificar se o script.js não encontrou seus elementos
-            // console.log('Elementos para script.js (ex: #email, #enviarCodigoBtn) não encontrados na página atual.');
-        }
-    })();
-
-})(); // Fecha a IIFE principal
+})();
