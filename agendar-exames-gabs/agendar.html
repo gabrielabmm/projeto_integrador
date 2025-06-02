@@ -36,7 +36,7 @@
         <div class="topo-agendamento">
             <div class="titulo-com-voltar">
                 <h2>Agendamento de Exames</h2>
-                <a href="#" class="back-link">&lt; Voltar</a>
+                <a href="#" class="back-link"> Voltar</a>
             </div>
             <button class="btn-primary" id="btnAgendarExames">Agendar Exames</button>
         </div>
@@ -72,7 +72,40 @@
         </div>
     </div>
 
-
+  <div id="ubsTimeModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Selecionar UBS e Horário</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="selectUbs">Selecione a UBS:</label>
+                    <select id="selectUbs" class="form-control">
+                        <option value="">-- Selecione --</option>
+                        <option value="ubs Centro">UBS Centro</option>
+                        <option value="ubs Vila Nova">UBS Vila Nova</option>
+                        <option value="ubs Jd. Primavera">UBS Jd. Primavera</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectTime">Selecione o Horário:</label>
+                    <select id="selectTime" class="form-control">
+                        <option value="">-- Selecione --</option>
+                        <option value="08:00">08:00</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-text" id="cancelUbsTimeSelection">Cancelar</button>
+                <button class="btn-primary" id="confirmAppointment">Confirmar Agendamento</button>
+            </div>
+        </div>
+    </div>
 
     <section class="secao-exames-agendados">
         <h2 class="titulo-principal">Exames Agendados:</h2>
@@ -80,7 +113,7 @@
 
     <div class="exam-card confirmed">
         <div class="status-header">
-            <span class="status-dot"></span>
+            <span class="status-dot-confirmado"></span>
             <p class="status-text">Confirmado</p>
             <p class="protocol">Nº de protocolo: 091207</p>
         </div>
@@ -110,7 +143,7 @@
 
     <div class="exam-card confirmed">
         <div class="status-header">
-            <span class="status-dot"></span>
+            <span class="status-dot-confirmado"></span>
             <p class="status-text">Confirmado</p>
             <p class="protocol">Nº de protocolo: 090909</p>
         </div>
@@ -140,7 +173,7 @@
 
     <div class="exam-card cancelled">
         <div class="status-header">
-            <span class="status-dot"></span>
+            <span class="status-dot-cancelado"></span>
             <p class="status-text">Cancelado</p>
             <p class="protocol">Nº de protocolo: 012345</p>
         </div>
