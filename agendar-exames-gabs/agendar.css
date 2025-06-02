@@ -137,7 +137,7 @@ body {
     color: var(--primary-green);
     margin: 60px auto 10px auto;
     text-align: left; 
-    max-width: 1500px;
+    max-width: 1300px;
 }
 
 .section-header {
@@ -536,7 +536,7 @@ body {
 
 .topo-agendamento .back-link {
     text-decoration: none;
-    color: var(--medium-grey);
+    color: var(--primary-green);
     font-size: 0.9em;
 }
 
@@ -552,7 +552,7 @@ body {
 .titulo-com-voltar {
     display: flex;
     align-items: center;
-    gap: 1155px;
+    gap: 1100px;
 }
 
 .titulo-com-voltar h2 {
@@ -585,7 +585,7 @@ h1 {
     margin: 0 auto 20px auto; 
     overflow: hidden;
     border: 1px solid #ddd;
-    max-width: 1500px; 
+    max-width: 1300px; 
 }
 
 
