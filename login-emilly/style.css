@@ -480,17 +480,6 @@ input.invalid {
     margin-bottom: 25px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
 .container {
   text-align: center;
 }
