@@ -1,6 +1,7 @@
 body {
   font-family: 'Instrument Sans', sans-serif;
   background: #fff;
+  margin: 0;
 }
 
 
@@ -12,8 +13,42 @@ body {
   border-bottom: 1px solid #ddd;
 }
 
+.logo-text-sidcc {
+  font-weight: bold;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.logo-text-sidcc .char-s {
+  color: #48AD45;
+}
+
+.logo-text-sidcc .char-i {
+  color: #F9BD14;
+}
+
+.logo-text-sidcc .char-d {
+  color: #2864AE;
+}
+
+.logo-text-sidcc .char-c1 {
+  color: #000;
+}
+
+.logo-text-sidcc .char-c2 {
+  color: #000;
+}
+
 .logo {
-  height: 40px;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
 }
 
 .menu a {
@@ -33,8 +68,8 @@ body {
   cursor: pointer;
 }
 
+
 .back-link {
-  align-items: center;
   color: #48AD45;
   font-weight: bold;
   text-decoration: none;
@@ -47,76 +82,21 @@ body {
   padding: 20px 60px;
 }
 
-
 .title {
-  align-items: right;
-  color: #000000;
   margin: 30px;
   font-weight: bold;
-  text-decoration: none;
-  }
-
-.search-bar {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  background-color: #B0E3AE;
-  border-radius: 50px;
-  padding: 0 20px; 
-  margin-left: 60px;
-  margin-right: 60px;
-  margin-bottom: 40px;
-  overflow: hidden;
-  width: auto; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-
-.search-bar__input {
-  flex-grow: 1;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  padding: 15px 10px;
-  font-size: 16px;
-  color: #3A5A40;
-}
-
-
-.search-bar__input::placeholder {
-  color: #557C55;
-  opacity: 1;
-}
-
-.search-bar__button {
-  background-color: #B0E3AE;
-  border: none;
-  padding: 13px 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: right;
-  justify-content: center;
-}
-
-.search-bar__button:hover {
-  background-color: #B0E3AE;
-}
-
-.search-bar__icon {
-  display: block;
+  color: #000;
 }
 
 .container-botoes {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   gap: 20px;
-  align-items: center;       
-  justify-content: center;   
+  margin-bottom: 40px;
 }
 
-
 .botao-toggle {
-  width: 460px;
+  width: 470px;
   height: 45px;
   font-size: 18px;
   font-weight: bold;
@@ -132,34 +112,96 @@ body {
   background-color: #48AD45;
 }
 
-
-.topo {
+main.conteudo {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  border-bottom: 1px solid #ddd;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 60px 60px;
 }
 
-.logo {
-  height: 40px;
+.card {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-left: 4px solid #48AD45; 
+  gap: 10px;
 }
 
-.menu a {
-  margin: 0 10px;
-  text-decoration: underline;
-  color: #000;
+.status {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.icone-perfil {
-  height: 30px;
-  vertical-align: top;
+.card.disponivel .status {
+  color: #48AD45;
 }
 
-.botao-perfil button {
-  background: none;
+.card.indisponivel .status {
+  color: #E04C4C;
+}
+
+.card .info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  flex: 1;
+}
+
+.card .info-item {
+  min-width: 180px;
+}
+
+.card .botoes {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn {
   border: none;
+  padding: 14px 28px; 
+  border-radius: 50px;
+  font-weight: bold;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.btn.verde {
+  background-color: #48AD45;
+  color: #fff;
+}
+
+.btn.cinza {
+  background-color: #aaa;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.card.consulta {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-left: 4px solid #48AD45; 
+  gap: 10px;
+}
+
+.card.consulta .info {
+  gap: 15px;
+}
+
+.card.consulta .botoes {
+  justify-content: flex-end;
 }
 
 .rodape {
@@ -168,14 +210,12 @@ body {
   padding: 40px 10%;
   font-size: 14px;
   color: #333;
-  margin: 0;
 }
 
 .rodape-conteudo {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0;
 }
 
 .coluna {
@@ -186,9 +226,9 @@ body {
 
 .coluna h4 {
   font-size: 16px;
-  margin-top: 0;
+  margin-top:0;
   margin-bottom: 15px;
-  color: #000;
+  color:#000;
   font-weight: bold;
 }
 
@@ -229,8 +269,4 @@ body {
 .menu {
   display: flex;
   align-items: center;
-}
-
-.footer {
-  margin: 0px;
 }
