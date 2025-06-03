@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Ficha de Cadastro</title>
-  <link rel="stylesheet" href="ficha-citpatologica.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIDCC</title>
+  <link rel="stylesheet" href="historico-hospitalar.css" />
 </head>
 <body>
 
-      <header class="topo">
-    <img src="logo.png.png" alt="Logo SIDCC" class="logo" />
+
+  <header class="topo">
+        <div class="logo">
+            <img src="../imagens/logo.png" alt="Logo SIDCC">
+            <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
+                    class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
+            </span>
+        </div>
     <nav class="menu">
   <div class="links-e-perfil">
     <a href="#">Início</a>
@@ -24,91 +31,96 @@
 
   </header>
 
-  
-    <div class="linha-topo">
-  <h2 class="title">Olá, Maria!</h2>
-  <a href="#" class="back-link">< Voltar</a>
-</div>
-
-    
-    <div class="search-bar">
-  
-        
-  <input type="text" class="search-bar__input" placeholder="Pesquise por um nome ou cartão SUS*">
-  <button type="button" class="search-bar__button" aria-label="Pesquisar">
-    <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="11" r="8"></circle>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-    </svg>
-  </button>
-</div>
-
-<div class="container-botoes">
-    <button id="btnPerfil" class="botao-toggle ativo">Perfil</button>
-    <button id="btnhistoricohospitalar" class="botao-toggle">Histórico Hospitalar</button>
+  <div class="linha-topo">
+    <h2 class="title">Olá, Maria!</h2>
+    <a href="#" class="back-link">&lt; Voltar</a>
   </div>
 
-  <script>
-    const btnPerfil = document.getElementById("btnPerfil");
-    const btnhistoricohospitalar = document.getElementById("btnhistoricohospitalar");
+  <div class="container-botoes">
+    <button id="btnPerfil" class="botao-toggle ativo">Perfil</button>
+    <button id="btnHistorico" class="botao-toggle">Histórico Hospitalar</button>
+  </div>
 
-    btnPerfil.addEventListener("click", () => {
-      btnPerfil.classList.add("ativo");
-      btnhistoricohospitalar.classList.remove("ativo");
-    });
+  <main class="conteudo">
+    <div class="card disponivel">
+      <div class="status">Disponível</div>
+      <div class="info">
+        <div class="info-item"><strong>Médico:</strong> <span>Ana Lopes</span></div>
+        <div class="info-item"><strong>Exame:</strong> <span>Preventivo</span></div>
+        <div class="info-item"><strong>Laboratório:</strong> <span>LabHealth</span></div>
+        <div class="info-item"><strong>Data de coleta:</strong> <span>12/06/2024</span></div>
+        <div class="info-item"><strong>Nº de protocolo:</strong> <span>091207</span></div>
+      </div>
+      <div class="botoes">
+        <button class="btn verde">Resultado</button>
+        <button class="btn verde">Mais detalhes</button>
+      </div>
+    </div>
 
-    btnhistoricohospitalar.addEventListener("click", () => {
-      btnhistoricohospitalar.classList.add("ativo");
-      btnPerfil.classList.remove("ativo");
-    });
-  </script>
-  
- 
+    <div class="card disponivel">
+      <div class="status">Disponível</div>
+      <div class="info">
+        <div class="info-item"><strong>Médico:</strong> <span>Joana Sousa</span></div>
+        <div class="info-item"><strong>Exame:</strong> <span>Ultrassom</span></div>
+        <div class="info-item"><strong>Laboratório:</strong> <span>SaúdeIdeal</span></div>
+        <div class="info-item"><strong>Data de coleta:</strong> <span>14/05/2024</span></div>
+        <div class="info-item"><strong>Nº de protocolo:</strong> <span>090909</span></div>
+      </div>
+      <div class="botoes">
+        <button class="btn verde">Resultado</button>
+        <button class="btn verde">Mais detalhes</button>
+      </div>
+    </div>
 
-  <script>
-  const campo = document.getElementById('campoPerfil');
-  const botao = document.getElementById('botaoEnviar');
+    <div class="card indisponivel">
+      <div class="status">Indisponível</div>
+      <div class="info">
+        <div class="info-item"><strong>Médico:</strong> <span>Maria Joaquina</span></div>
+        <div class="info-item"><strong>Exame:</strong> <span>Preventivo</span></div>
+        <div class="info-item"><strong>Laboratório:</strong> <span>LabHealth</span></div>
+        <div class="info-item"><strong>Data de coleta:</strong> <span>10/05/2024</span></div>
+        <div class="info-item"><strong>Nº de protocolo:</strong> <span>012345</span></div>
+      </div>
+      <div class="botoes">
+        <button class="btn cinza" disabled>Resultado</button>
+        <button class="btn cinza" disabled>Mais detalhes</button>
+      </div>
+    </div>
 
-  campo.addEventListener('input', () => {
-    if (campo.value.trim() !== '') {
-      botao.classList.add('ativo');
-      botao.disabled = false;
-    } else {
-      botao.classList.remove('ativo');
-      botao.disabled = true;
-    }
-  });
-</script>
+    <div class="card consulta">
+      <div class="info">
+        <div class="info-item"><strong>Consulta -</strong> <span>02/04/2024</span></div>
+        <div class="info-item"><strong>Médico:</strong> <span>Maria Joaquina</span></div>
+      </div>
+      <div class="botoes">
+        <button class="btn verde">Ver prontuário</button>
+      </div>
+    </div>
+  </main>
 
-<body>
-    
-</body>
-
-</html>
-      
-   <footer class="rodape">
+  <footer class="rodape">
     <div class="rodape-conteudo">
       
       <div class="coluna">
         <h4>SIDCC</h4>
         <div class="redes-sociais">
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384031.png" alt="Facebook" /></a>
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384028.png" alt="Instagram" /></a>
-          <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/1384/1384014.png" alt="LinkedIn" /></a>
+          <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+                <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+                <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
         </div>
       </div>
 
       <div class="coluna">
         <h4>Institucional</h4>
         <ul>
-          <li><a href="#">SAC</a></li>
+          <li><a href="sac-logado.html">SAC</a></li>
         </ul>
       </div>
 
       <div class="coluna">
         <h4>Ajuda</h4>
         <ul>
-          <li><a href="#">Dúvidas frequentes</a></li>
+          <li><a href="faq-logado.html">Dúvidas frequentes</a></li>
           <li><a href="#">Acessibilidade</a></li>
         </ul>
       </div>
@@ -116,13 +128,28 @@
       <div class="coluna">
         <h4>Legal</h4>
         <ul>
-          <li><a href="#">Termos de uso</a></li>
-          <li><a href="#">Política de privacidade</a></li>
+          <li><a href="termos-de-uso-logado.html">Termos de uso</a></li>
+          <li><a href="politica-de-privacidade-logado.html">Política de privacidade</a></li>
         </ul>
       </div>
 
     </div>
   </footer>
 
+
+  <script>
+    const btnPerfil = document.getElementById("btnPerfil");
+    const btnHistorico = document.getElementById("btnHistorico");
+
+    btnPerfil.addEventListener("click", () => {
+      btnPerfil.classList.add("ativo");
+      btnHistorico.classList.remove("ativo");
+    });
+
+    btnHistorico.addEventListener("click", () => {
+      btnHistorico.classList.add("ativo");
+      btnPerfil.classList.remove("ativo");
+    });
+  </script>
 </body>
 </html>
