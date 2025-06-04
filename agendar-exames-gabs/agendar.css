@@ -539,59 +539,74 @@ body {
   }
   
 
-  .topo-agendamento {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px 40px;
-}
-
-.topo-agendamento h2 {
-    font-size: 1.6em;
-    color: var(--primary-green);
-}
-
-.topo-agendamento .btn-primary {
-    min-width: 160px;
-}
-
-.topo-agendamento .back-link {
-    text-decoration: none;
-    color: var(--primary-green);
-    font-size: 0.9em;
-}
-
 .topo-agendamento {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px;
-    gap: 20px;
-    flex-wrap: wrap;
+    padding: 20px 80px; 
+    gap: 15px;
 }
 
-.titulo-com-voltar {
+.header-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 1100px;
+    width: 100%;
 }
 
-.titulo-com-voltar h2 {
+.header-content h2 {
     font-size: 1.6em;
     color: var(--primary-green);
     margin: 0;
+    flex-grow: 1;
+    text-align: left;
 }
 
 .back-link {
+    color: #48AD45;
+    font-weight: bold;
     text-decoration: none;
-    color: var(--primary-green);
-    font-size: 1em;
+    margin: 0;
+    white-space: nowrap;
+    padding-left: 20px;
 }
 
 .back-link:hover {
     text-decoration: underline;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .topo-agendamento {
+        padding: 15px 20px; 
+        gap: 10px; 
+    }
+
+    .header-content {
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 5px; 
+    }
+
+    .header-content h2 {
+        text-align: left; 
+    }
+
+    .back-link {
+        padding-left: 0; 
+    }
+
+    .button-container {
+        padding-top: 10px; 
+    }
+
+    .btn-primary {
+        width: 100%; 
+    }
 }
 
 
