@@ -4,44 +4,36 @@
   <meta charset="UTF-8">
   <title>Resultado Pesquisa</title>
   <link rel="stylesheet" href="historico-hospitalar.css">
-
   <link rel="stylesheet" href="iniciomedico.css">
   <style>
-    /* Estilo APENAS para o box cinza com borda */
     .info-box-cinza {
-        background-color: #f3f4f6; /* Cinza claro (Tailwind bg-gray-100 ou 200) */
-        padding: 20px;             /* Espaçamento interno */
-        border-radius: 8px;        /* Cantos arredondados */
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        margin-top: 20px;          /* Espaço acima da caixa, separando-a do cabeçalho do perfil */
-        border-left: 5px solid #4CAF50; /* Borda verde à esquerda, como na referência */
-        margin-bottom: 20px;       /* Espaço abaixo da caixa */
+        background-color: #f3f4f6;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        border-left: 5px solid #4CAF50;
+        margin-bottom: 20px;
     }
-   
-    /* Ajustes opcionais para os títulos e seções dentro do box, para melhor visualização. 
-       Você pode ajustar ou remover se já tiver estilos para eles. */
+    
     .info-box-cinza .secao-titulo {
-        margin-bottom: 15px; /* Espaço abaixo dos títulos de cada seção */
-        /* Se quiser uma cor específica para os títulos dentro do box: */
-        /* color: #374151; */ 
+        margin-bottom: 15px;
     }
 
     .info-box-cinza .secao-info {
-        margin-bottom: 20px; /* Espaço entre as seções de informação */
+        margin-bottom: 20px;
     }
     .info-box-cinza .secao-info:last-child {
-        margin-bottom: 0; /* Remove a margem da última seção no box */
+        margin-bottom: 0;
     }
 
-    /* Para garantir que o conteúdo principal tenha algum espaço lateral na página */
     #conteudoPaciente {
         padding-left: 15px;
         padding-right: 15px;
-        max-width: 1000px; /* Define uma largura máxima para o conteúdo */
-        margin-left: auto;  /* Centraliza */
-        margin-right: auto; /* Centraliza */
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
     }
-
   </style>
 </head>
 
@@ -73,7 +65,7 @@
       <h2 class="title">Olá, Joana!</h2>
       <a href="#" class="back-link">< Voltar</a>
     </div>
-   
+    
     
     <div class="container-botoes">
         <button id="btnProntuario" class="botao-toggle ativo">Perfil</button>
@@ -87,9 +79,6 @@
     </div>
 
     <main class="perfil-paciente-container">
-        <!-- Esta tag <main> está vazia no seu HTML original.
-             O conteúdo principal parece estar na div#conteudoPaciente abaixo.
-             Considere mover o conteúdo para dentro desta tag <main> ou remover esta tag <main> se não for usada. -->
     </main>
 
     <div id="conteudoPaciente">
@@ -101,7 +90,6 @@
             </div>
         </div>
 
-        <!-- Adicionada a classe 'info-box-cinza' aqui -->
         <div id="perfilPacienteContainer" class="info-container ativo info-box-cinza">
             <div class="secao-info">
                 <h3 class="secao-titulo">Dados Pessoais</h3>
@@ -145,10 +133,8 @@
                     </div>
                 </div>
             </div>
-            <!-- A seção duplicada de "Outras Informações" que só tinha escolaridade foi removida, pois já estava assim no seu HTML original. -->
         </div>
 
-        <!-- Adicionada a classe 'info-box-cinza' aqui também para o histórico -->
         <div id="historicoHospitalarContainer" class="info-container info-box-cinza" style="display: none;">
             <h3 class="secao-titulo">Histórico Hospitalar</h3>
             <p>Conteúdo do Histórico Hospitalar será carregado aqui.</p>
@@ -188,6 +174,5 @@
         </div>
     </footer>
     <script src="geral.js"></script>
-    <!-- Removi o script de demonstração da resposta anterior para manter apenas o essencial -->
 </body>
 </html>
