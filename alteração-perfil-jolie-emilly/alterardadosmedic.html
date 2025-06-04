@@ -90,12 +90,12 @@
   </main>
 
   <script>
-    // Seus dados JS (podem vir de um arquivo JS separado ou serem definidos antes de geral.js)
+    
     const dadosInstituicaoAutenticada = {
       nomeInstituicao: "Joana",
       cnes: "1234567",
       crmCorenResponsavel: "CRM/SP 123456",
-      // Adicione outros dados conforme necessário para preencher o formulário
+     
       email: "contato@joanaclinica.com",
       celular: "(11) 99999-8888",
       telefone: "(11) 5555-4444",
@@ -107,31 +107,31 @@
       bairro: "Centro",
       complemento: "Sala 3",
       online: {
-        senha: "Pi2025" // Lembre-se que a senha não deve ser pré-preenchida no formulário
+        senha: "Pi2025"
       }
     };
   </script>
   <script src="geral.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function() {
-        // Verifica se o usuário da instituição está "logado" (simulado pelo localStorage)
+        
         const instituicaoLogadaCNES = localStorage.getItem('instituicaoLogadaIdentificador');
 
-        // Verifica se dadosInstituicaoAutenticada está definido e se o CNES corresponde (se logado)
+        
         if (typeof dadosInstituicaoAutenticada !== 'undefined') {
           if (instituicaoLogadaCNES && dadosInstituicaoAutenticada.cnes !== instituicaoLogadaCNES) {
             console.warn("CNES no localStorage não corresponde aos dados carregados. Usando dados carregados.");
-            // Você pode decidir redirecionar aqui se a inconsistência for crítica
+           
           }
 
           if (typeof window.preencherFormularioInstituicao === 'function') {
-            window.preencherFormularioInstituicao(); // Chama a nova função
+            window.preencherFormularioInstituicao(); 
           } else {
             console.error("A função preencherFormularioInstituicao não foi encontrada. Verifique geral.js.");
           }
         } else {
           console.error("O objeto dadosInstituicaoAutenticada não foi encontrado. Verifique geral.js.");
-          // Informar ao usuário ou redirecionar, pois os dados essenciais não estão disponíveis
+         
         }
       });
     </script>
