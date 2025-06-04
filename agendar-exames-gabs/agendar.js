@@ -2,7 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAgendarExames = document.getElementById('btnAgendarExames');
     const dateModal = document.getElementById('dateModal');
     const ubsTimeModal = document.getElementById('ubsTimeModal'); // Get the new modal
+const contactModal = document.getElementById('contactModal');
+    const detailsModal = document.getElementById('detailsModal');
+    const closeContactModalBtn = document.getElementById('closeContactModal');
+    const closeDetailsModalBtn = document.getElementById('closeDetailsModal');
+    const contactBtns = document.querySelectorAll('.exam-card .contact-btn');
+    const detailsBtns = document.querySelectorAll('.exam-card .details-btn');
 
+    const contactModalBody = document.getElementById('contactModalBody');
+    const detailsModalBody = document.getElementById('detailsModalBody');
     const currentDayDisplay = document.querySelector('.current-date-display');
     const prevMonthBtn = document.querySelector('.prev-month');
     const nextMonthBtn = document.querySelector('.next-month');
@@ -180,6 +188,80 @@ document.addEventListener('DOMContentLoaded', () => {
         ubsTimeModal.addEventListener('click', (e) => {
             if (e.target === ubsTimeModal) {
                 closeModal(ubsTimeModal);
+            }
+        });
+    }
+
+    contactBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            
+            const examCard = event.target.closest('.exam-card');
+
+            
+            const laboratorioNome = examCard.dataset.laboratorioNome;
+            const laboratorioTelefone = examCard.dataset.laboratorioTelefone;
+            const laboratorioEmail = examCard.dataset.laboratorioEmail;
+            const laboratorioEndereco = examCard.dataset.laboratorioEndereco;
+
+            contactModalBody.innerHTML = `
+                <p><strong>Laboratório:</strong> ${laboratorioNome}</p>
+                <p><strong>Telefone:</strong> ${laboratorioTelefone}</p>
+                <p><strong>Email:</strong> ${laboratorioEmail}</p>
+                <p><strong>Endereço:</strong> ${laboratorioEndereco}</p>
+            `;
+            openModal(contactModal);
+        });
+    });
+
+    detailsBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            const examCard = event.target.closest('.exam-card');
+
+            const exameTipo = examCard.dataset.exameTipo;
+            const medicoSolicitante = examCard.dataset.medicoSolicitante;
+            const dataAgendada = examCard.dataset.dataAgendada;
+            const horario = examCard.dataset.horario;
+            const local = examCard.dataset.local;
+            const preparo = examCard.dataset.preparo;
+            const observacoes = examCard.dataset.observacoes;
+
+            detailsModalBody.innerHTML = `
+                <p><strong>Tipo de Exame:</strong> ${exameTipo}</p>
+                <p><strong>Médico Solicitante:</strong> ${medicoSolicitante}</p>
+                <p><strong>Data Agendada:</strong> ${dataAgendada}</p>
+                <p><strong>Horário:</strong> ${horario}</p>
+                <p><strong>Local:</strong> ${local}</p>
+                <p><strong>Preparo:</strong> ${preparo}</p>
+                <p><strong>Observações:</strong> ${observacoes}</p>
+            `;
+            openModal(detailsModal);
+        });
+    });
+
+    if (closeContactModalBtn) {
+        closeContactModalBtn.addEventListener('click', () => {
+            closeModal(contactModal);
+        });
+    }
+
+    if (closeDetailsModalBtn) {
+        closeDetailsModalBtn.addEventListener('click', () => {
+            closeModal(detailsModal);
+        });
+    }
+
+    if (contactModal) {
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeModal(contactModal);
+            }
+        });
+    }
+
+    if (detailsModal) {
+        detailsModal.addEventListener('click', (e) => {
+            if (e.target === detailsModal) {
+                closeModal(detailsModal);
             }
         });
     }
