@@ -6,16 +6,15 @@
   <link rel="stylesheet" href="historico-hospitalar.css">
   <link rel="stylesheet" href="iniciomedico.css">
   <style>
-    /* Estilo APENAS para o box cinza com borda (de perfil.html) */
+   
     .info-box-cinza {
-        background-color: #f3f4f6; /* Cinza claro (Tailwind bg-gray-100 ou 200) */
-        padding: 20px;            /* Espaçamento interno */
-        border-radius: 8px;       /* Cantos arredondados */
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        margin-top: 20px;         /* Espaço acima da caixa, separando-a do cabeçalho do perfil */
-        border-left: 5px solid #4CAF50; /* Borda verde à esquerda, como na referência */
-        margin-bottom: 20px;      /* Espaço abaixo da caixa */
-    }
+        background-color: #f3f4f6;
+        padding: 20px;            
+        border-radius: 8px;      
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;        
+        border-left: 5px solid #4CAF50;
+        margin-bottom: 20px;     
     
     .info-box-cinza .secao-titulo {
         margin-bottom: 15px;
@@ -36,14 +35,12 @@
         margin-right: auto;
     }
 
-    /* Classe para esconder conteúdo que não está ativo */
+   
     .conteudo-secao.oculto {
         display: none;
     }
     
-    /* Estilos para os cards do histórico (já devem estar em historico-hospitalar.css) */
-    /* Se precisar de ajustes específicos para os cards quando dentro desta estrutura, adicione aqui */
-    /* Exemplo: .info-container .card { margin-bottom: 15px; } */
+   
 
   </style>
 </head>
@@ -232,23 +229,23 @@
             const secaoPerfil = document.getElementById('secaoPerfil');
             const secaoHistorico = document.getElementById('secaoHistorico');
 
-            // Função para mostrar uma seção e esconder a outra
+           
             function mostrarSecao(secaoParaMostrar, btnParaAtivar) {
-                // Esconde todas as seções
+                
                 secaoPerfil.classList.add('oculto');
                 secaoHistorico.classList.add('oculto');
 
-                // Remove classe 'ativo' de todos os botões de toggle
+               
                 btnMostrarPerfil.classList.remove('ativo');
                 btnMostrarHistorico.classList.remove('ativo');
 
-                // Mostra a seção desejada
+                
                 secaoParaMostrar.classList.remove('oculto');
-                // Adiciona classe 'ativo' ao botão clicado
+                
                 btnParaAtivar.classList.add('ativo');
             }
 
-            // Event listeners para os botões
+           
             btnMostrarPerfil.addEventListener('click', function () {
                 mostrarSecao(secaoPerfil, btnMostrarPerfil);
             });
@@ -257,10 +254,7 @@
                 mostrarSecao(secaoHistorico, btnMostrarHistorico);
             });
 
-            // Define o estado inicial (Perfil visível)
-            // A classe 'oculto' já está em secaoHistorico e 'ativo' em btnMostrarPerfil no HTML.
-            // Se preferir controlar estritamente via JS:
-            // mostrarSecao(secaoPerfil, btnMostrarPerfil); 
+          
         });
     </script>
     <script src="geral.js"></script> </body>
