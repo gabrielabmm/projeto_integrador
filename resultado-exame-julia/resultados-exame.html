@@ -5,34 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIDCC</title>
-    <link rel="stylesheet" href="resultados-exame.css">
+    <link rel="stylesheet" href="resultados-exame-paciente.css">
+    <link rel="stylesheet" href="inicio.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
-<body>
-    <!-- HEADER -->
-    <header class="site-header">
-        <div class="container header-container">
-            <div class="logo">
-                <img src="../imagens/logo.png" alt="Logo SIDCC">
-                <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
-                        class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
-                </span>
+<body id="paginaPerfilPaciente">
+    <header class="topo">
+        <img src="logo.png.png" alt="Logo SIDCC" class="logo" />
+        <nav class="menu">
+            <div class="links-e-perfil">
+                <a href="index.html">Início</a>
+                <a href="#">Sobre</a>
+                <a href="sac-logado.html">SAC</a>
             </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="inicio-logado.html">Início</a></li>
-                    <li><a href="inicio-logado.html">Sobre</a></li>
-                    <li><a href="sac-logado.html">SAC</a></li>
-                </ul>
-            </nav>
-            <div class="profile-access">
-                <a href="alterar-perfil.html" class="profile-link" title="Acessar Perfil">
-                    <img src="foto-perfil.png" alt="Foto do Perfil" class="profile-avatar">
-                </a>
+            <a href="javascript:void(0);" id="headerIconePerfilTrigger" class="icone-perfil">
+                <img src="perfilm.png" alt="Perfil" class="icone-perfil" />
+            </a>
+            <div id="perfilDropdownOverlay" class="perfil-dropdown-card">
+                <button id="fecharDropdownBtn" class="fechar-dropdown-btn" aria-label="Fechar menu perfil">×</button>
+                <img src="perfilm.png" alt="Foto do Paciente" id="dropdownFotoPerfil" class="dropdown-foto">
+                <h3 id="dropdownNomeCompleto" class="dropdown-nome"></h3>
+                <div class="dropdown-dados">
+                    <p><strong>Data de Nasc.:</strong> <span id="dropdownDataNascimento"></span></p>
+                    <p><strong>Idade:</strong> <span id="dropdownIdade"></span></p>
+                    <p><strong>CEP:</strong> <span id="dropdownCEP"></span></p>
+                    <p><strong>CPF:</strong> <span id="dropdownCPF"></span></p>
+                    <p><strong>Cartão SUS:</strong> <span id="dropdownCartaoSUS"></span></p>
+                </div>
+                <div class="dropdown-actions">
+                    <a href="alterardados.html" id="linkVerMeuPerfilDropdown" class="btn-action btn-alterar">Alterar Dados</a>
+                    <a href="escolher-tipo-usuario.html" id="linkSairDaConta" class="btn-action btn-sair">Sair da Conta</a>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <!-- BODY -->
@@ -42,7 +49,7 @@
 
             <h2 class="resultados-exame__titulo resultados-exame__titulo--texto">Resultados de exames</h2>
             <li class="resultados-exame__titulo resultados-exame__titulo--voltar ">
-              <a href="#" class="link">
+              <a href="inicio.html" class="link">
                 <i class="resultados-exame__titulo resultados-exame__titulo--voltar fa-solid fa-angle-left"></i>
                 Voltar
               </a>
@@ -167,6 +174,16 @@
         </div>
     </div>
 </footer>
+<div id="confirmLogoutModal" class="modal-logout-overlay">
+        <div class="modal-logout-content">
+            <p>Tem certeza que deseja sair da conta?</p>
+            <div class="modal-logout-actions">
+                <button id="confirmLogoutModalButton" class="btn-modal-confirmar">Sim, Sair</button>
+                <button id="cancelLogoutModalButton" class="btn-modal-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <script src="geral.js"></script>
 </body>
 
 </html>
