@@ -1,60 +1,88 @@
-// scripts.js
-
 document.addEventListener('DOMContentLoaded', function() {
-    const cookieBanner = document.getElementById('cookie-banner');
-    const acceptButton = document.getElementById('cookie-accept');
-    const declineButton = document.getElementById('cookie-decline');
+    // Obter referências aos elementos HTML
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('emailError');
+    const enviarCodigoBtn = document.getElementById('enviarCodigoBtn');
 
-    // Função para definir um cookie (ou localStorage)
-    function setCookiePreference(value, days) {
-        // Usando localStorage para simplicidade. Para cookies reais com expiração,
-        // a lógica é um pouco mais complexa.
-        localStorage.setItem('cookieConsent', value);
-        // Se quisesse usar cookies HTTP:
-        // let expires = "";
-        // if (days) {
-        //     const date = new Date();
-        //     date.setTime(date.getTime() + (days*24*60*60*1000));
-        //     expires = "; expires=" + date.toUTCString();
-        // }
-        // document.cookie = "cookieConsent=" + (value || "")  + expires + "; path=/";
+    // Função para validar o formato do e-mail usando uma expressão regular
+    function isValidEmail(email) {
+        // Expressão regular para validação de e-mail (básica, mas eficaz)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
-    // Função para obter a preferência de cookie
-    function getCookiePreference() {
-        return localStorage.getItem('cookieConsent');
-        // Se usasse cookies HTTP:
-        // const nameEQ = "cookieConsent=";
-        // const ca = document.cookie.split(';');
-        // for(let i=0;i < ca.length;i++) {
-        //     let c = ca[i];
-        //     while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        //     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-        // }
-        // return null;
+    // Função para exibir a mensagem de erro
+    function showEmailError(message) {
+        emailInput.classList.add('invalid'); // Adiciona a classe 'invalid' para estilizar
+        emailError.textContent = message;    // Define o texto da mensagem de erro
+        emailError.style.display = 'block';  // Torna a mensagem visível
     }
 
-    // Verificar se o consentimento já foi dado
-    if (cookieBanner) {
-        cookieBanner.style.display = 'block'; // Ou 'flex' se você usou display:flex para o layout interno do banner
-                                              // Verifique qual display é usado na regra .cookie-banner no seu CSS
-                                              // quando ele deve estar visível.
+    // Função para esconder a mensagem de erro
+    function hideEmailError() {
+        emailInput.classList.remove('invalid'); // Remove a classe 'invalid'
+        emailError.textContent = '';           // Limpa o texto da mensagem
+        emailError.style.display = 'none';     // Esconde a mensagem
     }
 
-    // 2. Modifique os botões para APENAS esconder o banner, sem salvar a preferência.
-    if (acceptButton && cookieBanner) {
-        acceptButton.addEventListener('click', function() {
-            cookieBanner.style.display = 'none'; // Apenas esconde o banner
-            console.log("Cookies 'aceitos' para esta visualização da página.");
-            // Nenhuma chamada para localStorage.setItem() aqui
-        });
-    }
+    // Adicionar um listener para o evento 'input' no campo de e-mail
+    // Isso fará a validação enquanto o usuário digita
+    emailInput.addEventListener('input', function() {
+        const emailValue = emailInput.value.trim(); // Pega o valor e remove espaços em branco
 
-    if (declineButton && cookieBanner) {
-        declineButton.addEventListener('click', function() {
-            cookieBanner.style.display = 'none'; // Apenas esconde o banner
-            console.log("Cookies 'recusados' para esta visualização da página.");
-            // Nenhuma chamada para localStorage.setItem() aqui
-        });
-    }
+        if (emailValue === '') {
+            hideEmailError(); // Esconde o erro se o campo estiver vazio (apenas para feedback em tempo real)
+        } else if (!isValidEmail(emailValue)) {
+            showEmailError('Por favor, insira um e-mail válido (ex: seu.email@exemplo.com).');
+        } else {
+            hideEmailError(); // Esconde o erro se o e-mail estiver válido
+        }
+    });
+
+    // Adicionar um listener para o evento 'click' no botão "Enviar código"
+    enviarCodigoBtn.addEventListener('click', function(event) {
+        // Impedir o envio padrão do formulário (para que o JavaScript possa validar)
+        event.preventDefault();
+
+        const emailValue = emailInput.value.trim();
+
+        if (emailValue === '') {
+            showEmailError('O campo de e-mail é obrigatório.');
+        } else if (!isValidEmail(emailValue)) {
+            showEmailError('Por favor, insira um e-mail válido (ex: seu.email@exemplo.com).');
+        } else {
+             // Se o e-mail for válido:
+            hideEmailError(); // Esconde qualquer erro existente
+            hideEmailSuccess(); // Esconde a mensagem de sucesso (pois vamos redirecionar)
+
+            // ** AQUI ESTÁ A MUDANÇA PRINCIPAL: REDIRECIONAR PARA codigoemail.html **
+            window.location.href = 'codigoemail.html';
+
+            // Opcional: Se você quiser passar o e-mail para a próxima página,
+            // pode usar sessionStorage ou parâmetros de URL (ex: 'codigoemail.html?email=' + encodeURIComponent(emailValue))
+            // Para um caso de uso real, você enviaria o e-mail para o servidor AQUI para gerar o código.
+            // Por exemplo:
+            /*
+            fetch('/api/enviar-codigo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: emailValue })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'codigoemail.html'; // Redireciona após sucesso do servidor
+                } else {
+                    // Tratar erro do servidor
+                    showEmailError('Erro ao enviar código. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+                showEmailError('Erro de conexão. Verifique sua internet.');
+            });
+            */
+        }
+    });
 });
