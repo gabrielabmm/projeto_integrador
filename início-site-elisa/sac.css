@@ -66,7 +66,7 @@ body {
 
 /* --- Logo SIDCC (apenas a imagem) --- */
 .logo {
-    width: 110px; /* Tamanho da logo */
+    width: 90px; /* Tamanho da logo */
     margin-bottom: 0px; /* Espaço entre a logo e o texto SIDCC */
     height: auto;
     object-fit: contain;
