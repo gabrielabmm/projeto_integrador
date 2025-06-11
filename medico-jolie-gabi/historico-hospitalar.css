@@ -270,3 +270,57 @@ main.conteudo {
   display: flex;
   align-items: center;
 }
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    height: 40px;
+}
+
+.menu a {
+    margin: 0 10px;
+    text-decoration:underline;
+    color: #000;
+}
+
+.icone-perfil {
+    height: 30px;
+    vertical-align:top;
+}
+
+.botao-perfil button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px;
+}
+/* Adicione este CSS ao seu arquivo historico-hospitalar.css */
+
+body {
+  /* É uma boa prática resetar margens e paddings do body se não estiver feito */
+  margin: 0; 
+  /* Você pode definir uma cor de fundo para a página inteira aqui se desejar */
+  /* background-color: #f4f7f6; */
+}
+
+.main-content-wrapper {
+  max-width: 1200px; /* Largura máxima do conteúdo. Pode ser 960px, 1000px, 1140px, etc. */
+  margin-left: auto;   /* Centraliza o bloco na horizontal */
+  margin-right: auto;  /* Centraliza o bloco na horizontal */
+  padding-left: 15px;  /* Pequeno espaçamento nas laterais */
+  padding-right: 15px; /* Pequeno espaçamento nas laterais */
+  padding-top: 20px;   /* Espaçamento no topo do conteúdo (opcional) */
+  padding-bottom: 20px;/* Espaçamento na base do conteúdo (opcional) */
+}
