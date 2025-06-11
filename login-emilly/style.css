@@ -480,10 +480,6 @@ input.invalid {
     margin-bottom: 25px;
 }
 
-.container {
-  text-align: center;
-}
-
 .gear {
   width: 80px;
   height: 80px;
@@ -500,7 +496,6 @@ input.invalid {
   }
 }
 
-p {
-  font-size: 1.2rem;
-  color: #555;
-}
+
+
+
