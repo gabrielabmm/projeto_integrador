@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Meu Calendário</title>
+  <link rel="stylesheet" href="iniciomedico.css">
   <link rel="stylesheet" href="calendario-medico.css">
 
   
@@ -11,37 +12,38 @@
   
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 </head>
-<body>
-
-  <header class="topo">
-    <div class="logo">
-      <img src="logo.png" alt="Logo SIDCC">
-      <span class="logo-text-sidcc">
-        <span class="char-s">S</span><span class="char-i">I</span><span class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
-      </span>
-    </div>
-   <nav class="menu">
-  <div class="links">
-    <a href="#">Início</a>
-    <a href="#">Sobre</a>
-    <a href="#">SAC</a>
-  </div>
-  <div class="perfil">
-    <form action="/perfil" method="get" class="botao-perfil">
-      <button type="submit">
-        <img src="perfil.png" alt="Perfil" class="icone-perfil" />
-      </button>
-    </form>
-  </div>
-</nav>
-
-
-  </header>
+<body id="paginaPerfilPaciente">
+    <header class="topo">
+        <img src="logo.png.png" alt="Logo SIDCC" class="logo" />
+        <nav class="menu">
+            <div class="links-e-perfil">
+                <a href="iniciomedico.html">Início</a>
+                <a href="#">Sobre</a>
+                <a href="sac-logado.html">SAC</a>
+            </div>
+            <a href="javascript:void(0);" id="headerIconePerfilTrigger" class="icone-perfil">
+                <img src="ruiva.png" alt="Perfil" class="icone-perfil" />
+            </a>
+            <div id="perfilDropdownOverlay" class="perfil-dropdown-card">
+                <button id="fecharDropdownBtn" class="fechar-dropdown-btn" aria-label="Fechar menu perfil">×</button>
+                <img src="ruiva.png" alt="Foto do Paciente" id="dropdownFotoPerfil" class="dropdown-foto">
+                <h3 id="dropdownNomeCompletoMedico" class="dropdown-nome">Dra. Joana</h3>
+        <div class="dropdown-dados">
+          <p><strong>CRM:</strong> <span id="dropdownCRMMedico">123456-SP</span></p>
+          <p><strong>Especialidade:</strong> <span id="dropdownEspecialidadeMedico">Ginecologia</span></p>
+                </div>
+                <div class="dropdown-actions">
+                    <a href="alterardadosmedico.html" id="linkVerMeuPerfilDropdown" class="btn-action btn-alterar">Alterar Dados</a>
+                    <a href="escolher-tipo-usuario.html" id="linkSairDaConta" class="btn-action btn-sair">Sair da Conta</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
   <main>
     <div class="linha-topo">
       <h1 class="title">Meu Calendário</h1>
-      <a href="#" class="back-link">< Voltar</a>
+      <a href="iniciomedico.html" class="back-link">< Voltar</a>
     </div>
 
     <div class="search-bar">
@@ -114,12 +116,26 @@
             title: 'Exame - Joaquina Oliveira',
             start: '2025-06-12T14:00:00',
             end: '2025-06-12T14:45:00'
+          },
+          {
+            title: 'Entrega Protótipo',
+            start: '2025-06-02T14:00:00',
+            end: '2025-0-02T14:45:00'
           }
         ]
       });
       calendar.render();
     });
   </script>
-
+<div id="confirmLogoutModal" class="modal-logout-overlay">
+        <div class="modal-logout-content">
+            <p>Tem certeza que deseja sair da conta?</p>
+            <div class="modal-logout-actions">
+                <button id="confirmLogoutModalButton" class="btn-modal-confirmar">Sim, Sair</button>
+                <button id="cancelLogoutModalButton" class="btn-modal-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <script src="geral.js"></script>
 </body>
 </html>
