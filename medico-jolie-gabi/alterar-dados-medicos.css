@@ -1,175 +1,156 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-.topo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 40px;
-  border-bottom: 1px solid #ccc;
-}
-
-.grupo-menu {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.menu {
-  display: flex;
-  gap: 20px;
-}
-
-.menu a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIDCC - Perfil do Profissional/Instituição</title>
+  <link rel="stylesheet" href="alterardados.css" />
+  <style>
+    /* Estilo básico para a imagem do avatar se for adicionada dinamicamente */
 
 
-.logo {
-  height: 40px;
-}
+    /* Estilos para os inputs no modo de visualização (fundo verde) */
+    .info-formulario input[type="text"],
+    .info-formulario input[type="email"],
+    .info-formulario input[type="tel"] {
+        background-color: #e7f5e7; 
+        border: 1px solid #ccc;
+        color: #333; 
+        padding: 8px; 
+        box-sizing: border-box; 
+        width: 100%; 
+    }
+</style>
+</head>
+    
+<body>
+  <header class="topo">
+    <img src="logo.png" alt="SIDCC Logo" class="logo" />
+    <div class="grupo-menu">
+      <nav class="menu">
+        <a href="iniciomedico.html">Início</a>
+        <a href="#">Sobre</a>
+        <a href="#">SAC</a>
+      </nav>
+      <div class="icone-perfil">
+        <img src="ruiva.png" alt="Perfil" />
+      </div>
+    </div>
+  </header>
 
+  <main class="conteudo">
+    <h2>Olá, <span id="saudacao-nome"></span>!</h2>
 
-.icone-perfil {
-  width: 32px;
-  height: 32px;
-  background: #ccc;
-  border-radius: 50%;
-}
+    <section class="cartao">
+      <div class="perfil">
+        <div class="avatar">
+          <img src="ruiva.png" alt="Foto de perfil" />
+        </div>
+        <p class="nome" id="nome-exibicao-perfil"></p>
+        <a href="escolher-nova-senha.html" style="text-decoration: none;">
+          <button class="botao">Alterar senha</button>
+        </a>
+      </div>
 
-.conteudo {
-  padding: 40px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+      <div class="info-formulario">
+        <h3>Dados da Instituição/Profissional</h3>
+        <div class="grade-formulario">
+          <label>Nome da Instituição/Profissional:
+            <input type="text" id="nomeInstituicao" />
+          </label>
+          <label>CNES:
+            <input type="text" id="cnes" />
+          </label>
+          <label>CRM/COREN do Responsável:
+            <input type="text" id="crmCorenResponsavel" />
+          </label>
+          <label>CNPJ (Opcional):
+            <input type="text" id="cnpj" />
+          </label>
+          <label>Email:
+            <input type="email" id="email" />
+          </label>
+          <label>Celular:
+            <input type="tel" id="celular" />
+          </label>
+          <label>Telefone Fixo:
+            <input type="tel" id="telefone" />
+          </label>
+        </div>
 
-.conteudo h2 {
-  margin-bottom: 30px;
-  font-size: 24px;
-}
+        <h3>Endereço Comercial</h3>
+        <div class="grade-formulario">
+          <label>CEP:
+            <input type="text" id="cep" />
+          </label>
+          <label>Cidade:
+            <input type="text" id="cidade" />
+          </label>
+          <label class="largura-total">Endereço:
+            <input type="text" id="endereco" />
+          </label>
+          <label>Número:
+            <input type="text" id="numero" />
+          </label>
+          <label>Complemento (Opcional):
+            <input type="text" id="complemento" />
+          </label>
+          <label>Bairro:
+            <input type="text" id="bairro" />
+          </label>
+        </div>
 
-.cartao {
-  display: flex;
-  background-color: #b7e3b7;
-  padding: 30px;
-  border-radius: 20px;
-  gap: 40px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+        <button class="botao editar">Editar</button>
+        <button class="botao salvar" style="display: none;">Salvar Alterações</button>
+      </div>
+    </section>
+  </main>
 
-.perfil {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 200px;
-}
+  <script>
+    // Seus dados JS (podem vir de um arquivo JS separado ou serem definidos antes de geral.js)
+    const dadosInstituicaoAutenticada = {
+      nomeInstituicao: "Joana",
+      cnes: "1234567",
+      crmCorenResponsavel: "CRM/SP 123456",
+      // Adicione outros dados conforme necessário para preencher o formulário
+      email: "contato@joanaclinica.com",
+      celular: "(11) 99999-8888",
+      telefone: "(11) 5555-4444",
+      cnpj: "12.345.678/0001-99",
+      cep: "01000-000",
+      cidade: "São Paulo",
+      endereco: "Av. Principal",
+      numero: "100",
+      bairro: "Centro",
+      complemento: "Sala 3",
+      online: {
+        senha: "Pi2025" // Lembre-se que a senha não deve ser pré-preenchida no formulário
+      }
+    };
+  </script>
+  <script src="geral.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        // Verifica se o usuário da instituição está "logado" (simulado pelo localStorage)
+        const instituicaoLogadaCNES = localStorage.getItem('instituicaoLogadaIdentificador');
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  background: #eee;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
+        // Verifica se dadosInstituicaoAutenticada está definido e se o CNES corresponde (se logado)
+        if (typeof dadosInstituicaoAutenticada !== 'undefined') {
+          if (instituicaoLogadaCNES && dadosInstituicaoAutenticada.cnes !== instituicaoLogadaCNES) {
+            console.warn("CNES no localStorage não corresponde aos dados carregados. Usando dados carregados.");
+            // Você pode decidir redirecionar aqui se a inconsistência for crítica
+          }
 
-.nome {
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-.botao {
-  background-color: #2e8b57;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.botao:hover {
-  background-color: #267448;
-}
-
-.info-formulario {
-  flex: 1;
-}
-
-.info-formulario h3 {
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.grade-formulario {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px 20px;
-  margin-bottom: 25px;
-}
-
-.grade-formulario label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-.grade-formulario input {
-  padding: 10px 14px;
-  border-radius: 20px; 
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-.grade-formulario input::placeholder {
-  color: #2e8b57; 
-  opacity: 1; 
-}
-
-.largura-total {
-  grid-column: span 2;
-}
-
-.botao.editar {
-  float: right;
-  margin-top: 10px;
-}
-
-.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #2e7d32;
-  margin: 0 auto;
-}
-
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.icone-perfil img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ccc;
-  cursor: pointer;
-}
-
-.icone-perfil {
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-}
+          if (typeof window.preencherFormularioInstituicao === 'function') {
+            window.preencherFormularioInstituicao(); // Chama a nova função
+          } else {
+            console.error("A função preencherFormularioInstituicao não foi encontrada. Verifique geral.js.");
+          }
+        } else {
+          console.error("O objeto dadosInstituicaoAutenticada não foi encontrado. Verifique geral.js.");
+          // Informar ao usuário ou redirecionar, pois os dados essenciais não estão disponíveis
+        }
+      });
+    </script>
+</body>
+</html>
