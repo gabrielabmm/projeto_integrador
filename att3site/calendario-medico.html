@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Calendário</title>
+  <link rel="stylesheet" href="iniciomedico.css">
+  <link rel="stylesheet" href="calendario-medico.css">
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+</head>
+<body id="paginaPerfilPaciente">
+    <header class="topo">
+        <div class="logo">
+                <img src="logo.png" alt="Logo SIDCC">
+                <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span></span>
+            </div>
+        <nav class="menu">
+            <div class="links-e-perfil">
+                <a href="iniciomedico.html">Início</a>
+                <a href="#">Sobre</a>
+                <a href="sac-logado.html">SAC</a>
+            </div>
+            <a href="javascript:void(0);" id="headerIconePerfilTrigger" class="icone-perfil">
+                <img src="ruiva.png" alt="Perfil" class="icone-perfil" />
+            </a>
+            <div id="perfilDropdownOverlay" class="perfil-dropdown-card">
+                <button id="fecharDropdownBtn" class="fechar-dropdown-btn" aria-label="Fechar menu perfil">×</button>
+                <img src="ruiva.png" alt="Foto do Paciente" id="dropdownFotoPerfil" class="dropdown-foto">
+                <h3 id="dropdownNomeCompletoMedico" class="dropdown-nome">Dra. Joana</h3>
+        <div class="dropdown-dados">
+          <p><strong>CRM:</strong> <span id="dropdownCRMMedico">123456-SP</span></p>
+          <p><strong>Especialidade:</strong> <span id="dropdownEspecialidadeMedico">Ginecologia</span></p>
+                </div>
+                <div class="dropdown-actions">
+                    <a href="alterardadosmedico.html" id="linkVerMeuPerfilDropdown" class="btn-action btn-alterar">Alterar Dados</a>
+                    <a href="escolher-tipo-usuario.html" id="linkSairDaConta" class="btn-action btn-sair">Sair da Conta</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+  <main>
+    <div class="linha-topo">
+      <h1 class="title">Meu Calendário</h1>
+      <a href="iniciomedico.html" class="back-link">< Voltar</a>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" class="search-bar__input" placeholder="Pesquise por um paciente...">
+      <button type="button" class="search-bar__button" aria-label="Pesquisar">
+        <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <section id="calendar"></section>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <div class="coluna">
+        <h4>SIDCC</h4>
+        <div class="social-icons">
+          <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+          <a href="https://youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+          <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
+        </div>
+      </div>
+
+      <div class="coluna">
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="#">SAC</a></li>
+        </ul>
+      </div>
+
+      <div class="coluna">
+        <h4>Ajuda</h4>
+        <ul>
+          <li><a href="#">Dúvidas frequentes</a></li>
+          <li><a href="#">Acessibilidade</a></li>
+        </ul>
+      </div>
+
+      <div class="coluna">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Termos de uso</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+s
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'pt-br',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+          {
+            title: 'Consulta - Maria Linda da Silva',
+            start: '2025-06-10T10:00:00',
+            end: '2025-06-10T10:30:00'
+          },
+          {
+            title: 'Exame - Joaquina Oliveira',
+            start: '2025-06-12T14:00:00',
+            end: '2025-06-12T14:45:00'
+          },
+          {
+            title: 'Entrega Protótipo',
+            start: '2025-06-02T14:00:00',
+            end: '2025-0-02T14:45:00'
+          }
+        ]
+      });
+      calendar.render();
+    });
+  </script>
+<div id="confirmLogoutModal" class="modal-logout-overlay">
+        <div class="modal-logout-content">
+            <p>Tem certeza que deseja sair da conta?</p>
+            <div class="modal-logout-actions">
+                <button id="confirmLogoutModalButton" class="btn-modal-confirmar">Sim, Sair</button>
+                <button id="cancelLogoutModalButton" class="btn-modal-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <script src="geral.js"></script>
+</body>
+</html>

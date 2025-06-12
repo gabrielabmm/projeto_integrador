@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>INICIO</title>
+    <link rel="stylesheet" href="inicio.css" />
+    <style>
+        /* Estilos do Cabeçalho Fornecidos por Você */
+        .site-header {
+            background-color: #fff; /* Fundo branco */
+            padding: 15px 0;
+            border-bottom: 1px solid #eee; /* Linha divisória sutil */
+        }
+
+       .header-container { /* Esta classe foi adicionada a uma nova div no HTML */
+    display: flex;
+    align-items: center;
+    padding: 0 20px; /* <<<< ADICIONE OU AJUSTE ESTA LINHA >>>> */ 
+                     /* Isso adiciona 20px de padding à esquerda e à direita. Ajuste o valor conforme necessário. */
+    /* Se também quiser que o conteúdo do header tenha uma largura máxima e seja centralizado: */
+    /* max-width: 1200px; */ /* Por exemplo, para limitar a largura do conteúdo do header */
+    /* margin: 0 auto;    */ /* Para centralizar o .header-container se max-width for usado */
+}
+        .logo { /* Esta classe agora é a da div que contém a imagem e o texto SIDCC */
+            display: flex;
+            align-items: center;
+            margin-right: auto; /* Empurra o menu para a direita */
+        }
+
+        .logo img {
+            height: 40px; /* Ajuste a altura da sua imagem de logo conforme necessário */
+            width: auto;
+        }
+
+        .logo-text-sidcc {
+            font-weight: bold; 
+            font-size: 24px;   
+            vertical-align: middle; 
+            margin-left: 8px; 
+        }
+
+        /* Cores para cada letra de SIDCC */
+        .logo-text-sidcc .char-s {
+            color: #48AD45; /* Verde */
+        }
+        .logo-text-sidcc .char-i {
+            color: #F9BD14; /* Amarelo */
+        }
+        .logo-text-sidcc .char-d {
+            color: #2864AE; /* Azul */
+        }
+        .logo-text-sidcc .char-c1 {
+            color: #000; /* Preto*/
+        }
+        .logo-text-sidcc .char-c2 {
+            color: #000; /* Preto */
+        }
+
+        /* Estilos para o menu e dropdown (mantenha ou adapte os seus de inicio.css) */
+        /* .menu { ... } */
+        /* .perfil-dropdown-card { ... } */
+
+    </style>
+</head>
+<body id="paginaPerfilPaciente">
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo SIDCC" /> 
+                <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span></span>
+            </div>
+            <nav class="menu">
+                <div class="links-e-perfil">
+                    <a href="iniciomedico.html">Início</a>
+                    <a href="#">Sobre</a>
+                    <a href="sac-logado.html">SAC</a>
+                </div>
+                <a href="javascript:void(0);" id="headerIconePerfilTrigger" class="icone-perfil">
+                    <img src="ruiva.png" alt="Perfil" class="icone-perfil" />
+                </a>
+                <div id="perfilDropdownOverlay" class="perfil-dropdown-card">
+                    <button id="fecharDropdownBtn" class="fechar-dropdown-btn" aria-label="Fechar menu perfil">×</button>
+                    <img src="ruiva.png" alt="Foto do Paciente" id="dropdownFotoPerfil" class="dropdown-foto">
+                    <h3 id="dropdownNomeCompletoMedico" class="dropdown-nome">Dra. Joana</h3>
+                    <div class="dropdown-dados">
+                        <p><strong>CRM:</strong> <span id="dropdownCRMMedico">123456-SP</span></p>
+                        <p><strong>Especialidade:</strong> <span id="dropdownEspecialidadeMedico">Ginecologia</span></p>
+                    </div>
+                    <div class="dropdown-actions">
+                        <a href="alterardadosmedico.html" id="linkVerMeuPerfilDropdown" class="btn-action btn-alterar">Alterar Dados</a>
+                        <a href="escolher-tipo-usuario.html" id="linkSairDaConta" class="btn-action btn-sair">Sair da Conta</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="conteudo">
+    <section class="painel-esquerdo">
+        <h2>Olá, Joana!</h2>
+        <div class="search-bar">
+            <input type="text" class="search-bar__input" placeholder="Pesquise por um nome ou cartão SUS*">
+            <button type="button" class="search-bar__button" aria-label="Pesquisar">
+                <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+
+            <a href="ficha-citopatologica.html" style="text-decoration: none;">
+                <button class="botao-principal">Novo Prontuário</button>
+            </a>
+            <a href="calendario-medico.html" style="text-decoration: none;">
+                <button class="botao-principal">Meu Calendário</button>
+            </a>
+            <a href="grafico.html" style="text-decoration: none;">
+                <button class="botao-principal">Gráficos e Estatísticas</button>
+            </a>
+            <a href="cadastropaciente.html" style="text-decoration: none;">
+                <button class="botao-principal">Cadastrar Paciente</button>
+            </a>
+        </section>
+
+        <img src="medica.png" alt="Médica SIDCC" class="imagem-medica" />
+    </main>
+
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <div class="coluna">
+                <h4>SIDCC</h4>
+                <div class="redes-sociais">
+                    <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+                    <a href="https://youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+                    <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
+                </div>
+            </div>
+            <div class="coluna">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="sac-logado.html">SAC</a></li>
+                </ul>
+            </div>
+            <div class="coluna">
+                <h4>Ajuda</h4>
+                <ul>
+                    <li><a href="#">Dúvidas frequentes</a></li>
+                    <li><a href="#">Acessibilidade</a></li>
+                </ul>
+            </div>
+            <div class="coluna">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Termos de uso</a></li>
+                    <li><a href="#">Política de privacidade</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div id="confirmLogoutModal" class="modal-logout-overlay">
+        <div class="modal-logout-content">
+            <p>Tem certeza que deseja sair da conta?</p>
+            <div class="modal-logout-actions">
+                <button id="confirmLogoutModalButton" class="btn-modal-confirmar">Sim, Sair</button>
+                <button id="cancelLogoutModalButton" class="btn-modal-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <script src="geral.js"></script>
+</body>
+</html>

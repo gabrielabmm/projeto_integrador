@@ -1,0 +1,501 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@400&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif; /* Fonte padrão */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    min-height: 100vh;
+    background-image:
+        radial-gradient(circle at top left, #d2ecd1 15%, transparent 35%),
+        radial-gradient(circle at top right, #fae9cb 15%, transparent 35%),
+        radial-gradient(circle at center, #ffffff 40%, transparent 60%),
+        radial-gradient(circle at bottom left, #ccdaeb 15%, transparent 35%),
+        radial-gradient(circle at bottom right, #d2ecd1 15%, transparent 35%);
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Para posicionar o botão voltar */
+    overflow-x: hidden; /* Previne scroll horizontal */
+}
+
+/* --- Botão "Voltar" --- */
+.voltar {
+    position: absolute;
+    top: 20px; /* Um pouco menor no top */
+    left: 20px; /* Um pouco menor no left */
+    text-decoration: none;
+    color: #48AD45; 
+    font-weight: 600;
+    font-size: 1.1em;
+    font-family: 'Instrument Sans', sans-serif;
+    display: inline-block;
+    z-index: 100;
+}
+
+.voltar::before {
+    content: ''; 
+}
+
+
+/* --- Cabeçalho (Logo e Título SIDCC) --- */
+.header-login {
+    display: flex; 
+    flex-direction: row; /* Coloca um ao lado do outro */
+    align-items: center; /* Alinha verticalmente no centro */
+    margin-bottom: 30px; 
+    margin-top: 60px; /* Espaço do topo da tela */
+    gap: 15px; /* Espaço entre a logo e o SIDCC */
+    z-index: 10;
+}
+
+.logo {
+    width: 100px; /* Tamanho da logo*/
+    height: auto;
+    object-fit: contain;
+}
+
+.titulo {
+    font-size: 3.5em; /*tamanho da fonte do SIDCC */
+    font-weight: bold;
+    font-family: 'Reddit Sans', sans-serif;
+    line-height: 1;
+    margin: 0; /* Remove margens padrão */
+}
+
+/* Cores das letras do SIDCC */
+.letra-s { color: #48ad45; }
+.letra-i { color: #2864AE; }
+.letra-d { color: #f9bd14; }
+.letra-c { color: #000000; }
+
+
+/* --- Container do Formulário (o quadro branco) --- */
+.container {
+    background-color: #ffffff;
+    border-radius: 15px; /* Borda mais arredondada */
+    box-shadow: 0 6px 12px rgba(41, 34, 34, 0.61); /* Sombra mais discreta e visível */
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: 0 auto;
+    margin-bottom: 60px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Tipo de Usuário (Radio Buttons) --- */
+.tipo-usuario {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    gap: 30px; /*Espaço entre as opções */
+}
+
+.tipo-usuario label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1em; /* Tamanho do texto proporcional ao círculo */
+    color: #555;
+    white-space: nowrap;
+}
+
+.tipo-usuario input[type="radio"] {
+    display: none;
+}
+
+.check {
+    display: inline-block;
+    width: 28px; /* Círculo maior */
+    height: 28px; /* Círculo maior */
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 10px; /* Mais espaço entre círculo e texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em; /* Checkmark proporcional */
+    color: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.tipo-usuario input[type="radio"]:checked + .check {
+    background-color: #F9BD14;
+    border-color: #F9BD14;
+    color: #fff;
+}
+
+.tipo-usuario input[type="radio"]:not(:checked) + .check {
+    border-color: #d9d9d9;
+    background-color: transparent;
+    color: transparent;
+}
+
+
+
+label {
+    align-self: flex-start;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.95em;
+}
+
+/* --- Quadros de login e senha --- */
+input[type="text"],
+input[type="password"],
+input[type="text"] { /* Esta linha tem input[type="text"] duplicado, mas mantendo conforme original */
+    background-color: #b0e3ae;
+    color: rgba(20, 20, 20, 0.795);
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #1c7419; /* Borda verde no foco */
+    box-shadow: 0 0 5px rgba(72, 173, 69, 0.5); /* Sombra verde no foco */
+}
+
+
+/* --- Botão "Continuar" --- */
+button[type="submit"] {
+    background-color: #48Ad45;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+button[type="submit"]:hover {
+    background-color: #2d6830;
+}
+
+/*FONTES*/
+p {
+    margin-top: 25px;
+    font-size: 0.9em;
+}
+
+p a {
+    color: #327ddf;
+    text-decoration: none;
+    margin: 0 2px;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] { /* Estilo geral para inputs, pode sobrescrever o anterior se a especificidade for igual ou maior */
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    background-color: #b7e9b4; /* Fundo verde claro */
+    font-size: 16px;
+    margin-bottom: 8px; /* Espaço antes da mensagem de erro */
+    box-sizing: border-box;
+    outline: none; /* Remove a borda de foco padrão */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave no foco */
+}
+
+.sucesso-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background:  radial-gradient(circle at top left, #d2ecd1 15%, transparent 35%),
+        radial-gradient(circle at top right, #fae9cb 15%, transparent 35%),
+        radial-gradient(circle at center, #ffffff 40%, transparent 60%),
+        radial-gradient(circle at bottom left, #ccdaeb 15%, transparent 35%),
+        radial-gradient(circle at bottom right, #d2ecd1 15%, transparent 35%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.sucesso-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+}
+
+.sucesso-box h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.sucesso-box p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.sucesso-box button {
+  display: inline-block; /* Altere para block se quiser que ocupe a largura total */
+    width: auto; 
+    min-width: 200px; 
+    text-align: center;
+    background-color: #48AD45;
+    color: white;
+    padding: 14px 45px; 
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 25px; /* Espaço acima do botão */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #1d461d;
+
+}
+input.invalid {
+    border-color: #FF0000; /* Borda vermelha forte */
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Sombra vermelha suave */
+}
+
+/* Estilo para a mensagem de erro (vermelho) */
+.error-message {
+    color: #FF0000; 
+    font-size: 0.85em;
+    margin-top: 0; /* Ajustado para estar logo abaixo do input */
+    margin-bottom: 10px; /* Espaço antes do próximo elemento */
+    display: none; 
+}
+
+/* Estilo para a mensagem de sucesso (verde) */
+.success-message {
+    color: #28a745; 
+    font-size: 0.85em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: none; 
+}
+
+.button-link {
+    display: block; /* Torna-o um elemento de bloco para ocupar a largura total */
+    width: fit-content; 
+    margin: 30px auto 0 auto; /* Centraliza o elemento de bloco (top, right, bottom, left) */
+    text-align: center; /* Centraliza o texto *dentro* do link */
+    
+    background-color: #48AD45;
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px; /* Ligeiramente maior para o botão de sucesso */
+    text-decoration: none; /* Remove sublinhado padrão do link */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+.reenviar-codigo-container {
+    text-align: center; /* Centraliza o botão e o contador */
+    margin-top: 10px; /* Espaço acima do contêiner */
+}
+
+/* Estilo para o botão "Reenviar Código" */
+.small-blue-button {
+    background-color: transparent; /* Remove o fundo */
+    color: #2864AE; /* Cor azul para parecer um link */
+    padding: 0; 
+    border: none; /* Remove a borda */
+    border-radius: 0; /* Remove o arredondamento */
+    font-size: 0.9em; /* Mantém o tamanho da fonte */
+    font-weight: normal; /* Mantém o peso da fonte */
+    cursor: pointer; /* Continua mostrando o cursor de clique */
+    transition: color 0.3s ease; /* Transição suave apenas para a cor do texto */
+    display: inline-block; 
+    text-decoration: underline; /* Adiciona sublinhado para parecer um link */
+}
+
+.small-blue-button:hover:not(:disabled) {
+    color: #1a4a82; /* Azul mais escuro no hover para o texto */
+    background-color: transparent; /* Garante que o fundo continue transparente no hover */
+}
+
+.small-blue-button:disabled {
+    background-color: transparent; /* Garante que o fundo continue transparente quando desabilitado */
+    color: #999999; /* Cor cinza mais suave para texto desabilitado */
+    cursor: not-allowed; 
+    opacity: 1; /* Mantém a opacidade normal, já que o fundo já é transparente */
+    text-decoration: none; /* Remove o sublinhado quando desabilitado, se desejar */
+}
+
+/* Estilo para a informação de reenvio (opcional, se quiser exibir algo extra) */
+.reenviar-info {
+    font-size: 0.8em;
+    color: #555555;
+    margin-top: 5px;
+    display: block; /* Para aparecer em uma nova linha */
+}
+
+.pagina-esqueci-senha h1 {
+    font-weight: bold;      
+    font-size: 28px;         
+    margin: 0 0 14px 0;     
+}
+
+
+.pagina-esqueci-senha p {
+    font-size: 16px;        
+    margin-bottom: 24px;     
+}
+
+/* Texto acima do campo de email na página esqueci-a-senha */
+.pagina-esqueci-senha label {
+    font-weight: 500;       
+    display: block;          
+    margin-bottom: 8px;     
+    font-size: 16px;        
+}
+#campos-email-esqueci-senha {
+    background-color: white; /* fundo branco da caixa */
+    padding: 40px; /* espaço interno da caixa */
+    border-radius: 14px; /* cantos arredondados */
+    box-shadow: 0 5px 14px rgba(49, 49, 49, 0.842); 
+    width: 400px; /* largura da caixa */
+    box-sizing: border-box; 
+}
+#campos-email-esqueci-senha p{
+    font-size: 17px;        
+    margin-bottom: 24px;   
+    
+}
+
+#campos-email-esqueci-senha h1{
+    font-size: 25px;        
+    margin-bottom: 24px;   
+    
+}
+
+#campos-redefinida {
+    background-color: white; 
+    padding: 40px; 
+    border-radius: 14px; 
+    box-shadow: 0 5px 14px rgba(49, 49, 49, 0.842); 
+    width: 400px; 
+    box-sizing: border-box; 
+}
+
+#campos-redefinida p{
+    font-size: 17px;        
+    margin-bottom: 24px;   
+    
+}
+
+#campos-redefinida .button-link {
+    display: block; 
+    width: fit-content; 
+    margin: 30px auto 0 auto; 
+    text-align: center; /* Centraliza o texto *dentro* do link */
+    
+    background-color: #48AD45;
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px; /* Ligeiramente maior para o botão de sucesso */
+    text-decoration: none; /* Remove sublinhado padrão do link */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1; /* Ocupa o espaço vertical disponível */
+    margin-top: 40px; /* Espaço para o link voltar */
+}
+
+.card {
+    background-color: #fff;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 480px;
+    text-align: left;
+}
+
+.card h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 18px;
+    color: #2c3e50;
+    text-align: center; /* Centralizado como na imagem */
+}
+
+.card p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.card p:nth-of-type(2) { /* "Insira o seu CEP..." */
+    margin-bottom: 25px;
+}
+
+.gear {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border: 10px solid #ccc;
+  border-top: 10px solid #4a90e2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
