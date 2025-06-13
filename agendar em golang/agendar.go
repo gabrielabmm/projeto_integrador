@@ -116,7 +116,7 @@ func apiExames(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(exames)
 }
 
-func main() {
+func Agendar() {
 	http.Handle("/", http.FileServer(http.Dir("./")))
 	http.HandleFunc("/api/calendario", apiCalendario)
 	http.HandleFunc("/api/confirmar", apiConfirmar)
