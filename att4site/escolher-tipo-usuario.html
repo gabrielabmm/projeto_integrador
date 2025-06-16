@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolher tipo de usuario</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@400&display=swap" />
+</head>
+<body class ="escolher-tipo-usuario">
+
+    <a href="index.html" class="voltar">&lt; Voltar</a>
+
+    <div class="header-login">
+        <img src="logo.png" class="logo" alt="Logo do SIDCC" />
+        <h1 class="titulo">
+            <span class ="letra-s">S</span> 
+            <span class ="letra-i">I</span> 
+            <span class ="letra-d">D</span> 
+            <span class ="letra-c">C</span> 
+            <span class ="letra-c">C</span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <form id="formLoginUsuario">
+            <div class="tipo-usuario">
+                <label>
+                    <input type="radio" name="tipo" value="beneficiario" checked onclick="mostrarCampos('beneficiario')">
+                    <span class="check check-beneficiario">✔</span>
+                    Sou beneficiário
+                </label>
+
+                <label>
+                    <input type="radio" name="tipo" value="instituicao" onclick="mostrarCampos('instituicao')">
+                    <span class="check check-instituicao">✔</span>
+                    Sou instituição
+                </label>
+            </div>
+
+            <div id="campos-beneficiario">
+                <label>Login:</label>
+                <input type="text" id="beneficiario-login" placeholder="Seu login aqui">
+                
+                <label>Senha:</label>
+               <input type="password" id="beneficiario-senha" placeholder="Sua senha aqui">
+            </div>
+
+            <div id="campos-instituicao" style="display: none;">
+                <label>CNES:</label>
+                <input type="text" id="instituicao-cnes" placeholder="Digite o CNES">
+
+                <label>CRM/COREN:</label>
+               <input type="text" id="instituicao-crm" placeholder="Digite o COREM">
+
+                <label>Senha:</label>
+               <input type="password" id="instituicao-senha-inst" placeholder="Sua senha aqui">
+            </div>
+            <p id="mensagem-login-erro" class="error-message" style="text-align: center; margin-top: 10px; margin-bottom: 10px; display: none;"></p>
+
+            <button type="submit">Continuar</button>
+
+            <p class="links-adicionais">
+                <a href="esqueci-senha.html">Esqueci minha senha</a> | 
+                <a href="cadastro.html">Ainda não sou cadastrado</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Script para alternar os campos de acordo com o tipo selecionado
+        function mostrarCampos(tipo) {
+            const beneficiario = document.getElementById('campos-beneficiario');
+            const instituicao = document.getElementById('campos-instituicao');
+            const mensagemErroLogin = document.getElementById('mensagem-login-erro'); // Adicionado para limpar erro ao trocar
+
+            if (tipo === 'beneficiario') {
+                beneficiario.style.display = 'block';
+                instituicao.style.display = 'none';
+            } else {
+                beneficiario.style.display = 'none';
+                instituicao.style.display = 'block';
+            }
+            if (mensagemErroLogin) { // Limpa a mensagem de erro ao trocar o tipo de usuário
+                mensagemErroLogin.style.display = 'none';
+                mensagemErroLogin.textContent = '';
+            }
+        }
+
+        // Script para gerenciar a seleção dos radio buttons (o marcador amarelo)
+        document.querySelectorAll('input[name="tipo"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.check').forEach(box => {
+                    box.classList.remove('selected');
+                });
+
+                if (this.checked) {
+                    // Adiciona 'selected' ao span.check correto
+                    if (this.value === 'beneficiario') {
+                        document.querySelector('.check-beneficiario').classList.add('selected');
+                    } else if (this.value === 'instituicao') {
+                        document.querySelector('.check-instituicao').classList.add('selected');
+                    }
+                    // A função mostrarCampos já é chamada pelo onclick, mas podemos garantir aqui também se preferir
+                    // mostrarCampos(this.value); 
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioInicial = document.querySelector('input[name="tipo"]:checked');
+            if (radioInicial) {
+                // Dispara o evento change para aplicar o estilo 'selected' e mostrar os campos corretos
+                // radioInicial.dispatchEvent(new Event('change')); // Esta linha pode ser redundante se o onclick já cobre
+                
+                // Garante que o 'selected' seja aplicado ao span.check correto no carregamento
+                 if (radioInicial.value === 'beneficiario' && document.querySelector('.check-beneficiario')) {
+                    document.querySelector('.check-beneficiario').classList.add('selected');
+                } else if (radioInicial.value === 'instituicao' && document.querySelector('.check-instituicao')) {
+                    document.querySelector('.check-instituicao').classList.add('selected');
+                }
+                mostrarCampos(radioInicial.value); // Chama explicitamente para garantir a exibição correta dos campos
+            }
+
+            // NOVO CÓDIGO PARA REDIRECIONAMENTO CONDICIONAL (já estava no seu HTML)
+            const linkAindaNaoCadastrado = document.querySelector('.links-adicionais a[href="cadastro.html"]');
+            const radioBeneficiario = document.querySelector('input[name="tipo"][value="beneficiario"]');
+
+            if (linkAindaNaoCadastrado && radioBeneficiario) {
+                linkAindaNaoCadastrado.addEventListener('click', function(event) {
+                    if (radioBeneficiario.checked) {
+                        event.preventDefault(); 
+                        window.location.href = 'sem-cadastrob.html'; 
+                    }
+                });
+            } else {
+                if (!linkAindaNaoCadastrado) console.error('Link "Ainda não sou cadastrado" não encontrado.');
+                if (!radioBeneficiario) console.error('Radio "Sou beneficiário" não encontrado.');
+            }
+        });
+    </script>
+    <script src="frontend.js" defer></script>
+</body>
+</html>

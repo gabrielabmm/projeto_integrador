@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinição de Senha</title>
+    <link rel="stylesheet" href="style.css"> 
+    </head>
+<body>
+    <a href="escolher-tipo-usuario.html" class="voltar">&lt; Voltar</a> 
+    <div id="campos-email-esqueci-senha"> <h1>Redefinição de<br>Senha!</h1> 
+        <form id="novaSenhaForm"> 
+            <label for="novaSenhaInput">Nova senha:</label>
+            <input type="password" id="novaSenhaInput" placeholder="Sua nova senha" required>
+            <div class="error-message" id="novaSenhaError"></div> 
+
+            <label for="confirmaSenhaInput">Confirmar nova senha:</label>
+            <input type="password" id="confirmaSenhaInput" placeholder="Confirme a nova senha" required>
+            <div class="error-message" id="confirmaSenhaError"></div> 
+            
+            <div class="success-message" id="senhaSuccessMessage" style="display: none;"></div>
+            
+            <button type="submit" id="definirSenhaBtn">Continuar</button> 
+        </form>
+    </div>
+    
+    <script src="frontend.js"></script> 
+</body>
+</html>
