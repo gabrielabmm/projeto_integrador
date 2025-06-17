@@ -1,0 +1,127 @@
+package main
+
+import (
+	"bytes" // Necessário para ler o arquivo em um buffer
+	"fmt"
+	"io"
+	"net/http"
+	"database/sql"
+	_ "github.com/lib/pq" // Driver PostgreSQL
+)
+
+var db *sql.DB
+
+func init() {
+	// Substitua pelos seus dados de conexão reais
+	connStr := "user=seu_usuario password=sua_senha dbname=seu_db host=localhost port=5432 sslmode=disable"
+	var err error
+	db, err = sql.Open("postgres", connStr)
+	if err != nil {
+		fmt.Println("Erro ao conectar ao banco de dados:", err)
+		panic(err)
+	}
+	err = db.Ping()
+	if err != nil {
+		fmt.Println("Erro ao fazer ping no banco de dados:", err)
+		panic(err)
+	}
+	fmt.Println("Conexão com o banco de dados estabelecida!")
+}
+
+// Handler para upload da imagem
+func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseMultipartForm(10 << 20) // Limite de 10 MB
+	if err != nil {
+		http.Error(w, "Erro ao parsear formulário: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	file, handler, err := r.FormFile("profile_image") // "profile_image" do HTML
+	if err != nil {
+		http.Error(w, "Erro ao obter arquivo: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+	defer file.Close()
+
+	// 1. Ler o conteúdo do arquivo para um buffer de bytes
+	buffer := bytes.NewBuffer(nil)
+	if _, err := io.Copy(buffer, file); err != nil {
+		http.Error(w, "Erro ao ler arquivo: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	imageData := buffer.Bytes() // Estes são os bytes da imagem
+
+	// Você pode querer validar o tipo de arquivo aqui (e.g., JPEG, PNG)
+	// Para isso, pode inspecionar os primeiros bytes (magic numbers) ou o tipo MIME do handler.Header
+
+	// 2. Identificar o paciente (exemplo: ID 1. Em um app real, viria de uma sessão/token)
+	pacienteID := 1
+
+	// 3. Inserir (ou atualizar) os bytes da imagem no banco de dados
+	// Usamos `UPDATE` para alterar a imagem de um paciente existente.
+	// Se fosse uma imagem padrão no cadastro, seria um `INSERT`.
+	_, err = db.Exec("UPDATE pacientes SET imagem_perfil = $1 WHERE id = $2", imageData, pacienteID)
+	if err != nil {
+		http.Error(w, "Erro ao salvar imagem no banco de dados: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	fmt.Fprintf(w, "Imagem de perfil atualizada com sucesso (armazenada como BLOB)!")
+}
+
+// Handler para servir a imagem do perfil
+func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
+	// Você precisará de alguma forma de identificar o paciente
+	// Para este exemplo, vamos buscar o paciente com ID 1
+	pacienteID := 1
+
+	var imageData []byte
+	err := db.QueryRow("SELECT imagem_perfil FROM pacientes WHERE id = $1", pacienteID).Scan(&imageData)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			http.Error(w, "Paciente não encontrado ou sem imagem de perfil.", http.StatusNotFound)
+			return
+		}
+		http.Error(w, "Erro ao buscar imagem: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if len(imageData) == 0 {
+		http.Error(w, "Imagem de perfil não encontrada.", http.StatusNotFound)
+		return
+	}
+
+	// Tentar detectar o tipo de conteúdo (MIME Type) da imagem.
+	// Isso é crucial para o navegador saber como renderizar a imagem.
+	// Uma forma simples é usar http.DetectContentType.
+	contentType := http.DetectContentType(imageData)
+	if contentType == "application/octet-stream" {
+		// Se não conseguiu detectar, pode ser um tipo de imagem desconhecido ou
+		// você pode definir um padrão. Para avatares, geralmente JPG ou PNG.
+		// Em um sistema real, você salvaria o tipo MIME junto com a imagem,
+		// ou validaria o tipo na hora do upload.
+		// Para simplificar, vou assumir PNG ou JPG aqui.
+		// É melhor ter o tipo MIME armazenado no DB se você tiver muitos tipos.
+		w.Header().Set("Content-Type", "image/png") // Ou image/jpeg, dependendo do que você espera
+	} else {
+		w.Header().Set("Content-Type", contentType)
+	}
+
+	w.Header().Set("Content-Length", fmt.Sprintf("%d", len(imageData)))
+	w.Write(imageData)
+}
+
+
+func main() {
+	http.HandleFunc("/upload-profile-image-blob", uploadProfileImageBLOB)
+	http.HandleFunc("/get-profile-image-blob", getProfileImageBLOB) // Endpoint para buscar a imagem
+
+	fmt.Println("Servidor Go rodando na porta :8080 (BLOB Mode)")
+	http.ListenAndServe(":8080", nil)
+}
