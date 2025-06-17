@@ -124,7 +124,7 @@
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    // Montar objeto com os dados que o backend espera
+   
    const limparMascara = (valor) => valor.replace(/\D/g, '');
 
     const celularCompleto = limparMascara(form.pacienteCelular.value);
@@ -136,7 +136,7 @@
         ddd = celularCompleto.substring(0, 2);
         telefone = celularCompleto.substring(2);
     } else {
-        telefone = celularCompleto; // Caso o número seja inserido sem DDD
+        telefone = celularCompleto; 
     }
     
     // backend 
@@ -147,7 +147,7 @@
         data_nasc: form.pacienteDataNascimento.value,
         cep: form.pacienteCEP.value,
         ddd: ddd,          
-        telefone: telefone, // <-- CORRIGIDO
+        telefone: telefone, 
         nacionalidade: form.pacienteNacionalidade.value,
         uf: form.pacienteEstadoSelect.value,
         nome_mae: form.pacienteNomeMae.value,
