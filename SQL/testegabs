@@ -1,34 +1,46 @@
 package main
 
 import (
-	"bytes" // Necessário para ler o arquivo em um buffer
-	"fmt"
-	"io"
-	"net/http"
+        "bytes"
+        "io"
 	"database/sql"
-	_ "github.com/lib/pq" // Driver PostgreSQL
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	"strings"
+
+	_ "github.com/lib/pq"
 )
 
-var db *sql.DB
-
-func init() {
-	// Substitua pelos seus dados de conexão reais
-	connStr := "user=seu_usuario password=sua_senha dbname=seu_db host=localhost port=5432 sslmode=disable"
-	var err error
-	db, err = sql.Open("postgres", connStr)
-	if err != nil {
-		fmt.Println("Erro ao conectar ao banco de dados:", err)
-		panic(err)
-	}
-	err = db.Ping()
-	if err != nil {
-		fmt.Println("Erro ao fazer ping no banco de dados:", err)
-		panic(err)
-	}
-	fmt.Println("Conexão com o banco de dados estabelecida!")
+type Paciente struct {
+	ID               int    `json:"id"`
+	CartaoSUS        string `json:"cartao_sus"`
+	CPF              string `json:"cpf"`
+	Nome             string `json:"nome"`
+	DataNasc         string `json:"data_nasc"`
+	CEP              string `json:"cep"`
+	DDD              string `json:"ddd"`
+	Telefone         string `json:"telefone"`
+	Nacionalidade    string `json:"nacionalidade"`
+	UF               string `json:"uf"`
+	Raca             string `json:"raca_cor"`
+	Escolaridade     string `json:"escolaridade"`
+	NomeMae          string `json:"nome_mae"`
+	NomeSocial       string `json:"nome_social"`
+	Logradouro       string `json:"logradouro"`
+	NumeroResidencia string `json:"numero_residencia"`
+	Complemento      string `json:"complemento"`
+	Setor            string `json:"setor"`
+	CodMunicipio     string `json:"cod_municipio"`
+	PontoReferencia  string `json:"ponto_referencia"`
 }
 
-// Handler para upload da imagem
+func conectar() (*sql.DB, error) {
+	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable"
+	return sql.Open("postgres", connStr)
+}
+
 func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
@@ -46,27 +58,18 @@ func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erro ao obter arquivo: "+err.Error(), http.StatusBadRequest)
 		return
 	}
-	defer file.Close()
-
-	// 1. Ler o conteúdo do arquivo para um buffer de bytes
-	buffer := bytes.NewBuffer(nil)
+	defer file.Close()buffer := bytes.NewBuffer(nil)
 	if _, err := io.Copy(buffer, file); err != nil {
 		http.Error(w, "Erro ao ler arquivo: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	imageData := buffer.Bytes() // Estes são os bytes da imagem
+	imageData := buffer.Bytes() 
 
-	// Você pode querer validar o tipo de arquivo aqui (e.g., JPEG, PNG)
-	// Para isso, pode inspecionar os primeiros bytes (magic numbers) ou o tipo MIME do handler.Header
-
-	// 2. Identificar o paciente (exemplo: ID 1. Em um app real, viria de uma sessão/token)
+// 2. Identificar o paciente (exemplo: ID 1. Em um app real, viria de uma sessão/token)
 	pacienteID := 1
 
-	// 3. Inserir (ou atualizar) os bytes da imagem no banco de dados
-	// Usamos `UPDATE` para alterar a imagem de um paciente existente.
-	// Se fosse uma imagem padrão no cadastro, seria um `INSERT`.
-	_, err = db.Exec("UPDATE pacientes SET imagem_perfil = $1 WHERE id = $2", imageData, pacienteID)
+_, err = db.Exec("UPDATE pacientes SET imagem_perfil = $1 WHERE id = $2", imageData, pacienteID)
 	if err != nil {
 		http.Error(w, "Erro ao salvar imagem no banco de dados: "+err.Error(), http.StatusInternalServerError)
 		return
@@ -75,7 +78,6 @@ func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Imagem de perfil atualizada com sucesso (armazenada como BLOB)!")
 }
 
-// Handler para servir a imagem do perfil
 func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 	// Você precisará de alguma forma de identificar o paciente
 	// Para este exemplo, vamos buscar o paciente com ID 1
@@ -97,17 +99,9 @@ func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Tentar detectar o tipo de conteúdo (MIME Type) da imagem.
-	// Isso é crucial para o navegador saber como renderizar a imagem.
-	// Uma forma simples é usar http.DetectContentType.
-	contentType := http.DetectContentType(imageData)
+contentType := http.DetectContentType(imageData)
 	if contentType == "application/octet-stream" {
-		// Se não conseguiu detectar, pode ser um tipo de imagem desconhecido ou
-		// você pode definir um padrão. Para avatares, geralmente JPG ou PNG.
-		// Em um sistema real, você salvaria o tipo MIME junto com a imagem,
-		// ou validaria o tipo na hora do upload.
-		// Para simplificar, vou assumir PNG ou JPG aqui.
-		// É melhor ter o tipo MIME armazenado no DB se você tiver muitos tipos.
+		
 		w.Header().Set("Content-Type", "image/png") // Ou image/jpeg, dependendo do que você espera
 	} else {
 		w.Header().Set("Content-Type", contentType)
@@ -118,10 +112,133 @@ func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 }
 
 
+
+func enableCORS(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+}
+
+func limparMascara(str string) string {
+	return strings.Map(func(r rune) rune {
+		if r >= '0' && r <= '9' {
+			return r
+		}
+		return -1
+	}, str)
+}
+
+
+
+func inserirPacienteAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	enableCORS(w)
+	if r.Method == http.MethodOptions {
+		return
+	}
+
+	var p Paciente
+	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
+		http.Error(w, "Dados inválidos", http.StatusBadRequest)
+		return
+	}
+
+	fmt.Printf("Recebido do frontend: %+v\n", p)
+
+	p.CPF = limparMascara(p.CPF)
+	p.CartaoSUS = limparMascara(p.CartaoSUS)
+	p.CEP = limparMascara(p.CEP)
+	p.Telefone = limparMascara(p.Telefone)
+	p.DDD = limparMascara(p.DDD)
+	if len(p.DDD) > 2 {
+		p.DDD = p.DDD[:2]
+	}
+	if len(p.Telefone) > 9 {
+		p.Telefone = p.Telefone[:9]
+	}
+	if len(p.CEP) > 8 {
+		p.CEP = p.CEP[:8]
+	}
+
+	// Tratar cod_municipio para aceitar NULL
+	var codMunicipio sql.NullString
+	if p.CodMunicipio != "" {
+		codMunicipio = sql.NullString{String: p.CodMunicipio, Valid: true}
+	} else {
+		codMunicipio = sql.NullString{Valid: false}
+	}
+
+	_, err := db.Exec(`INSERT INTO paciente_infos (
+        cartao_sus, cpf_paciente, nome_completo, data_nascimento,
+        cep, ddd, telefone, nacionalidade, uf,
+        raca_cor, escolaridade, nome_mae, nome_social,
+        logradouro, numero_residencia, complemento, setor, cod_municipio, ponto_referencia
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)`,
+		p.CartaoSUS, p.CPF, p.Nome, p.DataNasc,
+		p.CEP, p.DDD, p.Telefone, p.Nacionalidade, p.UF,
+		p.Raca, p.Escolaridade, p.NomeMae, p.NomeSocial,
+		p.Logradouro, p.NumeroResidencia, p.Complemento, p.Setor, codMunicipio, p.PontoReferencia,
+	)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Erro ao inserir paciente: %v", err), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	fmt.Fprint(w, "Paciente inserido com sucesso.")
+}
+
+func listarPacientesAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	enableCORS(w)
+	if r.Method == http.MethodOptions {
+		return
+	}
+
+	rows, err := db.Query("SELECT id, nome_completo, cpf_paciente FROM paciente_infos")
+	if err != nil {
+		http.Error(w, "Erro ao buscar pacientes", http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+
+	var pacientes []Paciente
+	for rows.Next() {
+		var p Paciente
+		err := rows.Scan(&p.ID, &p.Nome, &p.CPF)
+		if err == nil {
+			pacientes = append(pacientes, p)
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(pacientes)
+}
+
 func main() {
-	http.HandleFunc("/upload-profile-image-blob", uploadProfileImageBLOB)
+http.HandleFunc("/upload-profile-image-blob", uploadProfileImageBLOB)
 	http.HandleFunc("/get-profile-image-blob", getProfileImageBLOB) // Endpoint para buscar a imagem
 
 	fmt.Println("Servidor Go rodando na porta :8080 (BLOB Mode)")
 	http.ListenAndServe(":8080", nil)
+
+	db, err := conectar()
+	if err != nil {
+		log.Fatal("Erro ao conectar ao banco:", err)
+	}
+	defer db.Close()
+
+	http.HandleFunc("/pacientes", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			listarPacientesAPI(w, r, db)
+		case http.MethodPost:
+			inserirPacienteAPI(w, r, db)
+		case http.MethodOptions:
+			enableCORS(w)
+		default:
+			http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+		}
+	})
+
+	fmt.Println("Servidor rodando em http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
