@@ -35,6 +35,7 @@ CREATE TABLE paciente_infos (
   cpf_paciente CHAR(11) NOT NULL UNIQUE,
   nome_completo VARCHAR(150) NOT NULL,
   data_nascimento DATE NOT NULL,
+  imagem_perfil BYTEA, -- Coluna para armazenar a imagem binária
   idade INT GENERATED ALWAYS AS (DATE_PART('year', AGE(data_nascimento))) STORED,
 
   cep CHAR(8) NOT NULL,
