@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Paciente (BLOB)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Meu Perfil (BLOB)</h1>
+
+        <div class="profile-image-wrapper">
+            <img id="profileImage" src="/get-profile-image-blob" alt="Imagem de Perfil" class="profile-image">
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            <label for="imageUpload" class="upload-button">Alterar Imagem</label>
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" name="profile_image" id="hiddenImageInput" style="display: none;">
+            <button type="submit" style="display: none;">Enviar Imagem</button>
+        </form>
+
+        <p>Nome: João Silva</p>
+        <p>Email: joao.silva@exemplo.com</p>
+    </div>
+
+    <script>
+        const profileImage = document.getElementById('profileImage');
+        const imageUpload = document.getElementById('imageUpload');
+        const hiddenImageInput = document.getElementById('hiddenImageInput');
+        const uploadForm = document.getElementById('uploadForm');
+
+        // Pré-visualização da imagem antes do upload
+        imageUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImage.src = e.target.result; // Pré-visualiza a imagem no cliente
+                };
+                reader.readAsDataURL(file);
+
+                hiddenImageInput.files = this.files;
+                submitForm(); // Submete o formulário automaticamente
+            }
+        });
+
+        function submitForm() {
+            const formData = new FormData(uploadForm);
+
+            // O endpoint agora é para upload BLOB
+            fetch('/upload-profile-image-blob', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                alert('Imagem de perfil atualizada!');
+                // Após o sucesso do upload, força o recarregamento da imagem
+                // do servidor para garantir que a imagem salva no DB seja exibida.
+                profileImage.src = '/get-profile-image-blob?' + new Date().getTime(); // Adiciona timestamp para evitar cache
+            })
+            .catch(error => {
+                console.error('Erro ao fazer upload:', error);
+                alert('Erro ao atualizar imagem de perfil.');
+            });
+        }
+    </script>
+</body>
+</html>
