@@ -12,16 +12,26 @@ import (
 )
 
 type Paciente struct {
-	ID            int    `json:"id"`
-	CartaoSUS     string `json:"cartao_sus"`
-	CPF           string `json:"cpf"`
-	Nome          string `json:"nome"`
-	DataNasc      string `json:"data_nasc"`
-	CEP           string `json:"cep"`
-	DDD           string `json:"ddd"`
-	Telefone      string `json:"telefone"`
-	Nacionalidade string `json:"nacionalidade"`
-	UF            string `json:"uf"`
+	ID               int    `json:"id"`
+	CartaoSUS        string `json:"cartao_sus"`
+	CPF              string `json:"cpf"`
+	Nome             string `json:"nome"`
+	DataNasc         string `json:"data_nasc"`
+	CEP              string `json:"cep"`
+	DDD              string `json:"ddd"`
+	Telefone         string `json:"telefone"`
+	Nacionalidade    string `json:"nacionalidade"`
+	UF               string `json:"uf"`
+	Raca             string `json:"raca_cor"`
+	Escolaridade     string `json:"escolaridade"`
+	NomeMae          string `json:"nome_mae"`
+	NomeSocial       string `json:"nome_social"`
+	Logradouro       string `json:"logradouro"`
+	NumeroResidencia string `json:"numero_residencia"`
+	Complemento      string `json:"complemento"`
+	Setor            string `json:"setor"`
+	CodMunicipio     string `json:"cod_municipio"`
+	PontoReferencia  string `json:"ponto_referencia"`
 }
 
 func conectar() (*sql.DB, error) {
@@ -44,6 +54,8 @@ func limparMascara(str string) string {
 	}, str)
 }
 
+// ...existing code...
+
 func inserirPacienteAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	enableCORS(w)
 	if r.Method == http.MethodOptions {
@@ -56,7 +68,8 @@ func inserirPacienteAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		return
 	}
 
-	// Limpeza extra das máscaras (caso frontend não limpe)
+	fmt.Printf("Recebido do frontend: %+v\n", p)
+
 	p.CPF = limparMascara(p.CPF)
 	p.CartaoSUS = limparMascara(p.CartaoSUS)
 	p.CEP = limparMascara(p.CEP)
@@ -72,12 +85,24 @@ func inserirPacienteAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		p.CEP = p.CEP[:8]
 	}
 
+	// Tratar cod_municipio para aceitar NULL
+	var codMunicipio sql.NullString
+	if p.CodMunicipio != "" {
+		codMunicipio = sql.NullString{String: p.CodMunicipio, Valid: true}
+	} else {
+		codMunicipio = sql.NullString{Valid: false}
+	}
+
 	_, err := db.Exec(`INSERT INTO paciente_infos (
-		cartao_sus, cpf_paciente, nome_completo, data_nascimento,
-		cep, ddd, telefone, nacionalidade, uf
-	) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+        cartao_sus, cpf_paciente, nome_completo, data_nascimento,
+        cep, ddd, telefone, nacionalidade, uf,
+        raca_cor, escolaridade, nome_mae, nome_social,
+        logradouro, numero_residencia, complemento, setor, cod_municipio, ponto_referencia
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)`,
 		p.CartaoSUS, p.CPF, p.Nome, p.DataNasc,
 		p.CEP, p.DDD, p.Telefone, p.Nacionalidade, p.UF,
+		p.Raca, p.Escolaridade, p.NomeMae, p.NomeSocial,
+		p.Logradouro, p.NumeroResidencia, p.Complemento, p.Setor, codMunicipio, p.PontoReferencia,
 	)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Erro ao inserir paciente: %v", err), http.StatusInternalServerError)
