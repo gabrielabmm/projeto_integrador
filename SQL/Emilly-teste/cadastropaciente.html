@@ -125,17 +125,43 @@
     event.preventDefault();
 
     // Montar objeto com os dados que o backend espera
+   const limparMascara = (valor) => valor.replace(/\D/g, '');
+
+    const celularCompleto = limparMascara(form.pacienteCelular.value);
+    
+    //Separar DDD e Telefone 
+    let ddd = "";
+    let telefone = "";
+    if (celularCompleto.length >= 10) {
+        ddd = celularCompleto.substring(0, 2);
+        telefone = celularCompleto.substring(2);
+    } else {
+        telefone = celularCompleto; // Caso o número seja inserido sem DDD
+    }
+    
+    // backend 
     const data = {
-      cartao_sus: form.pacienteCartaoSUS.value,
-      cpf: form.pacienteCPF.value,
-      nome: form.pacienteNome.value,
-      data_nasc: form.pacienteDataNascimento.value,
-      cep: form.pacienteCEP.value,
-      ddd: form.pacienteCelular.value.substring(1, 3), // Pega o DDD do celular (exemplo: "(11) 91234-5678" -> "11")
-      telefone: form.pacienteCelular.value,
-      nacionalidade: form.pacienteNacionalidade.value,
-      uf: form.pacienteEstadoSelect.value,
+        cartao_sus: form.pacienteCartaoSUS.value,
+        cpf: form.pacienteCPF.value,
+        nome: form.pacienteNome.value,
+        data_nasc: form.pacienteDataNascimento.value,
+        cep: form.pacienteCEP.value,
+        ddd: ddd,          
+        telefone: telefone, // <-- CORRIGIDO
+        nacionalidade: form.pacienteNacionalidade.value,
+        uf: form.pacienteEstadoSelect.value,
+        nome_mae: form.pacienteNomeMae.value,
+        raca_cor: form.pacienteRacaSelect.value,
+        escolaridade: form.pacienteEscolaridadeSelect.value,
+        nome_social: form.pacienteNomeSocial.value,
+        logradouro: form.pacienteLogradouro.value,
+        setor: form.pacienteSetor.value,
+        cod_municipio: "",
+        complemento: form.pacienteComplemento.value,
+        ponto_referencia: form.pacientePontoReferencia.value,
+        numero_residencia: form.pacienteNumeroResidencia.value,
     };
+
 
     try {
       const response = await fetch("http://localhost:8080/pacientes", {
