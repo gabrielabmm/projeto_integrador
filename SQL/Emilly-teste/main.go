@@ -54,7 +54,7 @@ func limparMascara(str string) string {
 	}, str)
 }
 
-// ...existing code...
+
 
 func inserirPacienteAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	enableCORS(w)
