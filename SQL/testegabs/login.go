@@ -19,14 +19,9 @@ type User struct {
 	Password string
 }
 
-// Função para conectar ao banco de dados PostgreSQL
-func setupDatabase() {
-	var err error
-	connStr := "postgres://seu_usuario:sua_senha@localhost/seu_banco?sslmode=disable"
-	db, err = sql.Open("postgres", connStr)
-	if err != nil {
-		log.Fatal("Erro ao conectar ao banco de dados: ", err)
-	}
+func conectar() (*sql.DB, error) {
+	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable"
+	return sql.Open("postgres", connStr)
 }
 
 // Função para verificar se o email existe no banco de dados
