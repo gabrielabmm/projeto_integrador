@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS paciente_infos (
   cpf_paciente CHAR(11) NOT NULL UNIQUE,
   nome_completo VARCHAR(150) NOT NULL,
   data_nascimento DATE NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
   imagem_perfil BYTEA,
 
   cep CHAR(8) NOT NULL,
