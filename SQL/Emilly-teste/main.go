@@ -85,7 +85,6 @@ func inserirPacienteAPI(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		p.CEP = p.CEP[:8]
 	}
 
-	// Tratar cod_municipio para aceitar NULL
 	var codMunicipio sql.NullString
 	if p.CodMunicipio != "" {
 		codMunicipio = sql.NullString{String: p.CodMunicipio, Valid: true}
