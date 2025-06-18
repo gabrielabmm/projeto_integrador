@@ -1,23 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btnAgendarExames = document.getElementById('btnAgendarExames');
     const dateModal = document.getElementById('dateModal');
-    const ubsTimeModal = document.getElementById('ubsTimeModal');
-    const contactModal = document.getElementById('contactModal');
+    const ubsTimeModal = document.getElementById('ubsTimeModal'); // Get the new modal
+const contactModal = document.getElementById('contactModal');
     const detailsModal = document.getElementById('detailsModal');
+    const closeContactModalBtn = document.getElementById('closeContactModal');
+    const closeDetailsModalBtn = document.getElementById('closeDetailsModal');
+    const contactBtns = document.querySelectorAll('.exam-card .contact-btn');
+    const detailsBtns = document.querySelectorAll('.exam-card .details-btn');
 
     const contactModalBody = document.getElementById('contactModalBody');
     const detailsModalBody = document.getElementById('detailsModalBody');
     const currentDayDisplay = document.querySelector('.current-date-display');
+    const prevMonthBtn = document.querySelector('.prev-month');
+    const nextMonthBtn = document.querySelector('.next-month');
+    const monthYearDisplay = document.querySelector('.month-year');
     const calendarGrid = document.querySelector('.calendar-grid');
-
     const cancelDateSelectionBtn = document.getElementById('cancelDateSelection');
     const okDateSelectionBtn = document.getElementById('okDateSelection');
-    const cancelUbsTimeSelectionBtn = document.getElementById('cancelUbsTimeSelection');
-    const confirmAppointmentBtn = document.getElementById('confirmAppointment');
-    const selectUbs = document.getElementById('selectUbs');
-    const selectTime = document.getElementById('selectTime');
+    const cancelUbsTimeSelectionBtn = document.getElementById('cancelUbsTimeSelection'); // New button
+    const confirmAppointmentBtn = document.getElementById('confirmAppointment'); // New button
+    const selectUbs = document.getElementById('selectUbs'); // New select element
+    const selectTime = document.getElementById('selectTime'); // New select element
 
-    let selectedDate = null;
+    let currentDate = new Date();
+    let activeDate = new Date(); // Dia inicialmente selecionado será o dia atual
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+
+    const monthNames = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+    const dayNames = [
+        "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
+        "Quinta-feira", "Sexta-feira", "Sábado"
+    ];
 
     function openModal(modal) {
         modal.classList.add('active');
@@ -27,179 +45,227 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('active');
     }
 
-    function loadCalendar() {
-        fetch('/api/calendario')
-            .then(res => res.json())
-            .then(days => {
-                while (calendarGrid.children.length > 7) {
-                    calendarGrid.removeChild(calendarGrid.lastChild);
+    function renderCalendar() {
+        while (calendarGrid.children.length > 7) {
+            calendarGrid.removeChild(calendarGrid.lastChild);
+        }
+
+        monthYearDisplay.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+        const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+        const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+        for (let i = 0; i < firstDayOfMonth; i++) {
+            const emptyDay = document.createElement('span');
+            emptyDay.classList.add('day', 'empty');
+            calendarGrid.appendChild(emptyDay);
+        }
+
+        for (let day = 1; day <= lastDayOfMonth; day++) {
+            const dayElement = document.createElement('span');
+            dayElement.classList.add('day');
+            dayElement.textContent = day;
+
+            if (day === currentDate.getDate() &&
+                currentMonth === currentDate.getMonth() &&
+                currentYear === currentDate.getFullYear()) {
+                dayElement.classList.add('today');
+            }
+
+            if (day === activeDate.getDate() &&
+                currentMonth === activeDate.getMonth() &&
+                currentYear === activeDate.getFullYear()) {
+                dayElement.classList.add('selected');
+            }
+
+            dayElement.addEventListener('click', () => {
+                const previouslySelected = calendarGrid.querySelector('.day.selected');
+                if (previouslySelected) {
+                    previouslySelected.classList.remove('selected');
                 }
+                dayElement.classList.add('selected');
 
-                days.forEach(day => {
-                    const el = document.createElement('span');
-                    el.classList.add('day');
-                    if (day.is_empty) {
-                        el.classList.add('empty');
-                        calendarGrid.appendChild(el);
-                        return;
-                    }
-                    el.textContent = day.day;
-                    if (day.is_today) el.classList.add('today');
-                    if (day.is_selected) {
-                        el.classList.add('selected');
-                        selectedDate = day.day;
-                        updateDateDisplay(day.day);
-                    }
-
-                    el.addEventListener('click', () => {
-                        calendarGrid.querySelectorAll('.day.selected').forEach(d => d.classList.remove('selected'));
-                        el.classList.add('selected');
-                        selectedDate = day.day;
-                        updateDateDisplay(day.day);
-                    });
-
-                    calendarGrid.appendChild(el);
-                });
+                activeDate = new Date(currentYear, currentMonth, day);
+                updateCurrentDateDisplay(activeDate);
             });
+
+            calendarGrid.appendChild(dayElement);
+        }
     }
 
-    function updateDateDisplay(day) {
-        const now = new Date();
-        now.setDate(day);
-        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-        currentDayDisplay.textContent = now.toLocaleDateString('pt-BR', options);
+    
+    function getFormattedDate(date) {
+        const dayOfWeek = dayNames[date.getDay()];
+        const dayOfMonth = date.getDate();
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+        return `${dayOfWeek}, ${dayOfMonth} de ${month} de ${year}`;
+    }
+
+    function updateCurrentDateDisplay(date) {
+        const dayOfWeek = dayNames[date.getDay()];
+        const dayOfMonth = date.getDate();
+        const month = monthNames[date.getMonth()];
+        const year = date.getFullYear();
+         currentDayDisplay.textContent = getFormattedDate(date);
     }
 
     if (btnAgendarExames) {
         btnAgendarExames.addEventListener('click', () => {
+            renderCalendar();
+            updateCurrentDateDisplay(activeDate);
             openModal(dateModal);
-            loadCalendar();
+        });
+    }
+
+    if (prevMonthBtn) {
+        prevMonthBtn.addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+    }
+
+    if (nextMonthBtn) {
+        nextMonthBtn.addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
         });
     }
 
     if (cancelDateSelectionBtn) {
-        cancelDateSelectionBtn.addEventListener('click', () => closeModal(dateModal));
+        cancelDateSelectionBtn.addEventListener('click', () => {
+            closeModal(dateModal);
+        });
     }
 
     if (okDateSelectionBtn) {
         okDateSelectionBtn.addEventListener('click', () => {
             closeModal(dateModal);
-            openModal(ubsTimeModal);
+            openModal(ubsTimeModal); 
         });
     }
 
     if (cancelUbsTimeSelectionBtn) {
-        cancelUbsTimeSelectionBtn.addEventListener('click', () => closeModal(ubsTimeModal));
-    }
-
-    if (confirmAppointmentBtn) {
-        confirmAppointmentBtn.addEventListener('click', () => {
-            const ubs = selectUbs.value;
-            const time = selectTime.value;
-
-            if (!ubs || !time || !selectedDate) {
-                alert("Selecione a UBS, o horário e uma data.");
-                return;
-            }
-
-            const now = new Date();
-            now.setDate(selectedDate);
-            const formattedDate = now.toLocaleDateString('pt-BR');
-
-            fetch('/api/confirmar', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ date: formattedDate, ubs, time })
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    alert(`Agendamento confirmado para ${data.data} às ${data.horario} na ${data.ubs}`);
-                    closeModal(ubsTimeModal);
-                });
+        cancelUbsTimeSelectionBtn.addEventListener('click', () => {
+            closeModal(ubsTimeModal); 
         });
     }
 
-    // Exibir dados dos exames
-    const renderExamCards = () => {
-        fetch('/api/exames')
-            .then(res => res.json())
-            .then(exames => {
-                const container = document.querySelector('.secao-exames-agendados');
-                console.log("Exames recebidos:", exames);
-                exames.forEach((exame, index) => {
-                    const card = document.createElement('div');
-                    card.classList.add('exam-card', exame.status === 'cancelled' ? 'cancelled' : 'confirmed');
-                    card.dataset.index = index;
-                    card.dataset.exame = JSON.stringify(exame);
+   if (confirmAppointmentBtn) {
+        confirmAppointmentBtn.addEventListener('click', () => {
+            const selectedUbs = selectUbs.value;
+            const selectedTime = selectTime.value;
+            const formattedDate = getFormattedDate(activeDate);
 
-                    card.innerHTML = `
-                        <div class="status-header">
-                            <span class="status-dot-${exame.status === 'cancelled' ? 'cancelado' : 'confirmado'}"></span>
-                            <p class="status-text">${exame.status === 'cancelled' ? 'Cancelado' : 'Confirmado'}</p>
-                            <p class="protocol">Nº de protocolo: ${exame.protocolo}</p>
-                        </div>
-                        <div class="exam-details">
-                            <div class="detail-item">
-                                <p class="label">Médico:</p>
-                                <p class="value">${exame.medico}</p>
-                            </div>
-                            <div class="detail-item">
-                                <p class="label">Exame:</p>
-                                <p class="value">${exame.exame}</p>
-                            </div>
-                            <div class="detail-item">
-                                <p class="label">Laboratório:</p>
-                                <p class="value">${exame.laboratorio}</p>
-                            </div>
-                            <div class="detail-item">
-                                <p class="label">Data da coleta:</p>
-                                <p class="value">${exame.data}</p>
-                            </div>
-                        </div>
-                        <div class="exam-actions">
-                            <button class="btn contact-btn">Contato</button>
-                            <button class="btn details-btn">Mais detalhes</button>
-                        </div>
-                    `;
+            if (selectedUbs && selectedTime) {
+                alert(`Agendamento confirmado para:\nData: ${formattedDate}\nUBS: ${selectedUbs}\nHorário: ${selectedTime}`);
+                closeModal(ubsTimeModal);
+            } else {
+                alert('Por favor, selecione a UBS e o horário.');
+            }
+        });
+    }
 
-                    card.querySelector('.contact-btn').addEventListener('click', () => {
-                        contactModalBody.innerHTML = `
-                            <p><strong>Laboratório:</strong> ${exame.laboratorio}</p>
-                            <p><strong>Telefone:</strong> ${exame.telefone}</p>
-                            <p><strong>Email:</strong> ${exame.email}</p>
-                            <p><strong>Endereço:</strong> ${exame.endereco}</p>
-                        `;
-                        openModal(contactModal);
-                    });
 
-                    card.querySelector('.details-btn').addEventListener('click', () => {
-                        console.log("Exame recebido:", exame);
-                        detailsModalBody.innerHTML = `
-                            <p><strong>Tipo de Exame:</strong> ${exame.exame}</p>
-                            <p><strong>Médico Solicitante:</strong> ${exame.medico}</p>
-                            <p><strong>Data Agendada:</strong> ${exame.data}</p>
-                            <p><strong>Horário:</strong> ${exame.horario}</p>
-                            <p><strong>Local:</strong> ${exame.local}</p>
-                            <p><strong>Preparo:</strong> ${exame.preparo}</p>
-                            <p><strong>Observações:</strong> ${exame.observacoes}</p>
-                        `;
-                        openModal(detailsModal);
-                    });
+    if (dateModal) {
+        dateModal.addEventListener('click', (e) => {
+            if (e.target === dateModal) {
+                closeModal(dateModal);
+            }
+        });
+    }
 
-                    container.appendChild(card);
-                });
-            });
-    };
+    
+    if (ubsTimeModal) {
+        ubsTimeModal.addEventListener('click', (e) => {
+            if (e.target === ubsTimeModal) {
+                closeModal(ubsTimeModal);
+            }
+        });
+    }
 
-    renderExamCards();
+    contactBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            
+            const examCard = event.target.closest('.exam-card');
 
-    document.getElementById('closeContactModal')?.addEventListener('click', () => closeModal(contactModal));
-    document.getElementById('closeDetailsModal')?.addEventListener('click', () => closeModal(detailsModal));
+            
+            const laboratorioNome = examCard.dataset.laboratorioNome;
+            const laboratorioTelefone = examCard.dataset.laboratorioTelefone;
+            const laboratorioEmail = examCard.dataset.laboratorioEmail;
+            const laboratorioEndereco = examCard.dataset.laboratorioEndereco;
 
-    [contactModal, detailsModal, dateModal, ubsTimeModal].forEach(modal => {
-        modal?.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal(modal);
+            contactModalBody.innerHTML = `
+                <p><strong>Laboratório:</strong> ${laboratorioNome}</p>
+                <p><strong>Telefone:</strong> ${laboratorioTelefone}</p>
+                <p><strong>Email:</strong> ${laboratorioEmail}</p>
+                <p><strong>Endereço:</strong> ${laboratorioEndereco}</p>
+            `;
+            openModal(contactModal);
         });
     });
+
+    detailsBtns.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            const examCard = event.target.closest('.exam-card');
+
+            const exameTipo = examCard.dataset.exameTipo;
+            const medicoSolicitante = examCard.dataset.medicoSolicitante;
+            const dataAgendada = examCard.dataset.dataAgendada;
+            const horario = examCard.dataset.horario;
+            const local = examCard.dataset.local;
+            const preparo = examCard.dataset.preparo;
+            const observacoes = examCard.dataset.observacoes;
+
+            detailsModalBody.innerHTML = `
+                <p><strong>Tipo de Exame:</strong> ${exameTipo}</p>
+                <p><strong>Médico Solicitante:</strong> ${medicoSolicitante}</p>
+                <p><strong>Data Agendada:</strong> ${dataAgendada}</p>
+                <p><strong>Horário:</strong> ${horario}</p>
+                <p><strong>Local:</strong> ${local}</p>
+                <p><strong>Preparo:</strong> ${preparo}</p>
+                <p><strong>Observações:</strong> ${observacoes}</p>
+            `;
+            openModal(detailsModal);
+        });
+    });
+
+    if (closeContactModalBtn) {
+        closeContactModalBtn.addEventListener('click', () => {
+            closeModal(contactModal);
+        });
+    }
+
+    if (closeDetailsModalBtn) {
+        closeDetailsModalBtn.addEventListener('click', () => {
+            closeModal(detailsModal);
+        });
+    }
+
+    if (contactModal) {
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeModal(contactModal);
+            }
+        });
+    }
+
+    if (detailsModal) {
+        detailsModal.addEventListener('click', (e) => {
+            if (e.target === detailsModal) {
+                closeModal(detailsModal);
+            }
+        });
+    }
+
+    renderCalendar();
+    updateCurrentDateDisplay(activeDate);
 });
