@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes" // Necessário para ler o arquivo em um buffer
+	"bytes" 
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -10,11 +10,10 @@ import (
 	"net/http"
 	"strings"
 
-	_ "github.com/lib/pq" // Driver PostgreSQL
+	_ "github.com/lib/pq" 
 )
 
-// Para o BLOB, a struct Paciente em si não precisa do campo da imagem,
-// já que ela é buscada separadamente pelo ID.
+
 type Paciente struct {
 	ID                 int    `json:"id"`
 	CartaoSUS          string `json:"cartao_sus"`
@@ -38,7 +37,7 @@ type Paciente struct {
 	PontoReferencia    string `json:"ponto_referencia"`
 }
 
-var globalDB *sql.DB // Variável global para a conexão com o banco de dados
+var globalDB *sql.DB 
 
 func conectar() (*sql.DB, error) {
 	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable"
@@ -47,7 +46,7 @@ func conectar() (*sql.DB, error) {
 
 func enableCORS(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT") // Adicionado PUT
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT") 
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 }
 
@@ -60,21 +59,21 @@ func limparMascara(str string) string {
 	}, str)
 }
 
-// Handler para upload da imagem como BLOB
+
 func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
-	enableCORS(w) // Habilita CORS para esta rota também
+	enableCORS(w) 
 	if r.Method != http.MethodPost {
 		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
 		return
 	}
 
-	err := r.ParseMultipartForm(10 << 20) // Limite de 10 MB
+	err := r.ParseMultipartForm(10 << 20) 
 	if err != nil {
 		http.Error(w, "Erro ao parsear formulário: "+err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	file, handler, err := r.FormFile("profile_image") // "profile_image" do HTML
+	file, handler, err := r.FormFile("profile_image") 
 	if err != nil {
 		http.Error(w, "Erro ao obter arquivo: "+err.Error(), http.StatusBadRequest)
 		return
@@ -89,9 +88,7 @@ func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 
 	imageData := buffer.Bytes()
 
-	// Você precisa de uma forma de identificar o paciente cujo perfil está sendo atualizado.
-	// Para este exemplo, vamos extrair o ID do paciente de um parâmetro de formulário 'paciente_id'.
-	// Em um sistema real, este ID viria de um mecanismo de autenticação/sessão seguro (e.g., JWT).
+
 	pacienteIDStr := r.FormValue("paciente_id")
 	if pacienteIDStr == "" {
 		http.Error(w, "ID do paciente não fornecido.", http.StatusBadRequest)
@@ -104,9 +101,7 @@ func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Insere ou atualiza os bytes da imagem na tabela paciente_infos.
-	// Assumimos que 'paciente_infos' tem uma coluna 'imagem_perfil' do tipo BYTEA.
-	// Se a coluna ainda não existe, você precisará adicioná-la com um ALTER TABLE.
+	
 	_, err = globalDB.Exec("UPDATE paciente_infos SET imagem_perfil = $1 WHERE id = $2", imageData, pacienteID)
 	if err != nil {
 		http.Error(w, "Erro ao salvar imagem no banco de dados: "+err.Error(), http.StatusInternalServerError)
@@ -118,13 +113,11 @@ func uploadProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Imagem de perfil atualizada com sucesso (armazenada como BLOB)!")
 }
 
-// Handler para servir a imagem de perfil como BLOB
-func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
-	enableCORS(w) // Habilita CORS para esta rota também
 
-	// Extrair o ID do paciente da URL (ex: /get-profile-image-blob?id=123)
-	// Em um cenário real, você buscaria o ID do usuário logado ou o ID do paciente
-	// que está sendo visualizado (se autorizado).
+func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
+	enableCORS(w) 
+
+	
 	pacienteIDStr := r.URL.Query().Get("id")
 	if pacienteIDStr == "" {
 		http.Error(w, "ID do paciente não fornecido na URL.", http.StatusBadRequest)
@@ -138,13 +131,13 @@ func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var imageData []byte
-	// Busca a imagem_perfil da tabela paciente_infos
+	
 	err = globalDB.QueryRow("SELECT imagem_perfil FROM paciente_infos WHERE id = $1", pacienteID).Scan(&imageData)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			// Não há imagem para este paciente ou paciente não existe
+			
 			log.Printf("Paciente ID %d não encontrado ou sem imagem de perfil.", pacienteID)
-			// Opcional: Redirecionar para uma imagem padrão
+			
 			http.Redirect(w, r, "/default_avatar.png", http.StatusFound)
 			return
 		}
@@ -159,12 +152,12 @@ func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Detecta o tipo de conteúdo (MIME Type) da imagem. Isso é crucial.
+	
 	contentType := http.DetectContentType(imageData)
-	// Se a detecção falhar, pode definir um padrão.
+	
 	if contentType == "application/octet-stream" {
 		log.Printf("Não foi possível detectar o Content-Type para paciente ID %d. Assumindo image/jpeg.", pacienteID)
-		contentType = "image/jpeg" // Ou 'image/png' dependendo do que você espera principalmente
+		contentType = "image/jpeg"
 	}
 
 	w.Header().Set("Content-Type", contentType)
@@ -172,8 +165,8 @@ func getProfileImageBLOB(w http.ResponseWriter, r *http.Request) {
 	w.Write(imageData)
 }
 
-// Handler para inserir paciente (existente)
-func inserirPacienteAPI(w http.ResponseWriter, r *http.Request) { // Removido db *sql.DB, usando globalDB
+
+func inserirPacienteAPI(w http.ResponseWriter, r *http.Request) { 
 	enableCORS(w)
 	if r.Method == http.MethodOptions {
 		return
@@ -229,15 +222,14 @@ func inserirPacienteAPI(w http.ResponseWriter, r *http.Request) { // Removido db
 	fmt.Fprint(w, "Paciente inserido com sucesso.")
 }
 
-// Handler para listar pacientes (existente)
-func listarPacientesAPI(w http.ResponseWriter, r *http.Request) { // Removido db *sql.DB, usando globalDB
+
+func listarPacientesAPI(w http.ResponseWriter, r *http.Request) { 
 	enableCORS(w)
 	if r.Method == http.MethodOptions {
 		return
 	}
 
-	// Não buscar a imagem BLOB aqui, pois pode ser muito grande para uma listagem.
-	// A imagem será buscada separadamente pelo endpoint /get-profile-image-blob.
+	
 	rows, err := globalDB.Query("SELECT id, nome_completo, cpf_paciente FROM paciente_infos")
 	if err != nil {
 		http.Error(w, "Erro ao buscar pacientes", http.StatusInternalServerError)
@@ -262,13 +254,13 @@ func listarPacientesAPI(w http.ResponseWriter, r *http.Request) { // Removido db
 
 func main() {
 	var err error
-	globalDB, err = conectar() // Conecta uma vez e armazena na variável global
+	globalDB, err = conectar() 
 	if err != nil {
 		log.Fatal("Erro ao conectar ao banco:", err)
 	}
 	defer globalDB.Close()
 
-	// Roteamento para Pacientes
+	
 	http.HandleFunc("/pacientes", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
@@ -282,12 +274,11 @@ func main() {
 		}
 	})
 
-	// Roteamento para Imagem de Perfil (BLOB)
+	
 	http.HandleFunc("/upload-profile-image", uploadProfileImageBLOB)
 	http.HandleFunc("/get-profile-image-blob", getProfileImageBLOB)
 
-	// Servir um avatar padrão se a imagem não for encontrada ou estiver vazia
-	// Crie um arquivo 'default_avatar.png' na raiz do seu projeto Go.
+
 	http.Handle("/default_avatar.png", http.FileServer(http.Dir(".")))
 
 	fmt.Println("Servidor rodando em http://localhost:8080")
