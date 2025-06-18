@@ -18,14 +18,9 @@ type User struct {
 	Email string
 }
 
-// Função para conectar ao banco de dados PostgreSQL
-func setupDatabase() {
-	var err error
-	connStr := "postgres://seu_usuario:sua_senha@localhost/seu_banco?sslmode=disable"
-	db, err = sql.Open("postgres", connStr)
-	if err != nil {
-		log.Fatal("Erro ao conectar ao banco de dados: ", err)
-	}
+func conectar() (*sql.DB, error) {
+	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable"
+	return sql.Open("postgres", connStr)
 }
 
 // Função para verificar se o email existe no banco de dados
@@ -71,7 +66,7 @@ func main() {
 		}
 
 		// Redireciona para a tela de definir senha
-		c.HTML(http.StatusOK, "definir_senha.html", gin.H{
+		c.HTML(http.StatusOK, "primeiroacesso.html", gin.H{
 			"email": email,
 		})
 	})
@@ -93,7 +88,7 @@ func main() {
 	})
 
 	// Configuração da template (HTML)
-	router.LoadHTMLFiles("definir_senha.html")
+	router.LoadHTMLFiles("primeiroacesso.html")
 
 	// Inicialização do servidor
 	router.Run(":8080")
