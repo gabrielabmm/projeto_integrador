@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro Acesso</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class ="pagina-esqueci-senha">
+
+    <div id="campos-email-esqueci-senha">
+        <a href="escolher-tipo-usuario.html" class="voltar">&lt; Voltar</a>
+
+        <h1>Email</h1>
+
+        <p>Insira aqui o email cadastrado na UBS</p>
+          <div class="error-message"></div>
+        <div class="success-message">Email válido. Redefina a senha...</div>
+
+        <form id="emailForm" action="escolher-nova-senha.html" method="get"> <label for="emailInput">Email:</label>
+            <input type="email" id="emailInput" name="emailInput" placeholder="Seu email aqui" required> <div class="error-message" id="emailError"></div>
+
+           
+            
+            <button type="submit" id="enviarCodigoBtn">Verificar email</button> 
+        </form>
+    </div>
+    
+    <script src="../js/frontend.js"></script> 
+</body>
+</html>
+
+   
