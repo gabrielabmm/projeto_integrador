@@ -17,7 +17,7 @@ func main() {
 	}
 	defer db.Close()
 
-	// Testa a conexão
+	
 	err = db.Ping()
 	if err != nil {
 		log.Fatal("Erro ao testar conexão:", err)
