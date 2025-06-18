@@ -1,4 +1,4 @@
--- Criar tipos ENUM só se não existirem
+
 DO $$
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'tipo_uf') THEN
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   senha TEXT NOT NULL
 );
 
--- Garantir que a constraint seja atualizada corretamente
+
 ALTER TABLE usuario DROP CONSTRAINT IF EXISTS senha;
 
 ALTER TABLE usuario ADD CONSTRAINT senha CHECK (
