@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS paciente_infos (
   numero_residencia VARCHAR(20),
   complemento VARCHAR(100),
   setor VARCHAR(100),
+  cidade VARCHAR (100),
   cod_municipio CHAR(7) REFERENCES municipio(cod),
   ponto_referencia VARCHAR(255),
 
