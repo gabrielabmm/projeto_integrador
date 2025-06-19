@@ -75,7 +75,6 @@ CREATE TABLE IF NOT EXISTS paciente_infos (
   ddd CHAR(2) NOT NULL,
   telefone CHAR(9) NOT NULL,
   fixo CHAR(20) NOT NULL,
-  email VARCHAR(150),
   nacionalidade VARCHAR(100) NOT NULL,
   uf tipo_uf NOT NULL,
 
