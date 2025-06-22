@@ -68,12 +68,16 @@ CREATE TABLE IF NOT EXISTS paciente_infos (
   cpf_paciente CHAR(11) NOT NULL UNIQUE,
   nome_completo VARCHAR(150) NOT NULL,
   data_nascimento DATE NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  imagem_perfil BYTEA,
 
   cep CHAR(8) NOT NULL,
   ddd CHAR(2) NOT NULL,
   telefone CHAR(9) NOT NULL,
+  fixo CHAR(20) NOT NULL,
   nacionalidade VARCHAR(100) NOT NULL,
   uf tipo_uf NOT NULL,
+  senha VARCHAR(50),
 
   raca_cor raca_cor,
   escolaridade escolaridade,
@@ -83,6 +87,7 @@ CREATE TABLE IF NOT EXISTS paciente_infos (
   numero_residencia VARCHAR(20),
   complemento VARCHAR(100),
   setor VARCHAR(100),
+  cidade VARCHAR (100),
   cod_municipio CHAR(7) REFERENCES municipio(cod),
   ponto_referencia VARCHAR(255),
 
@@ -149,15 +154,15 @@ CREATE TABLE IF NOT EXISTS usuario (
   tipo tipo_usuario NOT NULL,
   ref_id INTEGER NOT NULL,  
   CPF CHAR(11) NOT NULL UNIQUE,
-  senha TEXT NOT NULL
+  password TEXT NOT NULL
 );
 
 -- Garantir que a constraint seja atualizada corretamente
-ALTER TABLE usuario DROP CONSTRAINT IF EXISTS senha;
+ALTER TABLE usuario DROP CONSTRAINT IF EXISTS password;
 
-ALTER TABLE usuario ADD CONSTRAINT senha CHECK (
-  senha ~ '[A-Z]'
-  AND senha ~ '[a-z]'
-  AND senha ~ '[0-9]'
-  AND senha ~ '[^A-Za-z0-9]'
+ALTER TABLE usuario ADD CONSTRAINT password CHECK (
+  password ~ '[A-Z]'
+  AND password ~ '[a-z]'
+  AND password ~ '[0-9]'
+  AND password ~ '[^A-Za-z0-9]'
 );
