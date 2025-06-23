@@ -1,0 +1,193 @@
+body {
+  margin: 0px;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+.back-link {
+  align-items: center;
+  color: #48AD45;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.linha-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+}
+
+
+.title {
+  align-items: right;
+  color: #48AD45;
+  margin: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  }
+
+ .topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+.links-e-perfil {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-text-sidcc {
+  font-weight: bold;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.logo-text-sidcc .char-s {
+  color: #48AD45;
+}
+
+.logo-text-sidcc .char-i {
+  color: #F9BD14;
+}
+
+.logo-text-sidcc .char-d {
+  color: #2864AE;
+}
+
+.logo-text-sidcc .char-c1 {
+  color: #000;
+}
+
+.logo-text-sidcc .char-c2 {
+  color: #000;
+}
+
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: underline;
+  color: #000;
+}
+
+
+.icone-perfil {
+  height: 30px;
+  vertical-align: top;
+}
+
+.botao-perfil button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rodape {
+  background-color: #b0e3ae;
+  border-top: 1px solid #ccc;
+  padding: 40px 10%;
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.rodape-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.coluna {
+  flex-basis: 30%;
+  margin-bottom: 20px;
+  min-width: 150px;
+}
+
+.coluna h4 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #000;
+  font-weight: bold;
+}
+
+.coluna ul {
+  list-style: none;
+  padding: 0;
+}
+
+.coluna ul li {
+  margin-bottom: 8px;
+}
+
+.coluna ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.coluna ul li a:hover {
+  text-decoration: underline;
+}
+
+.redes-sociais a {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.redes-sociais img {
+  width: 24px;
+  height: 24px;
+}
+
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  margin: 0px;
+}
+
+.texto {
+  margin: 80px;
+  font-weight: 400;
+  font-family: 'Instrument Sans', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.texto p {
+  margin-bottom: 16px;
+}
+
+
+.link-informativo {
+  color: #000;
+  text-decoration: underline;
+}
