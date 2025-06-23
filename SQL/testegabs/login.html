@@ -61,7 +61,11 @@
     <input type="password" id="instituicao-senha-inst" name="password" placeholder="Sua senha aqui">
 </div>
 
-            <p id="mensagem-login-erro" class="error-message" style="text-align: center; margin-top: 10px; margin-bottom: 10px; display: none;"></p>
+           {{if .Error}}
+<p class="error-message" style="text-align: center; margin: 10px 0; color: red;">
+    {{.Error}}
+</p>
+{{end}}
 
             <button type="submit">Continuar</button>
 
