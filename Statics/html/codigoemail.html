@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Código</title>      
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      .error-message {
+        color: #FF0000;
+        font-size: 0.95em;
+        margin-top: 10px;
+        display: none;
+      }
+    </style>
+</head>
+<body>
+    <div id="campos-email-esqueci-senha">
+        <a href="esqueci-senha.html" class="voltar">&lt; Voltar</a>
+        <h1>Redefinição de Senha!</h1>
+        <form id="codigoForm">
+            <label for="codigoInput">Digite o código recebido:</label>
+            <input type="text" id="codigoInput" maxlength="6" required placeholder="Código de 6 dígitos">
+            <div class="error-message" id="codigoError"></div>
+            <button type="submit">Verificar código</button>
+        </form>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("codigoForm");
+      const codigoInput = document.getElementById("codigoInput");
+      const codigoError = document.getElementById("codigoError");
+
+      // Pega o email da querystring
+      const params = new URLSearchParams(window.location.search);
+      const email = params.get("email");
+
+      form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        codigoError.textContent = "";
+        codigoError.style.display = "none";
+        const codigo = codigoInput.value;
+
+        try {
+          const res = await fetch("http://localhost:3000/verificar-codigo", {
+            method: "POST",
+            body: new URLSearchParams({ email, codigo }),
+          });
+          if (res.ok) {
+            window.location.href = "escolher-nova-senha.html?email=" + encodeURIComponent(email);
+          } else {
+            codigoError.textContent = "Código incorreto. Tente novamente.";
+            codigoError.style.display = "block";
+          }
+        } catch (error) {
+          codigoError.textContent = "Erro ao conectar ao servidor.";
+          codigoError.style.display = "block";
+        }
+      });
+
+      codigoInput.addEventListener("input", function() {
+        codigoError.textContent = "";
+        codigoError.style.display = "none";
+      });
+    });
+    </script>
+</body>
+</html>

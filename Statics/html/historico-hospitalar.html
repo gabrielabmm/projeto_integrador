@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIDCC</title>
+  <link rel="stylesheet" href="../css/historico-hospitalar.css" />
+</head>
+<body>
+
+  <header class="topo">
+    <div class="logo">
+        <img src="../img/logo.png" alt="Logo SIDCC">
+        <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
+                class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
+        </span>
+    </div>
+    <nav class="menu">
+      <div class="links-e-perfil">
+        <a href="iniciomedico.css">Início</a>
+        <a href="#">Sobre</a>
+        <a href="sac-logado.html">SAC</a>
+        <form action="/perfil" method="get" class="botao-perfil">
+          <button type="submit">
+            <img src="../img/ruiva.png" alt="Perfil" class="icone-perfil" />
+          </button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <div class="main-content-wrapper">
+
+    <div class="linha-topo">
+      <h2 class="title">Olá, Joana!</h2>
+      <a href="#" class="back-link">< Voltar</a>
+    </div>
+
+    <div class="container-botoes">
+      <button id="btnPerfil" class="botao-toggle ativo">Perfil</button>
+      <script>
+      // Pega o elemento botão pelo seu ID
+      var botaoPerfil = document.getElementById("btnPerfil");
+
+      // Adiciona um ouvinte de evento para o clique
+      if (botaoPerfil) { // Verifica se o botão realmente existe antes de adicionar o listener
+        botaoPerfil.addEventListener("click", function() {
+          // Redireciona para a página pesquisa.html
+          window.location.href = "pesquisa.html";
+        });
+      }
+      </script>
+      <button id="btnHistorico" class="botao-toggle">Histórico Hospitalar</button>
+    </div>
+
+    <main class="conteudo">
+      <div class="card disponivel">
+        <div class="status">Disponível</div>
+        <div class="info">
+          <div class="info-item"><strong>Médico:</strong> <span>Ana Lopes</span></div>
+          <div class="info-item"><strong>Exame:</strong> <span>Preventivo</span></div>
+          <div class="info-item"><strong>Laboratório:</strong> <span>LabHealth</span></div>
+          <div class="info-item"><strong>Data de coleta:</strong> <span>12/06/2024</span></div>
+          <div class="info-item"><strong>Nº de protocolo:</strong> <span>091207</span></div>
+        </div>
+        <div class="botoes">
+          <button class="btn verde">Resultado</button>
+          <button class="btn verde">Mais detalhes</button>
+        </div>
+      </div>
+
+      <div class="card disponivel">
+        <div class="status">Disponível</div>
+        <div class="info">
+          <div class="info-item"><strong>Médico:</strong> <span>Joana Sousa</span></div>
+          <div class="info-item"><strong>Exame:</strong> <span>Ultrassom</span></div>
+          <div class="info-item"><strong>Laboratório:</strong> <span>SaúdeIdeal</span></div>
+          <div class="info-item"><strong>Data de coleta:</strong> <span>14/05/2024</span></div>
+          <div class="info-item"><strong>Nº de protocolo:</strong> <span>090909</span></div>
+        </div>
+        <div class="botoes">
+          <button class="btn verde">Resultado</button>
+          <button class="btn verde">Mais detalhes</button>
+        </div>
+      </div>
+
+      <div class="card indisponivel">
+        <div class="status">Indisponível</div>
+        <div class="info">
+          <div class="info-item"><strong>Médico:</strong> <span>Maria Joaquina</span></div>
+          <div class="info-item"><strong>Exame:</strong> <span>Preventivo</span></div>
+          <div class="info-item"><strong>Laboratório:</strong> <span>LabHealth</span></div>
+          <div class="info-item"><strong>Data de coleta:</strong> <span>10/05/2024</span></div>
+          <div class="info-item"><strong>Nº de protocolo:</strong> <span>012345</span></div>
+        </div>
+        <div class="botoes">
+          <button class="btn cinza" disabled>Resultado</button>
+          <button class="btn cinza" disabled>Mais detalhes</button>
+        </div>
+      </div>
+
+      <div class="card consulta">
+        <div class="info">
+          <div class="info-item"><strong>Consulta -</strong> <span>02/04/2024</span></div>
+          <div class="info-item"><strong>Médico:</strong> <span>Maria Joaquina</span></div>
+        </div>
+        <div class="botoes">
+          <button class="btn verde">Ver prontuário</button>
+        </div>
+      </div>
+    </main>
+
+  </div> <footer class="rodape">
+    <div class="rodape-conteudo">
+      <div class="coluna">
+        <h4>SIDCC</h4>
+        <div class="redes-sociais">
+          <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+          <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+          <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
+        </div>
+      </div>
+      <div class="coluna">
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="sac-logado.html">SAC</a></li>
+        </ul>
+      </div>
+      <div class="coluna">
+        <h4>Ajuda</h4>
+        <ul>
+          <li><a href="#">Dúvidas frequentes</a></li>
+          <li><a href="#">Acessibilidade</a></li>
+        </ul>
+      </div>
+      <div class="coluna">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Termos de uso</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  const btnPerfil = document.getElementById("btnPerfil");
+  const btnHistorico = document.getElementById("btnHistorico");
+
+  // Script para navegação do btnPerfil já está inline acima.
+  // Este script abaixo é para alternar a classe 'ativo'
+  if (btnPerfil && btnHistorico) { // Verifica se ambos os botões existem
+      btnPerfil.addEventListener("click", () => {
+        // A navegação já está sendo feita pelo script inline.
+        // Apenas garante que as classes 'ativo' sejam gerenciadas caso esta página seja recarregada
+        // ou se o usuário não navegar imediatamente.
+        if (!btnPerfil.classList.contains("ativo")) {
+            btnPerfil.classList.add("ativo");
+        }
+        btnHistorico.classList.remove("ativo");
+      });
+
+      btnHistorico.addEventListener("click", () => {
+        if (!btnHistorico.classList.contains("ativo")) {
+            btnHistorico.classList.add("ativo");
+        }
+        btnPerfil.classList.remove("ativo");
+        // Adicionar navegação para o btnHistorico se necessário, por exemplo:
+        // window.location.href = "pagina-historico.html"; // (se for diferente desta)
+      });
+  }
+  </script>
+</body>
+</html>

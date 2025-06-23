@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Primeiro Acesso</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <a href="escolher-tipo-usuario.html" class="voltar">&lt; Voltar</a>
+    <h2>Primeiro acesso</h2>
+    <p>Preencha os dados abaixo para criar sua conta.</p>
+
+    <form>
+      <label for="crm">CRM/COREN:</label>
+      <input type="text" id="crm" placeholder="">
+
+      <label for="cnes">CNES:</label>
+      <input type="text" id="cnes" placeholder="">
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="">
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" placeholder="" required>
+
+      <button type="submit">Continuar</button>
+    </form>
+  </div>
+  <!-- Tela de sucesso (inicialmente oculta) -->
+<div id="sucessoContainer" class="sucesso-container" style="display: none;">
+  <div class="sucesso-box">
+    <h2>Cadastro realizado!</h2>
+    <p>Seu cadastro foi completado com sucesso!</p>
+    <button onclick="voltarParaInicio()">Voltar para a página inicial</button>
+  </div>
+</div>
+
+  <script src="../js/sac-validation.js"></script> 
+  <script src="../js/frontend.js"></script> 
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinição de Senha</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <a href="escolher-tipo-usuario.html" class="voltar">&lt; Voltar</a> 
+    <div id="campos-email-esqueci-senha">
+        <h1>Redefinição de<br>Senha!</h1> 
+        <form id="novaSenhaForm"> 
+            <label for="novaSenhaInput">Nova senha:</label>
+            <input type="password" id="novaSenhaInput" placeholder="Sua nova senha" required>
+            <div class="error-message" id="novaSenhaError"></div> 
+
+            <label for="confirmaSenhaInput">Confirmar nova senha:</label>
+            <input type="password" id="confirmaSenhaInput" placeholder="Confirme a nova senha" required>
+            <div class="error-message" id="confirmaSenhaError"></div> 
+            
+            <div class="success-message" id="senhaSuccessMessage" style="display: none;"></div>
+            
+            <button type="submit" id="definirSenhaBtn">Continuar</button> 
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("novaSenhaForm");
+            const novaSenhaInput = document.getElementById("novaSenhaInput");
+            const confirmaSenhaInput = document.getElementById("confirmaSenhaInput");
+            const novaSenhaError = document.getElementById("novaSenhaError");
+            const confirmaSenhaError = document.getElementById("confirmaSenhaError");
+            const senhaSuccessMessage = document.getElementById("senhaSuccessMessage");
+
+            // Pega o email da querystring
+            const params = new URLSearchParams(window.location.search);
+            const email = params.get("email");
+
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                novaSenhaError.textContent = "";
+                confirmaSenhaError.textContent = "";
+                senhaSuccessMessage.style.display = "none";
+
+                const novaSenha = novaSenhaInput.value;
+                const confirmaSenha = confirmaSenhaInput.value;
+
+                if (novaSenha !== confirmaSenha) {
+                    confirmaSenhaError.textContent = "As senhas não coincidem.";
+                    return;
+                }
+
+                try {
+                    const res = await fetch("http://localhost:3000/redefinir-senha", {
+                        method: "POST",
+                        body: new URLSearchParams({ email, nova_senha: novaSenha }),
+                    });
+                    if (res.ok) {
+                        // Redireciona para tela de sucesso
+                        window.location.href = "redefinida-sucesso.html";
+                    } else {
+                        novaSenhaError.textContent = "Erro ao redefinir senha.";
+                    }
+                } catch (error) {
+                    novaSenhaError.textContent = "Erro ao conectar ao servidor.";
+                }
+            });
+        });
+    </script>
+    <script src="../js/frontend.js"></script> 
+</body>
+</html>

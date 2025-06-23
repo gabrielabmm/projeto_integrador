@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro Acesso</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div id="campos-email-esqueci-senha">
+        <a href="escolher-tipo-usuario.html" class="voltar">&lt; Voltar</a>
+        <h1>Email</h1>
+        <p>Insira aqui o email cadastrado na UBS</p>
+        <form id="emailForm">
+            <label for="emailInput">Email:</label>
+            <input type="email" id="emailInput" name="emailInput" placeholder="Seu email aqui" required>
+            <div class="error-message" id="emailError"></div>
+            <button type="submit" id="enviarCodigoBtn">Verificar email</button>
+        </form>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("emailForm");
+        const emailInput = document.getElementById("emailInput");
+        const emailError = document.getElementById("emailError");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            emailError.textContent = "";
+
+            const email = emailInput.value.trim();
+            if (!email) {
+                emailError.textContent = "Digite um e-mail.";
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost:3000/checar-email", {
+                    method: "POST",
+                    body: new URLSearchParams({ email }),
+                });
+                if (res.ok) {
+                    window.location.href = "escolher-nova-senha.html?email=" + encodeURIComponent(email);
+                } else {
+                    emailError.textContent = "E-mail não encontrado!";
+                }
+            } catch (err) {
+                emailError.textContent = "Erro ao conectar ao servidor.";
+            }
+        });
+    });
+    </script>
+</body>

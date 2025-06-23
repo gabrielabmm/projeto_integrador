@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIDCC - Perfil</title>
+  
+  <link rel="stylesheet" href="../css/alterardados.css" />
+
+  <style>
+    /* Estilo básico para a imagem do avatar se for adicionada dinamicamente */
+
+
+    /* Estilos para os inputs no modo de visualização (fundo verde) */
+    .info-formulario input[type="text"],
+    .info-formulario input[type="email"],
+    .info-formulario input[type="tel"] {
+        background-color: #e7f5e7; 
+        border: 1px solid #ccc;
+        color: #333; 
+        padding: 8px; 
+        box-sizing: border-box; 
+        width: 100%; 
+    }
+
+    /* Quando .cartao tem a classe .modo-edicao, os inputs ficam brancos */
+    .cartao.modo-edicao .info-formulario input[type="text"],
+    .cartao.modo-edicao .info-formulario input[type="email"],
+    .cartao.modo-edicao .info-formulario input[type="tel"] {
+        background-color: #fff; 
+        color: #000; 
+        border: 1px solid #767676; 
+    }
+
+  
+    
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="logo">
+    <img src="../img/logo.png" alt="SIDCC Logo" class="logo" >
+    <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
+                    class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
+            </span>
+    </div>
+    <div class="grupo-menu">
+      <nav class="menu">
+        <a href="inicio.html">Início</a>
+        <a href="#">Sobre</a>
+        <a href="sac-logado.html">SAC</a>
+      </nav>
+      <div class="icone-perfil">
+        <img src="../img/perfilm.png" alt="Perfil" />
+      </div>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <h2>Olá, Maria<span id="saudacao-nome"></span>!</h2>
+
+    <section class="cartao">
+      <div class="perfil">
+        <div class="avatar" >
+        <img src="../img/perfilm.png" id="avatarContainer">
+        </div>
+       <p class="nome" id="nomeDisplayPerfil">Carregando...</p>
+        <a href="escolher-nova-senha.html" style="text-decoration: none;">
+            <button class="botao">Alterar senha</button>
+        </a>
+      </div>
+      <div class="info-formulario">
+        <h3>Dados pessoais</h3>
+        <div class="grade-formulario">
+          <label>Nome: <input type="text" id="inputNome" /></label>
+          <label>Email: <input type="email" id="inputEmail" /></label>
+          <label>CPF: <input type="text" id="inputCPF" /></label>
+          <label>Celular: <input type="tel" id="inputCelular" /></label>
+          <label>Telefone: <input type="tel" id="inputTelefone" /></label>
+          <label>Escolaridade: <input type="text" id="inputEscolaridade" /></label>
+        </div>
+
+        <h3>Dados residenciais</h3>
+        <div class="grade-formulario">
+          <label>CEP: <input type="text" id="inputCEP" /></label>
+          <label>Cidade: <input type="text" id="inputCidade" /></label>
+          <label class="largura-total">Endereço: <input type="text" id="inputEndereco" /></label>
+        </div>
+
+        <div class="botoes-acao-formulario">
+            <button class="botao editar" id="btnEditarDados">Editar</button>
+            <button class="botao salvar" id="btnSalvarDados" style="display: none;">Salvar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script src="geral.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. Tenta preencher o formulário com dados do geral.js
+      if (typeof window.preencherFormularioEdicaoGlobal === 'function') {
+        console.log("HTML: Chamando preencherFormularioEdicaoGlobal() para popular os dados.");
+        window.preencherFormularioEdicaoGlobal(); 
+      } else {
+        console.error("HTML: Função preencherFormularioEdicaoGlobal não encontrada. Os dados iniciais não serão populados por ela. Verifique geral.js.");
+        document.getElementById('saudacaoNomePaciente').textContent = 'Usuário';
+        document.getElementById('nomeDisplayPerfil').textContent = 'Nome não carregado';
+      }
+
+      // 2. Configurar a lógica de edição/visualização
+      const cartaoElement = document.querySelector('section.cartao');
+      const btnEditarDados = document.getElementById('btnEditarDados');
+      const btnSalvarDados = document.getElementById('btnSalvarDados');
+      const inputsDoFormulario = cartaoElement.querySelectorAll(
+        '.info-formulario input[type="text"], ' +
+        '.info-formulario input[type="email"], ' +
+        '.info-formulario input[type="tel"]'
+      );
+
+      function aplicarModoVisualizacao() {
+          if (!cartaoElement) {
+            console.error("Elemento .cartao não encontrado para aplicar modo visualização.");
+            return;
+          }
+          cartaoElement.classList.remove('modo-edicao');
+          inputsDoFormulario.forEach(input => {
+              input.setAttribute('readonly', true);
+          });
+          if(btnEditarDados) btnEditarDados.style.display = 'inline-block';
+          if(btnSalvarDados) btnSalvarDados.style.display = 'none';
+          console.log("Modo de visualização aplicado.");
+      }
+
+      function aplicarModoEdicao() {
+          if (!cartaoElement) {
+            console.error("Elemento .cartao não encontrado para aplicar modo edição.");
+            return;
+          }
+          cartaoElement.classList.add('modo-edicao');
+          inputsDoFormulario.forEach(input => {
+              input.removeAttribute('readonly');
+          });
+          if(btnEditarDados) btnEditarDados.style.display = 'none';
+          if(btnSalvarDados) btnSalvarDados.style.display = 'inline-block';
+          
+          if(inputsDoFormulario.length > 0) {
+              inputsDoFormulario[0].focus();
+          }
+          console.log("Modo de edição aplicado.");
+      }
+
+      if (btnEditarDados) {
+        btnEditarDados.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            aplicarModoEdicao();
+        });
+      } else {
+        console.error("Botão Editar (btnEditarDados) não encontrado.");
+      }
+
+      if (btnSalvarDados) {
+        btnSalvarDados.addEventListener('click', function(event) {
+            event.preventDefault(); 
+            
+            let dadosColetados = {};
+            inputsDoFormulario.forEach(input => {
+              if(input.id) {
+                  dadosColetados[input.id] = input.value;
+              }
+            });
+            console.log("Dados 'salvos' (simulação):", dadosColetados);
+            
+            alert("Dados alterados com sucesso!"); 
+            window.location.href = 'inicio.html';
+        });
+      } else {
+        console.error("Botão Salvar (btnSalvarDados) não encontrado.");
+      }
+      
+      aplicarModoVisualizacao(); 
+    });
+  </script>
+</body>
+</html>
