@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS usuario (
   id SERIAL PRIMARY KEY,
   tipo tipo_usuario NOT NULL,
   ref_id INTEGER NOT NULL,  
-  CPF CHAR(11) NOT NULL UNIQUE,
+  email CHAR(11) NOT NULL UNIQUE,
   password TEXT NOT NULL
 );
 
