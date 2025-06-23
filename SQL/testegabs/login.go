@@ -14,7 +14,7 @@ var db *sql.DB
 
 type User struct {
 	ID       int
-	email    string
+	Email    string
 	Password string
 }
 
@@ -63,16 +63,22 @@ func loginUser(c *gin.Context) {
 }
 
 func main() {
-	
-	setupDatabase()
+	var err error
+	db, err = conectar()
+	if err != nil {
+		log.Fatal("Erro ao conectar ao banco de dados:", err)
+	}
 	defer db.Close()
 
-	
 	router := gin.Default()
 
-	
+	router.LoadHTMLGlob("templates/*")
+
+	router.GET("/login", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "login.html", nil)
+	})
+
 	router.POST("/login", loginUser)
 
-	
 	router.Run(":8080")
 }
