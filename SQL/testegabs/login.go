@@ -3,82 +3,58 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"html/template"
+	"net/http"
 )
 
 var db *sql.DB
-
-type User struct {
-	ID       int
-	Email    string
-	Password string
-}
-
-func conectar() (*sql.DB, error) {
-	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable"
-	return sql.Open("postgres", connStr)
-}
-
-
-func checkEmail(email string) (*User, error) {
-	var user User
-	err := db.QueryRow("SELECT id, email, password FROM users WHERE email = $1", email).Scan(&user.ID, &user.Email, &user.Password)
-	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, nil 
-		}
-		return nil, err 
-	}
-	return &user, nil
-}
-
-
-func loginUser(c *gin.Context) {
-	email := c.DefaultPostForm("email", "")
-	password := c.DefaultPostForm("password", "")
-
-	
-	user, err := checkEmail(email)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao verificar o email"})
-		return
-	}
-
-	if user == nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Email ou senha incorretos"})
-		return
-	}
-
-	
-	if user.Password != password {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Email ou senha incorretos"})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"message": "Login bem-sucedido", "user": user.Email})
-}
+var tpl *template.Template
 
 func main() {
 	var err error
-	db, err = conectar()
+	db, err = sql.Open("postgres", "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable")
 	if err != nil {
-		log.Fatal("Erro ao conectar ao banco de dados:", err)
+		panic(err)
 	}
 	defer db.Close()
 
-	router := gin.Default()
+	
+	tpl = template.Must(template.ParseFiles("static/login.html"))
 
-	router.LoadHTMLGlob("templates/*")
+	
+	http.HandleFunc("/login", loginHandler)
 
-	router.GET("/login", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "login.html", nil)
-	})
+	
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	router.POST("/login", loginUser)
+	fmt.Println("Servidor rodando em http://localhost:8080/login")
+	http.ListenAndServe(":8080", nil)
+}
 
-	router.Run(":8080")
+
+func loginHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		tpl.Execute(w, nil)
+	case "POST":
+		email := r.FormValue("email")
+		password := r.FormValue("password")
+
+		var dbPassword string
+		err := db.QueryRow("SELECT password FROM usuario WHERE email=$1", email).Scan(&dbPassword)
+		if err != nil {
+			tpl.Execute(w, map[string]string{"Error": "Email não encontrado"})
+			return
+		}
+
+		if password != dbPassword {
+			tpl.Execute(w, map[string]string{"Error": "Senha incorreta"})
+			return
+		}
+
+		http.Redirect(w, r, "/dashboard", http.StatusSeeOther)
+	default:
+		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+	}
 }
