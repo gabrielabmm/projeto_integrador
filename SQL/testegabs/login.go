@@ -75,7 +75,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			http.Redirect(w, r, "/dashboard-instituicao", http.StatusSeeOther)
+			http.Redirect(w, r, "iniciomedico.html", http.StatusSeeOther)
 
 		} else {
 			tpl.Execute(w, map[string]string{"Error": "Tipo de usuário inválido"})
