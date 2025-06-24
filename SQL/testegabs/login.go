@@ -24,7 +24,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			// Buscar os dados da ficha do paciente
+			
 			var paciente struct {
 				NomeCompleto    string
 				CPF             string
@@ -44,7 +44,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			// Renderizar a página de início com os dados
+			
 			err = tpl.ExecuteTemplate(w, "inicio.html", map[string]interface{}{
 				"Paciente": paciente,
 			})
