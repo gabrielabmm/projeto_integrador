@@ -26,17 +26,17 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 			// Buscar os dados da ficha do paciente
 			var paciente struct {
-				NomeCompleto   string
-				Email          string
-				CPF            string
-				DataNascimento string
+				NomeCompleto    string
+				CPF             string
+				CartaoSUS       string
+				DataNascimento  string
+				CEP             string
 			}
 
 			err = db.QueryRow(`
-				SELECT nome_completo, email, cpf_paciente, TO_CHAR(data_nascimento, 'DD/MM/YYYY') 
-				FROM paciente_infos 
-				WHERE id = $1
-			`, refID).Scan(&paciente.NomeCompleto, &paciente.Email, &paciente.CPF, &paciente.DataNascimento)
+				SELECT nome_completo, cpf_paciente, cartao_sus, TO_CHAR(data_nascimento, 'DD/MM/YYYY'), cep
+				FROM paciente_infos WHERE id = $1
+			`, refID).Scan(&paciente.NomeCompleto, &paciente.CPF, &paciente.CartaoSUS, &paciente.DataNascimento, &paciente.CEP)
 
 			if err != nil {
 				log.Println("Erro ao buscar dados do paciente:", err)
@@ -44,8 +44,8 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			// Redirecionar com dados para o dashboard
-			err = tpl.ExecuteTemplate(w, "dashboard.html", map[string]interface{}{
+			// Renderizar a página de início com os dados
+			err = tpl.ExecuteTemplate(w, "inicio.html", map[string]interface{}{
 				"Paciente": paciente,
 			})
 			if err != nil {
