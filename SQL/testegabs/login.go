@@ -1,3 +1,11 @@
+package main
+
+import (
+    "html/template"
+    "net/http"
+    "log"
+)
+
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
@@ -84,4 +92,14 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
 	}
+	
+func main() {
+    http.HandleFunc("/", handler)
+
+    log.Println("Servidor rodando na porta 8080...")
+    err := http.ListenAndServe(":8080", nil)
+    if err != nil {
+        log.Fatal("Erro ao iniciar servidor: ", err)
+    }
+}
 }
