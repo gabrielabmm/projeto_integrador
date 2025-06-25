@@ -94,7 +94,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	
 func main() {
-    http.HandleFunc("/", handler)
+    http.HandleFunc("inicio.html", handler)
 
     log.Println("Servidor rodando na porta 8080...")
     err := http.ListenAndServe(":8080", nil)
