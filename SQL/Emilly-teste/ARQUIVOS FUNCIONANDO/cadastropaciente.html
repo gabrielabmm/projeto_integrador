@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Paciente - SIDCC</title>
+    <link rel="stylesheet" href="../css/cadastrarpacientes.css" />
+    <style>
+        .mensagem-erro-campo {
+            color: #D8000C; 
+            padding: 5px 8px;
+            margin-top: 4px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            display: none; 
+        }
+    </style>
+</head>
+<body id="paginaCadastroPaciente">
+    <header class="topo">
+        <div class="logo">
+            <img src="../img/logo.png" alt="Logo SIDCC">
+            <span class="logo-text-sidcc">
+                <span class="char-s">S</span><span class="char-i">I</span><span class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
+            </span>
+        </div>
+        <div class="grupo-menu">
+            <nav class="menu">
+                <a href="iniciomedico.html">Início</a>
+                <a href="#">Sobre</a>
+                <a href="#">SAC</a>
+            </nav>
+            <img src="../img/ruiva.png" alt="Perfil" class="icone-perfil" />
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <h2>Olá, <span id="nomeMedicoLogado">&lt;NOME&gt;</span>!</h2>
+        <section class="cartao">
+            <div class="perfil">
+                <div class="avatar"></div>
+                <p class="nome">Nome Paciente</p>
+                <input type="file" id="fotoPerfil" name="profile_image" accept="image/*" style="display:none;" />
+                <button class="botao" id="btnAdicionarFoto" type="button">Adicionar foto</button>
+            </div>
+
+            <div class="info-formulario">
+                <form id="formCadastroPaciente">
+                    <h3>Dados pessoais</h3>
+                    <div class="grade-formulario">
+                        <label>Nome*: <input name="pacienteNome" required id="pacienteNome" /></label>
+                        <label>Nome social: <input type="text" id="pacienteNomeSocial" name="pacienteNomeSocial" /></label>
+                        <label>Nome da mãe: <input type="text" id="pacienteNomeMae" name="pacienteNomeMae" /></label>
+                        <label>Cartão SUS*: <input name="pacienteCartaoSUS" required id="pacienteCartaoSUS" maxlength="19" /></label>
+                        <label>Data de Nascimento*:<input name="pacienteDataNascimento" type="date" required id="pacienteDataNascimento" /></label>
+                        <label>Nacionalidade*:<input name="pacienteNacionalidade" id="pacienteNacionalidade" value="Brasileira" /></label>
+                        <label>Raça:
+                            <select id="pacienteRacaSelect" name="pacienteRacaSelect">
+                                <option value="">Selecione...</option>
+                                <option value="Branca">Branca</option>
+                                <option value="Preta">Preta</option>
+                                <option value="Parda">Parda</option>
+                                <option value="Indigena">Indígena</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </label>
+                        <div id="containerRacaOutros" style="display:none;">
+                            <label>Qual Raça?:<input type="text" id="pacienteRacaOutros" name="pacienteRacaOutros" /></label>
+                        </div>
+                        <label>Escolaridade:
+                            <select id="pacienteEscolaridadeSelect" name="pacienteEscolaridadeSelect">
+                                <option value="">Selecione...</option>
+                                <option value="Analfabeta">Analfabeta</option>
+                                <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                                <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            </select>
+                        </label>
+                        <label>CPF*:
+                            <input type="text" id="pacienteCPF" name="pacienteCPF" placeholder="000.000.000-00" maxlength="14" />
+                        </label>
+                        <label>Celular (com DDD)*:<input type="text" id="pacienteCelular" name="pacienteCelular" maxlength="15" /></label>
+                        <label>Telefone Fixo (com DDD):<input type="text" id="pacienteTelefone" name="pacienteTelefone" maxlength="14" /></label>
+                        <label>Email: <input type="email" id="pacienteEmail_paciente" name="pacienteEmail_paciente" /></label>
+                    </div>
+
+                    <h3>Dados residenciais</h3>
+                    <div class="grade-formulario">
+                        <label>CEP*: <input type="text" id="pacienteCEP" name="pacienteCEP" maxlength="9" /></label>
+                        <label>Cidade*: <input type="text" id="pacienteCidade" name="pacienteCidade" /></label> 
+                        <label>Estado (UF)*:
+                            <select id="pacienteEstadoSelect" name="pacienteEstadoSelect">
+                                <option value="">Selecione UF...</option>
+                                <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+                                <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+                                <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                                <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                                <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+                                <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+                                <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                                <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                                <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                            </select>
+                        </label>
+                        <label>Logradouro: <input type="text" id="pacienteLogradouro" name="pacienteLogradouro" /></label>
+                        <label>Nº residência: <input type="text" id="pacienteNumeroResidencia" name="pacienteNumeroResidencia" /></label>
+                        <label>Setor: <input type="text" id="pacienteSetor" name="pacienteSetor" /></label>
+                        <label>Complemento: <input type="text" id="pacienteComplemento" name="pacienteComplemento" /></label>
+                        <label>Ponto de referência: <input type="text" id="pacientePontoReferencia" name="pacientePontoReferencia"  /></label>
+                    </div>
+                
+                    <div class="botao-cadastro">
+                        <button type="submit" id="btnCadastrarPaciente" class="botao">Cadastrar paciente</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+   <!-- Exemplo do trecho JS do formulário -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formCadastroPaciente");
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const data = {
+      cartao_sus: form.pacienteCartaoSUS.value,
+      cpf_paciente: form.pacienteCPF.value,
+      nome_completo: form.pacienteNome.value,
+      data_nascimento: form.pacienteDataNascimento.value,
+      cep: form.pacienteCEP.value,
+      ddd: form.pacienteCelular.value.substring(1,3),
+      telefone: form.pacienteCelular.value,
+      fixo: form.pacienteTelefone.value || "",
+      email_paciente: form.pacienteEmail_paciente.value || "",
+      nacionalidade: form.pacienteNacionalidade.value,
+      uf: form.pacienteEstadoSelect.value,
+      raca_cor: form.pacienteRacaSelect.value,
+      escolaridade: form.pacienteEscolaridadeSelect.value,
+      nome_mae: form.pacienteNomeMae.value,
+      nome_social: form.pacienteNomeSocial.value,
+      logradouro: form.pacienteLogradouro.value,
+      numero_residencia: form.pacienteNumeroResidencia.value,
+      complemento: form.pacienteComplemento.value,
+      setor: form.pacienteSetor.value,
+      cidade: form.pacienteCidade.value,
+      cod_municipio: "",
+      ponto_referencia: form.pacientePontoReferencia.value
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/pacientes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("Paciente cadastrado com sucesso!");
+        form.reset();
+      } else {
+        const text = await response.text();
+        alert("Erro ao cadastrar paciente: " + text);
+      }
+    } catch (error) {
+      alert("Erro ao conectar com o servidor: " + error.message);
+    }
+  });
+});
+</script>
+</body>
+</html>

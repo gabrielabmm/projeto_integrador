@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha de Cadastro</title>
+  <link rel="stylesheet" href="ficha-citpatologicaOG.css">
+</head>
+<body>
+
+  <header class="topo">
+        <div class="logo">
+            <img src="logo.png" alt="Logo SIDCC">
+            <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
+                    class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
+            </span>
+        </div>
+        
+    <nav class="menu">
+      <div class="links-e-perfil">
+        <a href="iniciomedico.html">Início</a>
+        <a href="#">Sobre</a>
+        <a href="#">SAC</a>
+        <form action="/perfil" method="get" class="botao-perfil">
+          <button type="submit">
+            <img src="ruiva.png" alt="Perfil" class="icone-perfil" />
+          </button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <div class="linha-topo">
+    <h1 class="title">Novo prontuário</h1>
+    <a href="iniciomedico.html" class="back-link">< Voltar</a>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" class="search-bar__input" placeholder="Pesquise por um nome ou cartão SUS*">
+    <button type="button" class="search-bar__button" aria-label="Pesquisar">
+      <svg class="search-bar__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="container-botoes">
+    <button id="btnProntuario" class="botao-toggle ativo">Prontuário</button>
+    <button id="btnFichaCitopatologica" class="botao-toggle">Ficha Citopatológica</button>
+  </div>
+
+ <div id="prontuarioFormContainer" class="form-section">
+  <main>
+    <form>
+      <header>
+        <div class="left-header">Dados do Prontuário</div>
+      </header>
+      <fieldset>
+        <legend>Informações do Paciente</legend>
+        <label for="nomePacienteProntuario">Nome do Paciente:</label>
+        <input type="text" id="nomePacienteProntuario" class="text-input" placeholder="Digite o nome completo">
+
+        <label for="dataNascimentoProntuario">Data de Nascimento:</label>
+        <input type="date" id="dataNascimentoProntuario" class="text-input">
+
+        <label for="obsGeraisProntuario">Observações Gerais do Prontuário:</label>
+        <textarea id="obsGeraisProntuario" class="text-area" rows="5" placeholder="Adicione observações relevantes para o prontuário geral"></textarea>
+      </fieldset>
+
+      <fieldset>
+          <legend>Resultados do Exame Citopatológico Atual</legend>
+
+          <label for="statusExameProntuario">Status do Exame:</label>
+          <select id="statusExameProntuario" name="status_exame" class="text-input">
+              <option value="">Selecione o status</option>
+              <option value="aprovado">Aprovado</option>
+              <option value="rejeitado">Rejeitado</option>
+              <option value="pendente">Pendente</option>
+          </select>
+
+          <label for="resultadoExameProntuario">Resultado:</label>
+          <textarea id="resultadoExameProntuario" name="resultado" class="text-area" rows="5" placeholder="Descreva o resultado do exame"></textarea>
+
+          <label for="motivoRejeicaoProntuario">Motivo da Rejeição (se aplicável):</label>
+          <textarea id="motivoRejeicaoProntuario" name="motivo_rejeicao" class="text-area" rows="3" placeholder="Informe o motivo da rejeição, se o status for 'Rejeitado'"></textarea>
+
+          <label for="observacoesExameProntuario">Observações Específicas do Exame:</label>
+          <textarea id="observacoesExameProntuario" name="observacoes" class="text-area" rows="4" placeholder="Adicione observações adicionais sobre este exame"></textarea>
+
+          <label for="dataAvaliacaoProntuario">Data da Avaliação:</label>
+          <input type="date" id="dataAvaliacaoProntuario" name="data_avaliacao" class="text-input">
+
+          <label for="profissionalResponsavelProntuario">Profissional Responsável:</label>
+          <input type="text" id="profissionalResponsavelProntuario" name="profissional_responsavel" class="text-input" placeholder="Nome do profissional que avaliou">
+      </fieldset>
+
+      <div class="buttons">
+        <button type="submit">Salvar Prontuário</button>
+      </div>
+    </form>
+  </main>
+</div>
+
+  <div id="fichaCitopatologicaFormContainer" class="form-section hidden">
+    <header>
+      <div class="left-header">MINISTÉRIO DA SAÚDE</div>
+      <div class="right-header">
+        FICHA DE CADASTRAMENTO INDIVIDUAL<br>
+        Programa de Saúde da Família / Sistema de Informação da Atenção Básica
+      </div>
+    </header>
+
+    <main>
+      <form id="fichaCitopatologicaForm"> <!-- Adicionado ID ao formulário -->
+        <fieldset>
+          <label>UF:</label>
+          <div class="char-input uf" id="ubs_uf"> <!-- ID para o char-input da UF da UBS -->
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+          </div>
+
+          <label>Nº Protocolo:</label>
+          <div class="char-input" id="ubs_protocolo"> <!-- ID para o char-input do Protocolo da UBS -->
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+          </div>
+
+          <label>CNES da Unidade:</label>
+          <div class="char-input" id="ubs_cnes"> <!-- ID para o char-input do CNES da UBS -->
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+          </div>
+
+          <label>Unidade de Saúde:</label>
+          <input type="text" id="ubs_unidade" class="text-input"> <!-- ID para a Unidade de Saúde -->
+
+          <label>Município:</label>
+          <input type="text" id="ubs_municipio" class="text-input"> <!-- ID para o Município da UBS -->
+
+          <label>Prontuário:</label>
+          <input type="text" id="ubs_prontuario" class="text-input"> <!-- ID para o Prontuário -->
+        </fieldset>
+
+        <fieldset>
+          <legend>Dados Pessoais</legend>
+
+          <label>Cartão SUS:</label>
+          <div class="char-input" id="cartao_sus">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+          </div>
+
+          <label>Nome completo:</label>
+          <input id="nome_completo" type="text" class="text-input">
+
+          <label>Nome da mãe:</label>
+          <input id="nome_mae" type="text" class="text-input">
+
+          <label>Nome social:</label>
+          <input id="nome_social" type="text" class="text-input">
+
+          <label>CPF:</label>
+          <div class="char-input" id="cpf">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+            <input type="text" maxlength="1">
+          </div>
+
+          <label>Nacionalidade:</label>
+          <input id="nacionalidade" type="text" class="text-input">
+
+          <label>Data de nascimento:</label>
+          <div class="char-input" id="data_nascimento">
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1">
+          </div>
+
+          <label>Idade:</label>
+          <div class="char-input" id="idade">
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1">
+          </div>
+
+
+          <label>Raça/Cor:</label>
+          <input type="radio" name="raca" value="Branca"> Branca
+          <input type="radio" name="raca" value="Preta"> Preta
+          <input type="radio" name="raca" value="Parda"> Parda
+          <input type="radio" name="raca" value="Amarela"> Amarela
+          <input type="radio" name="raca" value="Indigena"> Indígena/etnia
+          <input type="radio" name="raca" value="Outros"> Outros
+          <!-- Campo de texto para 'Outros' ou etnia específica, se o radio 'Indígena' for selecionado -->
+          <input type="text" class="text-input" id="raca_cor_outros" placeholder="Etnia, se 'Indígena' ou 'Outros'">
+        </fieldset>
+
+        <fieldset>
+            <legend>Dados Residenciais</legend>
+
+          <label>Logradouro:</label>
+          <input id="logradouro" type="text" class="text-input">
+
+          <label>Número:</label>
+          <input id="numero_residencia" type="text" class="text-input">
+
+          <label>Complemento:</label>
+          <input id="complemento" type="text" class="text-input">
+
+          <label>Bairro:</label>
+          <input id="bairro" type="text" class="text-input">
+
+          <label>UF:</label>
+          <div class="char-input uf" id="uf">
+            <input type="text" maxlength="1"><input type="text" maxlength="1">
+          </div>
+
+          <label>Código do Município:</label>
+          <div class="char-input" id="cod_municipio">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          </div>
+
+          <label>Município:</label>
+          <input id="municipio" type="text" class="text-input">
+
+          <label>CEP:</label>
+          <div class="char-input" id="cep">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          <input type="text" maxlength="1">
+          </div>
+
+          <label>DDD:</label>
+          <div class="char-input" id="ddd">
+            <input type="text" maxlength="1"><input type="text" maxlength="1">
+          </div>
+
+          <label>Telefone:</label>
+          <div class="char-input" id="telefone">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             <input type="text" maxlength="1">
+             
+          </div>
+
+          <label>Ponto de Referência:</label>
+          <input id="ponto_referencia" type="text" class="text-input">
+          <label>Escolaridade:</label>
+          <input type="radio" name="escolaridade" value="Analfabeta"> Analfabeta
+          <input type="radio" name="escolaridade" value="Ensino Fundamental Incompleto"> Ensino fundamental incompleto
+          <input type="radio" name="escolaridade" value="Ensino Fundamental Completo"> Ensino fundamental completo
+          <input type="radio" name="escolaridade" value="Ensino Médio Completo"> Ensino médio completo
+          <input type="radio" name="escolaridade" value="Ensino Superior Completo"> Ensino superior completo
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Anamnese</legend>
+
+          <label>Motivo do exame:</label>
+          <input type="radio" name="motivo_exame" value="Rastreamento"> Rastreamento
+          <input type="radio" name="motivo_exame" value="Repeticao"> Repetição(exame alterado ASCUS/baixo grau) 
+          <input type="radio" name="motivo_exame" value="Seguimento"> Seguimento(pós diagnóstico colposcópico/tratamento)
+
+
+          <label>Fez o exame preventivo alguma vez?</label>
+          <input type="radio" name="primeira_vez_exame" value="Sim"> Sim
+          <input type="radio" name="primeira_vez_exame" value="Nao"> Não
+          <input type="radio" name="primeira_vez_exame" value="Nao sabe"> Não sabe
+
+          <label>Quando fez o último exame?</label>
+          <input type="text" id="data_ultimo_exame" class="text-input" placeholder="Data do último exame">
+
+          <label>Usa DIU?</label>
+          <input type="radio" name="usa_diu" value="Sim"> Sim
+          <input type="radio" name="usa_diu" value="Nao"> Não
+          <input type="radio" name="usa_diu" value="Nao sabe"> Não sabe
+
+          <label>Está grávida?</label>
+          <input type="radio" name="esta_gestante" value="Sim"> Sim
+          <input type="radio" name="esta_gestante" value="Nao"> Não
+          <input type="radio" name="esta_gestante" value="Nao sabe"> Não sabe
+
+          <label>Usa pílula anticoncepcional?</label>
+          <input type="radio" name="usa_anticoncepcional" value="Sim"> Sim
+          <input type="radio" name="usa_anticoncepcional" value="Nao"> Não
+          <input type="radio" name="usa_anticoncepcional" value="Nao sabe"> Não sabe
+
+          <label>Usa hormônio/remédio para menopausa?</label>
+          <input type="radio" name="usa_hormonio" value="Sim"> Sim
+          <input type="radio" name="usa_hormonio" value="Nao"> Não
+          <input type="radio" name="usa_hormonio" value="Nao sabe"> Não sabe
+
+          <label>Já fez tratamento com radioterapia?</label>
+          <input type="radio" name="ja_fez_radioterapia" value="Sim"> Sim
+          <input type="radio" name="ja_fez_radioterapia" value="Nao"> Não
+          <input type="radio" name="ja_fez_radioterapia" value="Nao sabe"> Não sabe
+
+          <label>Quando foi a última menstruação?</label>
+          <input type="text" id="data_ultima_menstruacao" class="text-input" placeholder="DD/MM/YYYY">
+
+          <!-- Novos campos para Anamnese: esta_menopausa e teve_corrimento -->
+          <label>Está na menopausa?</label>
+          <input type="radio" name="esta_menopausa" value="Sim"> Sim
+          <input type="radio" name="esta_menopausa" value="Nao"> Não
+          <input type="radio" name="esta_menopausa" value="Nao lembra"> Não lembra
+
+          <label>Teve corrimento?</label>
+          <input type="radio" name="teve_corrimento" value="Sim"> Sim
+          <input type="radio" name="teve_corrimento" value="Nao"> Não
+          <input type="radio" name="teve_corrimento" value="Nao sabe"> Não sabe
+          <input type="radio" name="teve_corrimento" value="Nao lembra"> Não lembra
+          <!-- Fim Novos campos para Anamnese -->
+
+          <label>Sangramento após relações sexuais?</label>
+          <input type="radio" name="teve_sangramento_anormal" value="Sim"> Sim
+          <input type="radio" name="teve_sangramento_anormal" value="Nao"> Não
+          <input type="radio" name="teve_sangramento_anormal" value="Nao sabe"> Não sabe
+          <input type="radio" name="teve_sangramento_anormal" value="Nao lembra"> Não lembra
+          <!-- O campo "Não está em menopausa" do ENUM 'resposta_sangramento' não tem um correspondente direto aqui. -->
+          <!-- Se 'Sangramento após a menopausa' é separado, ele precisaria de um campo distinto ou lógica combinada. -->
+          <!-- Por enquanto, mapeamos 'teve_sangramento_anormal' para "Sangramento após relações sexuais". -->
+
+          <label>Sangramento após a menopausa?</label>
+          <input type="radio" name="sangramento_menopausa_extra" value="Sim"> Sim
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao"> Não
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao sabe"> Não sabe
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao lembra"> Não lembra
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao esta em menopausa"> Não está em menopausa
+
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Exame Clínico</legend>
+
+          <label>Inspeção do colo:</label>
+          <input type="radio" name="inspecao_colo" value="normal"> Normal
+          <input type="radio" name="inspecao_colo" value="ausente"> Ausente(anomalias congênitas ou retirado cirurgicamente)
+          <input type="radio" name="inspecao_colo" value="alterado"> Alterado
+          <input type="radio" name="inspecao_colo" value="colo_nao_visualizado"> Colo não visualizado
+
+          <label>Sinais sugestivos de doenças sexualmente transmissíveis?</label>
+          <input type="radio" name="sinais_dst" value="sim"> Sim
+          <input type="radio" name="sinais_dst" value="nao"> Não
+
+
+          <label>Data da coleta:</label>
+          <div class="char-input" id="data_coleta"> <!-- ID para a Data da Coleta -->
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
+            <input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1">
+          </div>
+
+          <label>Responsável:</label>
+          <input type="text" id="profissional_responsavel" class="text-input"> <!-- ID para o Profissional Responsável -->
+        </fieldset>
+
+        <div class="buttons">
+          <button type="submit" id="salvarFichaCitopatologica">Salvar</button> <!-- Novo ID para o botão Salvar -->
+          <button type="button" onclick="window.print()">Imprimir</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+
+      <div class="coluna">
+        <h4>SIDCC</h4>
+        <div class="redes-sociais">
+         <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+          <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+            <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
+        </div>
+      </div>
+
+      <div class="coluna">
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="#">SAC</a></li>
+        </ul>
+      </div>
+
+      <div class="coluna">
+        <h4>Ajuda</li>
+        <ul>
+          <li><a href="#">Dúvidas frequentes</a></li>
+          <li><a href="#">Acessibilidade</a></li>
+        </ul>
+      </div>
+
+      <div class="coluna">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Termos de uso</a></li>
+          <li><a href="#">Política de privacidade</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    let pacienteIdGlobal = null; // Variável global para armazenar o ID do paciente
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Seleciona todos os inputs do Cartão SUS
+      const cartaoSusInputs = document.querySelectorAll('#cartao_sus input');
+      // Seleciona o último input para o evento de 'blur'
+      const lastCartaoSusInput = cartaoSusInputs[cartaoSusInputs.length - 1];
+
+      // Adiciona um listener para quando o último input do Cartão SUS perder o foco
+      lastCartaoSusInput.addEventListener('blur', async () => {
+        // Concatena os valores de todos os inputs do Cartão SUS
+        const cartao = Array.from(cartaoSusInputs).map(input => input.value).join('');
+
+        // Verifica se o Cartão SUS tem o tamanho correto (15 dígitos)
+        if (cartao.length === 15) {
+          try {
+            // Faz a requisição para o backend para buscar o paciente pelo Cartão SUS
+            const resp = await fetch(`http://localhost:3000/pacientes/busca?cartao_sus=${cartao}`);
+
+            // Se a resposta não for OK (ex: 404 Not Found, 500 Internal Server Error)
+            if (!resp.ok) {
+              limparDadosPessoaisFicha();
+              alert('Paciente não encontrado ou erro na busca. Verifique se o servidor backend está rodando em http://localhost:3000.');
+              return;
+            }
+
+            // Converte a resposta para JSON
+            const paciente = await resp.json();
+            
+            // Armazena o ID do paciente globalmente
+            pacienteIdGlobal = paciente.id;
+
+            // --- LOGS DE DEBUG ---
+            console.log('Objeto paciente recebido:', paciente);
+            console.log('Data de nascimento recebida:', paciente.data_nascimento);
+            // --- FIM LOGS DE DEBUG ---
+
+            // Preenche os campos de texto comuns
+            document.getElementById('nome_completo').value = paciente.nome_completo || '';
+            document.getElementById('nome_mae').value = paciente.nome_mae || '';
+            document.getElementById('nome_social').value = paciente.nome_social || '';
+            document.getElementById('nacionalidade').value = paciente.nacionalidade || '';
+            document.getElementById('logradouro').value = paciente.logradouro || '';
+            document.getElementById('numero_residencia').value = paciente.numero_residencia || '';
+            document.getElementById('complemento').value = paciente.complemento || '';
+            document.getElementById('bairro').value = paciente.setor || '';
+            document.getElementById('municipio').value = paciente.cidade || '';
+            document.getElementById('ponto_referencia').value = paciente.ponto_referencia || '';
+
+            // Preenche os campos tipo char-input
+            preencherInputsCharInput('cpf', paciente.cpf_paciente || '');
+            preencherInputsCharInput('uf', paciente.uf || '');
+            preencherInputsCharInput('cod_municipio', paciente.cod_municipio || '');
+            preencherInputsCharInput('cep', paciente.cep || '');
+            preencherInputsCharInput('ddd', paciente.ddd || '');
+            preencherInputsCharInput('telefone', paciente.telefone || '');
+
+            // Preenche e calcula a idade a partir da data de nascimento
+            if (paciente.data_nascimento) {
+              const dataNasc = new Date(paciente.data_nascimento); 
+              if (isNaN(dataNasc.getTime())) { // Verifica se a data é inválida
+                 console.error('Data de nascimento inválida após parse: ', paciente.data_nascimento);
+                 preencherInputsCharInput('idade', '');
+                 preencherInputsCharInput('data_nascimento', '');
+              } else {
+                  const hoje = new Date();
+                  let idade = hoje.getFullYear() - dataNasc.getFullYear();
+                  const mes = hoje.getMonth() - dataNasc.getMonth();
+                  if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
+                    idade--;
+                  }
+                  preencherInputsCharInput('idade', String(idade));
+
+                  // Formata a data de nascimento para DDMMYYYY para os inputs char-input
+                  const dia = String(dataNasc.getDate()).padStart(2, '0');
+                  const mesNasc = String(dataNasc.getMonth() + 1).padStart(2, '0');
+                  const ano = String(dataNasc.getFullYear());
+                  preencherInputsCharInput('data_nascimento', dia + mesNasc + ano);
+              }
+            } else {
+                preencherInputsCharInput('idade', '');
+                preencherInputsCharInput('data_nascimento', '');
+            }
+
+            // Preenche os radio buttons para Raça/Cor
+            const racaRadios = document.querySelectorAll('input[name="raca"]');
+            racaRadios.forEach(radio => {
+              // Valores no HTML agora correspondem aos ENUMs do Go (capitalizados)
+              if (radio.value === paciente.raca_cor) {
+                radio.checked = true;
+              } else {
+                radio.checked = false;
+              }
+            });
+            if (document.getElementById('raca_cor_outros')) { 
+                if (paciente.raca_cor === 'Indigena' && paciente.raca_cor_etnia) { // raca_cor_etnia não existe no seu Go, então este caso não será preenchido
+                    document.getElementById('raca_cor_outros').value = paciente.raca_cor_etnia;
+                } else if (paciente.raca_cor === 'Outros') {
+                    document.getElementById('raca_cor_outros').value = paciente.raca_cor;
+                } else {
+                    document.getElementById('raca_cor_outros').value = '';
+                }
+            }
+
+
+            // Preenche os radio buttons para Escolaridade
+            const escolaridadeRadios = document.querySelectorAll('input[name="escolaridade"]');
+            escolaridadeRadios.forEach(radio => {
+              // Valores no HTML agora correspondem aos ENUMs do Go (capitalizados)
+              if (radio.value === paciente.escolaridade) {
+                radio.checked = true;
+              } else {
+                radio.checked = false;
+              }
+            });
+
+          } catch (error) {
+            console.error('Erro ao buscar paciente:', error);
+            alert('Ocorreu um erro ao buscar os dados do paciente. Verifique o console para mais detalhes.');
+          }
+        }
+      });
+
+      // Função auxiliar para preencher inputs dentro de um div .char-input
+      function preencherInputsCharInput(idCampo, valor = '') {
+        const inputs = document.querySelectorAll(`#${idCampo} input`);
+        const valorLimpo = String(valor).replace(/\D/g, ''); 
+        const arrChars = valorLimpo.split('');
+        inputs.forEach((input, i) => {
+          input.value = arrChars[i] || ''; 
+        });
+      }
+
+      // Função para limpar todos os campos de dados pessoais na ficha
+      function limparDadosPessoaisFicha() {
+          pacienteIdGlobal = null; // Limpa o ID do paciente
+          document.getElementById('nome_completo').value = '';
+          document.getElementById('nome_mae').value = '';
+          document.getElementById('nome_social').value = '';
+          preencherInputsCharInput('cpf', '');
+          document.getElementById('nacionalidade').value = '';
+          preencherInputsCharInput('data_nascimento', '');
+          preencherInputsCharInput('idade', '');
+          if (document.getElementById('raca_cor_outros')) { 
+              document.getElementById('raca_cor_outros').value = '';
+          }
+          document.getElementById('logradouro').value = '';
+          document.getElementById('numero_residencia').value = '';
+          document.getElementById('complemento').value = '';
+          document.getElementById('bairro').value = '';
+          preencherInputsCharInput('uf', '');
+          preencherInputsCharInput('cod_municipio', '');
+          document.getElementById('municipio').value = '';
+          preencherInputsCharInput('cep', '');
+          preencherInputsCharInput('ddd', '');
+          preencherInputsCharInput('telefone', '');
+          document.getElementById('ponto_referencia').value = '';
+
+          document.querySelectorAll('input[name="raca"]').forEach(radio => radio.checked = false);
+          document.querySelectorAll('input[name="escolaridade"]').forEach(radio => radio.checked = false);
+          document.querySelectorAll('#cartao_sus input').forEach(input => input.value = '');
+      }
+
+      // Lógica para coletar e enviar todos os dados da Ficha Citopatológica
+      const fichaCitopatologicaForm = document.getElementById('fichaCitopatologicaForm');
+      fichaCitopatologicaForm.addEventListener('submit', async (event) => {
+          event.preventDefault(); // Impede o recarregamento da página
+
+          if (!pacienteIdGlobal) {
+              alert('Por favor, preencha o Cartão SUS e busque o paciente antes de salvar a ficha.');
+              return;
+          }
+
+          // 1. Coletar dados da UBS
+          const ubsInfoData = {
+              uf: lerInputsCharInput('ubs_uf'),
+              protocolo: lerInputsCharInput('ubs_protocolo'),
+              cnes: lerInputsCharInput('ubs_cnes'),
+              unidade: document.getElementById('ubs_unidade').value,
+              municipios_ubs: document.getElementById('ubs_municipio').value,
+              // estado: não há campo direto para 'estado' na primeira fieldset, usando ubs_uf como proxy se necessário
+          };
+
+          // 2. Coletar dados de Anamnese (Exame Citopatológico)
+          const exameData = {
+              paciente_id: pacienteIdGlobal,
+              motivo_exame: document.querySelector('input[name="motivo_exame"]:checked')?.value || '',
+              primeira_vez_exame: document.querySelector('input[name="primeira_vez_exame"]:checked')?.value || '',
+              usa_diu: document.querySelector('input[name="usa_diu"]:checked')?.value || '',
+              esta_gestante: document.querySelector('input[name="esta_gestante"]:checked')?.value || '',
+              usa_anticoncepcional: document.querySelector('input[name="usa_anticoncepcional"]:checked')?.value || '',
+              usa_hormonio: document.querySelector('input[name="usa_hormonio"]:checked')?.value || '',
+              ja_fez_radioterapia: document.querySelector('input[name="ja_fez_radioterapia"]:checked')?.value || '',
+              data_ultima_menstruacao: document.getElementById('data_ultima_menstruacao').value, // DD/MM/YYYY
+              esta_menopausa: document.querySelector('input[name="esta_menopausa"]:checked')?.value || '', 
+              teve_corrimento: document.querySelector('input[name="teve_corrimento"]:checked')?.value || '', 
+              teve_sangramento_anormal: document.querySelector('input[name="teve_sangramento_anormal"]:checked')?.value || '',
+              // Os campos 'inspecao_colo', 'sinais_dst', 'data_coleta', 'profissional_responsavel'
+              // do "Exame Clínico" não estão na tabela 'exame_citopatologico'.
+              // Eles precisariam de uma nova tabela (ex: resultado_exame) ou ajuste do schema SQL.
+              // Para este escopo, estamos focando em inserir na tabela exame_citopatologico.
+          };
+          
+          // Tratamento especial para o 'motivo_exame' do HTML 'Repeticao' para 'Rastreamento' do Go ENUM
+          // Se o valor do radio button for "Repeticao", ajuste para "Rastreamento" antes de enviar para o backend.
+          if (exameData.motivo_exame === 'Repeticao') {
+            exameData.motivo_exame = 'Rastreamento'; 
+          }
+          
+          // Tratamento para 'sangramento_menopausa_extra' se for o caso
+          const sangramentoMenopausaExtraRadio = document.querySelector('input[name="sangramento_menopausa_extra"]:checked');
+          if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao esta em menopausa') {
+            exameData.teve_sangramento_anormal = 'Não está em menopausa';
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Sim') {
+              exameData.teve_sangramento_anormal = 'Sim'; // Se selecionado 'Sim' para sangramento após menopausa
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao') {
+              exameData.teve_sangramento_anormal = 'Não'; // Se selecionado 'Não' para sangramento após menopausa
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao sabe') {
+              exameData.teve_sangramento_anormal = 'Não sabe'; // Se selecionado 'Não sabe'
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao lembra') {
+              exameData.teve_sangramento_anormal = 'Não lembra'; // Se selecionado 'Não lembra'
+          }
+
+          // Formata a data da última menstruação para YYYY-MM-DD para o backend
+          if (exameData.data_ultima_menstruacao) {
+              const parts = exameData.data_ultima_menstruacao.split('/');
+              if (parts.length === 3) {
+                  exameData.data_ultima_menstruacao = `${parts[2]}-${parts[1]}-${parts[0]}`; // Converte DD/MM/YYYY para YYYY-MM-DD
+              } else {
+                  console.warn('Formato de data da última menstruação inválido, esperado DD/MM/YYYY. Enviando como está (pode causar erro no backend).');
+              }
+          }
+
+          // 3. Criar o payload completo para enviar ao backend
+          const payload = {
+              ubs_info_data: ubsInfoData,
+              exame_data: exameData,
+          };
+
+          try {
+              // A URL do fetch não precisa de barra final, pois o backend agora lida com ambos os casos
+              const response = await fetch('http://localhost:3000/submit_ficha_citopatologica', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(payload),
+              });
+
+              if (response.ok) {
+                  alert('Ficha citopatológica salva com sucesso!');
+                  fichaCitopatologicaForm.reset(); // Limpa o formulário
+                  limparDadosPessoaisFicha(); // Limpa dados puxados
+              } else {
+                  const errorText = await response.text();
+                  alert(`Erro ao salvar ficha citopatológica: ${errorText}`);
+                  console.error('Erro ao salvar ficha:', errorText);
+              }
+          } catch (error) {
+              console.error('Erro de rede ao tentar salvar a ficha:', error);
+              alert('Erro de conexão ao servidor. Verifique se o backend está rodando.');
+          }
+      });
+
+      // Nova função auxiliar para ler inputs de char-input
+      function lerInputsCharInput(idCampo) {
+        const inputs = document.querySelectorAll(`#${idCampo} input`);
+        return Array.from(inputs).map(input => input.value).join('');
+      }
+
+      // Lógica existente para navegação entre inputs de caracteres
+      document.querySelectorAll('.char-input input').forEach((input, index, inputs) => {
+        input.addEventListener('input', () => {
+          if (input.value.length === input.maxLength) {
+            const next = inputs[index + 1];
+            if (next) next.focus();
+          }
+        });
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && input.value === '') {
+            const prev = inputs[index - 1];
+            if (prev) prev.focus();
+          }
+        });
+      });
+
+      // Lógica existente para alternar entre formulários
+      const btnProntuario = document.getElementById("btnProntuario");
+      const btnFichaCitopatologica = document.getElementById("btnFichaCitopatologica");
+      const prontuarioFormContainer = document.getElementById("prontuarioFormContainer");
+      const fichaCitopatologicaFormContainer = document.getElementById("fichaCitopatologicaFormContainer");
+
+      function showProntuarioForm() {
+        prontuarioFormContainer.classList.remove("hidden");
+        fichaCitopatologicaFormContainer.classList.add("hidden");
+        btnProntuario.classList.add("ativo");
+        btnFichaCitopatologica.classList.remove("ativo");
+      }
+
+      function showFichaCitopatologicaForm() {
+        fichaCitopatologicaFormContainer.classList.remove("hidden");
+        prontuarioFormContainer.classList.add("hidden");
+        btnFichaCitopatologica.classList.add("ativo");
+        btnProntuario.classList.remove("ativo");
+      }
+
+      btnProntuario.addEventListener("click", showProntuarioForm);
+      btnFichaCitopatologica.addEventListener("click", showFichaCitopatologicaForm);
+
+      // Garante que o formulário de prontuário seja exibido por padrão ao carregar
+      document.addEventListener("DOMContentLoaded", showProntuarioForm);
+    });
+  </script>
+
+</body>
+</html>
