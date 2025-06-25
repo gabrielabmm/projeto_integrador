@@ -5,43 +5,43 @@
   font-family: sans-serif;
 }
 .logo-text-sidcc {
-    font-weight: bold; /* Exemplo: deixar o texto em negrito */
-    font-size: 24px;   /* Exemplo: ajustar o tamanho da fonte do texto */
-    /* Mantenha o alinhamento com a imagem, se necessário */
-    vertical-align: middle; /* Tenta alinhar o texto com o meio da imagem */
-    margin-left: 8px; /* Espaço entre a imagem e o texto colorido */
+    font-weight: bold; 
+    font-size: 24px;  
+  
+    vertical-align: middle;
+    margin-left: 8px;
 }
 
-/* Cores para cada letra de SIDCC */
+
 .logo-text-sidcc .char-s {
-    color: #48AD45; /* Verde - Exemplo de cor */
+    color: #48AD45;
 }
 
 .logo-text-sidcc .char-i {
-    color: #F9BD14; /* Amarelo - Exemplo de cor */
+    color: #F9BD14;
 }
 
 .logo-text-sidcc .char-d {
-    color: #2864AE; /* Azul - Exemplo de cor */
+    color: #2864AE; 
 }
 
 .logo-text-sidcc .char-c1 {
-    color: #000; /* Preto*/
+    color: #000; 
 }
 
 .logo-text-sidcc .char-c2 {
-    color: #000; /* Preto */
+    color: #000; 
 }
 
-/* Ajuste para o alinhamento vertical se a imagem e o texto não estiverem alinhados */
+
 .logo {
     display: flex;
     align-items: center;
-    margin-right: auto; /* ADICIONE ESTA LINHA! */
+    margin-right: auto; 
 }
 
 .logo img {
-    height: 40px; /* Ajuste a altura da sua imagem de logo conforme necessário */
+    height: 40px; 
     width: auto;
 }
 .topo {
