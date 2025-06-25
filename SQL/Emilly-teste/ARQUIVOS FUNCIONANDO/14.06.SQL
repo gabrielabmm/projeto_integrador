@@ -1,4 +1,3 @@
--- Criar tipos ENUM só se não existirem
 DO $$
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'tipo_uf') THEN
@@ -54,7 +53,6 @@ BEGIN
   END IF;
 END$$;
 
--- Tabelas
 
 CREATE TABLE IF NOT EXISTS municipio (
   cod CHAR(7) PRIMARY KEY,
