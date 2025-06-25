@@ -35,15 +35,15 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		tipo := r.FormValue("tipo")
 
 		if tipo == "beneficiario" {
-			email := r.FormValue("email")
+			cpf := r.FormValue("cpf")
 			password := r.FormValue("password")
 
 			var dbPassword string
 			var refID int
 
-			err := db.QueryRow("SELECT password, ref_id FROM usuario WHERE email = $1 AND tipo = 'paciente'", email).Scan(&dbPassword, &refID)
+			err := db.QueryRow("SELECT password, ref_id FROM usuario WHERE cpf = $1 AND tipo = 'paciente'", cpf).Scan(&dbPassword, &refID)
 			if err != nil {
-				tpl.Execute(w, map[string]string{"Error": "Email não encontrado ou tipo inválido"})
+				tpl.Execute(w, map[string]string{"Error": "Cpf não encontrado ou tipo inválido"})
 				return
 			}
 
