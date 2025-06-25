@@ -9,7 +9,7 @@
 
   <header class="topo">
         <div class="logo">
-            <img src="../img/logo.png" alt="Logo SIDCC">
+            <img src="logo.png" alt="Logo SIDCC">
             <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span
                     class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span>
             </span>
@@ -22,7 +22,7 @@
         <a href="#">SAC</a>
         <form action="/perfil" method="get" class="botao-perfil">
           <button type="submit">
-            <img src="../img/ruiva.png" alt="Perfil" class="icone-perfil" />
+            <img src="ruiva.png" alt="Perfil" class="icone-perfil" />
           </button>
         </form>
       </div>
@@ -111,16 +111,16 @@
     </header>
 
     <main>
-      <form>
+      <form id="fichaCitopatologicaForm"> 
         <fieldset>
           <label>UF:</label>
-          <div class="char-input uf">
+          <div class="char-input uf" id="ubs_uf"> 
             <input type="text" maxlength="1">
             <input type="text" maxlength="1">
           </div>
 
           <label>Nº Protocolo:</label>
-          <div class="char-input">
+          <div class="char-input" id="ubs_protocolo"> 
             <input type="text" maxlength="1">
             <input type="text" maxlength="1">
             <input type="text" maxlength="1">
@@ -136,7 +136,7 @@
           </div>
 
           <label>CNES da Unidade:</label>
-          <div class="char-input">
+          <div class="char-input" id="ubs_cnes"> 
             <input type="text" maxlength="1">
             <input type="text" maxlength="1">
             <input type="text" maxlength="1">
@@ -155,13 +155,12 @@
           </div>
 
           <label>Unidade de Saúde:</label>
-          <input type="text" class="text-input">
-
+          <input type="text" id="ubs_unidade" class="text-input"> 
           <label>Município:</label>
-          <input type="text" class="text-input">
+          <input type="text" id="ubs_municipio" class="text-input"> 
 
           <label>Prontuário:</label>
-          <input type="text" class="text-input">
+          <input type="text" id="ubs_prontuario" class="text-input"> 
         </fieldset>
 
         <fieldset>
@@ -227,12 +226,14 @@
 
 
           <label>Raça/Cor:</label>
-          <input type="radio" name="raca" value="branca"> Branca
-          <input type="radio" name="raca" value="preta"> Preta
-          <input type="radio" name="raca" value="parda"> Parda
-          <input type="radio" name="raca" value="amarela"> Amarela
-          <input type="radio" name="raca" value="indigena"> Indígena/etnia
-          <input type="text" class="text-input">
+          <input type="radio" name="raca" value="Branca"> Branca
+          <input type="radio" name="raca" value="Preta"> Preta
+          <input type="radio" name="raca" value="Parda"> Parda
+          <input type="radio" name="raca" value="Amarela"> Amarela
+          <input type="radio" name="raca" value="Indigena"> Indígena/etnia
+          <input type="radio" name="raca" value="Outros"> Outros
+         
+          <input type="text" class="text-input" id="raca_cor_outros" placeholder="Etnia, se 'Indígena' ou 'Outros'">
         </fieldset>
 
         <fieldset>
@@ -302,11 +303,11 @@
           <label>Ponto de Referência:</label>
           <input id="ponto_referencia" type="text" class="text-input">
           <label>Escolaridade:</label>
-          <input type="radio" name="escolaridade" value="analfabeta"> Analfabeta
-          <input type="radio" name="escolaridade" value="ensinofundincomp"> Ensino fundamental incompleto
-          <input type="radio" name="escolaridade" value="ensinofundcomp"> Ensino fundamental completo
-          <input type="radio" name="escolaridade" value="ensinomediocomp"> Ensino médio completo
-          <input type="radio" name="escolaridade" value="ensinosuperiorcomp"> Ensino superior completo
+          <input type="radio" name="escolaridade" value="Analfabeta"> Analfabeta
+          <input type="radio" name="escolaridade" value="Ensino Fundamental Incompleto"> Ensino fundamental incompleto
+          <input type="radio" name="escolaridade" value="Ensino Fundamental Completo"> Ensino fundamental completo
+          <input type="radio" name="escolaridade" value="Ensino Médio Completo"> Ensino médio completo
+          <input type="radio" name="escolaridade" value="Ensino Superior Completo"> Ensino superior completo
 
         </fieldset>
 
@@ -314,84 +315,104 @@
           <legend>Anamnese</legend>
 
           <label>Motivo do exame:</label>
-          <input type="radio" name="motivo" value="rastreamento"> Rastreamento
-          <input type="radio" name="motivo" value="repeticao"> Repetição(exame alterado ASCUS/baixo grau)
-          <input type="radio" name="motivo" value="seguimento"> Seguimento(pós dianóstico colposcópico/tratamento)
+          <input type="radio" name="motivo_exame" value="Rastreamento"> Rastreamento
+          <input type="radio" name="motivo_exame" value="Repeticao"> Repetição(exame alterado ASCUS/baixo grau) 
+          <input type="radio" name="motivo_exame" value="Seguimento"> Seguimento(pós diagnóstico colposcópico/tratamento)
 
 
           <label>Fez o exame preventivo alguma vez?</label>
-          <input type="radio" name="examepreventivo" value="sim"> Sim
-          <input type="radio" name="examepreventivo" value="nao"> Não
-          <input type="radio" name="examepreventivo" value="nao sabe"> Não sabe
+          <input type="radio" name="primeira_vez_exame" value="Sim"> Sim
+          <input type="radio" name="primeira_vez_exame" value="Nao"> Não
+          <input type="radio" name="primeira_vez_exame" value="Nao sabe"> Não sabe
 
           <label>Quando fez o último exame?</label>
-          <input type="text" class="text-input">
+          <input type="text" id="data_ultimo_exame" class="text-input" placeholder="Data do último exame">
 
           <label>Usa DIU?</label>
-          <input type="radio" name="diu" value="sim"> Sim
-          <input type="radio" name="diu" value="nao"> Não
-          <input type="radio" name="diu" value="nao sabe"> Não sabe
+          <input type="radio" name="usa_diu" value="Sim"> Sim
+          <input type="radio" name="usa_diu" value="Nao"> Não
+          <input type="radio" name="usa_diu" value="Nao sabe"> Não sabe
 
           <label>Está grávida?</label>
-          <input type="radio" name="gravida" value="sim"> Sim
-          <input type="radio" name="gravida" value="nao"> Não
-          <input type="radio" name="gravida" value="nao sabe"> Não sabe
+          <input type="radio" name="esta_gestante" value="Sim"> Sim
+          <input type="radio" name="esta_gestante" value="Nao"> Não
+          <input type="radio" name="esta_gestante" value="Nao sabe"> Não sabe
 
           <label>Usa pílula anticoncepcional?</label>
-          <input type="radio" name="pilulaanticoncep" value="sim"> Sim
-          <input type="radio" name="pilulaanticoncep" value="nao"> Não
-          <input type="radio" name="pilulaanticoncep" value="nao sabe"> Não sabe
+          <input type="radio" name="usa_anticoncepcional" value="Sim"> Sim
+          <input type="radio" name="usa_anticoncepcional" value="Nao"> Não
+          <input type="radio" name="usa_anticoncepcional" value="Nao sabe"> Não sabe
 
           <label>Usa hormônio/remédio para menopausa?</label>
-          <input type="radio" name="hormonio" value="sim"> Sim
-          <input type="radio" name="hormonio" value="nao"> Não
-          <input type="radio" name="hormonio" value="nao sabe"> Não sabe
+          <input type="radio" name="usa_hormonio" value="Sim"> Sim
+          <input type="radio" name="usa_hormonio" value="Nao"> Não
+          <input type="radio" name="usa_hormonio" value="Nao sabe"> Não sabe
 
           <label>Já fez tratamento com radioterapia?</label>
-          <input type="radio" name="radioterapia" value="sim"> Sim
-          <input type="radio" name="radioterapia" value="nao"> Não
-          <input type="radio" name="radioterapia" value="nao sabe"> Não sabe
+          <input type="radio" name="ja_fez_radioterapia" value="Sim"> Sim
+          <input type="radio" name="ja_fez_radioterapia" value="Nao"> Não
+          <input type="radio" name="ja_fez_radioterapia" value="Nao sabe"> Não sabe
 
           <label>Quando foi a última menstruação?</label>
-          <input type="text" class="text-input">
+          <input type="text" id="data_ultima_menstruacao" class="text-input" placeholder="DD/MM/YYYY">
+
+
+          <label>Está na menopausa?</label>
+          <input type="radio" name="esta_menopausa" value="Sim"> Sim
+          <input type="radio" name="esta_menopausa" value="Nao"> Não
+          <input type="radio" name="esta_menopausa" value="Nao lembra"> Não lembra
+
+          <label>Teve corrimento?</label>
+          <input type="radio" name="teve_corrimento" value="Sim"> Sim
+          <input type="radio" name="teve_corrimento" value="Nao"> Não
+          <input type="radio" name="teve_corrimento" value="Nao sabe"> Não sabe
+          <input type="radio" name="teve_corrimento" value="Nao lembra"> Não lembra
+
 
           <label>Sangramento após relações sexuais?</label>
-          <input type="radio" name="sangramentorelacoes" value="sim"> Sim
-          <input type="radio" name="sangramentorelacoes" value="nao"> Não
-          <input type="radio" name="sangramentorelacoes" value="nao sabe"> Não sabe
+          <input type="radio" name="teve_sangramento_anormal" value="Sim"> Sim
+          <input type="radio" name="teve_sangramento_anormal" value="Nao"> Não
+          <input type="radio" name="teve_sangramento_anormal" value="Nao sabe"> Não sabe
+          <input type="radio" name="teve_sangramento_anormal" value="Nao lembra"> Não lembra
+        
 
           <label>Sangramento após a menopausa?</label>
-          <input type="radio" name="sangramentomenopausa" value="sim"> Sim
-          <input type="radio" name="sangramentomenopausa" value="nao"> Não/não sabe/não lembra/não está na menopausa
+          <input type="radio" name="sangramento_menopausa_extra" value="Sim"> Sim
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao"> Não
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao sabe"> Não sabe
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao lembra"> Não lembra
+          <input type="radio" name="sangramento_menopausa_extra" value="Nao esta em menopausa"> Não está em menopausa
+
+
         </fieldset>
 
         <fieldset>
           <legend>Exame Clínico</legend>
 
           <label>Inspeção do colo:</label>
-          <input type="radio" name="inspecaodocolo" value="normal"> Normal
-          <input type="radio" name="inspecaodocolo" value="ausente"> Ausente(anomalias congênitas ou retirado cirurgicamente)
-          <input type="radio" name="inspecaodocolo" value="alterado"> Alterado
-          <input type="radio" name="inspecaodocolo" value="colonaovisualizado"> Colo não visualizado
+          <input type="radio" name="inspecao_colo" value="normal"> Normal
+          <input type="radio" name="inspecao_colo" value="ausente"> Ausente(anomalias congênitas ou retirado cirurgicamente)
+          <input type="radio" name="inspecao_colo" value="alterado"> Alterado
+          <input type="radio" name="inspecao_colo" value="colo_nao_visualizado"> Colo não visualizado
 
           <label>Sinais sugestivos de doenças sexualmente transmissíveis?</label>
-          <input type="radio" name="doencasexual" value="sim"> Sim
-          <input type="radio" name="doencasexual" value="nao"> Não
+          <input type="radio" name="sinais_dst" value="sim"> Sim
+          <input type="radio" name="sinais_dst" value="nao"> Não
 
 
           <label>Data da coleta:</label>
-          <div class="char-input">
+          <div class="char-input" id="data_coleta"> 
             <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
             <input type="text" maxlength="1"><input type="text" maxlength="1"><span>/</span>
             <input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1"><input type="text" maxlength="1">
           </div>
 
           <label>Responsável:</label>
-          <input type="text" class="text-input">
+          <input type="text" id="profissional_responsavel" class="text-input"> 
         </fieldset>
 
         <div class="buttons">
-          <button type="submit">Salvar</button>
+          <button type="submit" id="salvarFichaCitopatologica">Salvar</button> 
           <button type="button" onclick="window.print()">Imprimir</button>
         </div>
       </form>
@@ -404,9 +425,9 @@
       <div class="coluna">
         <h4>SIDCC</h4>
         <div class="redes-sociais">
-         <a href="https://facebook.com/seuperfil"><img src="../img/facebook.svg" alt="Facebook"></a>
-          <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="../img/youtube.svg" alt="YouTube"></a>
-            <a href="https://instagram.com/seuperfil11"><img src="../img/instagram.svg" alt="Instagram"></a>
+         <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+          <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+            <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
         </div>
       </div>
 
@@ -418,7 +439,7 @@
       </div>
 
       <div class="coluna">
-        <h4>Ajuda</h4>
+        <h4>Ajuda</li>
         <ul>
           <li><a href="#">Dúvidas frequentes</a></li>
           <li><a href="#">Acessibilidade</a></li>
@@ -437,95 +458,312 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cartaoSusInputs = document.querySelectorAll('#cartao_sus input');
-      const lastInput = cartaoSusInputs[cartaoSusInputs.length - 1];
+    let pacienteIdGlobal = null; 
 
-      lastInput.addEventListener('blur', async () => {
+    document.addEventListener('DOMContentLoaded', () => {
+     
+      const cartaoSusInputs = document.querySelectorAll('#cartao_sus input');
+      
+      const lastCartaoSusInput = cartaoSusInputs[cartaoSusInputs.length - 1];
+
+      
+      lastCartaoSusInput.addEventListener('blur', async () => {
+        
         const cartao = Array.from(cartaoSusInputs).map(input => input.value).join('');
+
+        
         if (cartao.length === 15) {
           try {
-            const resp = await fetch(`http://localhost:8080/pacientes/busca?cartao_sus=${cartao}`);
+            
+            const resp = await fetch(`http://localhost:3000/pacientes/busca?cartao_sus=${cartao}`);
+
+            
             if (!resp.ok) {
-              alert('Paciente não encontrado.');
+              limparDadosPessoaisFicha();
+              alert('Paciente não encontrado ou erro na busca. Verifique se o servidor backend está rodando em http://localhost:3000.');
               return;
             }
-            const paciente = await resp.json();
 
+            
+            const paciente = await resp.json();
+            
+            
+            pacienteIdGlobal = paciente.id;
+
+            
+            console.log('Objeto paciente recebido:', paciente);
+            console.log('Data de nascimento recebida:', paciente.data_nascimento);
+            
             document.getElementById('nome_completo').value = paciente.nome_completo || '';
             document.getElementById('nome_mae').value = paciente.nome_mae || '';
             document.getElementById('nome_social').value = paciente.nome_social || '';
             document.getElementById('nacionalidade').value = paciente.nacionalidade || '';
-            preencherInputsCharInput('cpf', paciente.cpf); 
-            preencherInputsCharInput('data_nascimento', paciente.data_nascimento); 
-            preencherInputsCharInput('idade', String(paciente.idade || ''));
-
             document.getElementById('logradouro').value = paciente.logradouro || '';
-            document.getElementById('numero_residencia').value = paciente.numero || '';
+            document.getElementById('numero_residencia').value = paciente.numero_residencia || '';
             document.getElementById('complemento').value = paciente.complemento || '';
-            document.getElementById('bairro').value = paciente.bairro || '';
-            preencherInputsCharInput('uf', paciente.uf); 
-            preencherInputsCharInput('cod_municipio', paciente.codigo_municipio); 
-            document.getElementById('municipio').value = paciente.municipio || '';
-            preencherInputsCharInput('cep', paciente.cep); 
-            preencherInputsCharInput('ddd', paciente.ddd); 
-            preencherInputsCharInput('telefone', paciente.telefone); 
+            document.getElementById('bairro').value = paciente.setor || '';
+            document.getElementById('municipio').value = paciente.cidade || '';
             document.getElementById('ponto_referencia').value = paciente.ponto_referencia || '';
+
+            
+            preencherInputsCharInput('cpf', paciente.cpf_paciente || '');
+            preencherInputsCharInput('uf', paciente.uf || '');
+            preencherInputsCharInput('cod_municipio', paciente.cod_municipio || '');
+            preencherInputsCharInput('cep', paciente.cep || '');
+            preencherInputsCharInput('ddd', paciente.ddd || '');
+            preencherInputsCharInput('telefone', paciente.telefone || '');
+
+            
+            if (paciente.data_nascimento) {
+              const dataNasc = new Date(paciente.data_nascimento); 
+              if (isNaN(dataNasc.getTime())) { 
+                 console.error('Data de nascimento inválida após parse: ', paciente.data_nascimento);
+                 preencherInputsCharInput('idade', '');
+                 preencherInputsCharInput('data_nascimento', '');
+              } else {
+                  const hoje = new Date();
+                  let idade = hoje.getFullYear() - dataNasc.getFullYear();
+                  const mes = hoje.getMonth() - dataNasc.getMonth();
+                  if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
+                    idade--;
+                  }
+                  preencherInputsCharInput('idade', String(idade));
+
+                 
+                  const dia = String(dataNasc.getDate()).padStart(2, '0');
+                  const mesNasc = String(dataNasc.getMonth() + 1).padStart(2, '0');
+                  const ano = String(dataNasc.getFullYear());
+                  preencherInputsCharInput('data_nascimento', dia + mesNasc + ano);
+              }
+            } else {
+                preencherInputsCharInput('idade', '');
+                preencherInputsCharInput('data_nascimento', '');
+            }
+
+          
+            const racaRadios = document.querySelectorAll('input[name="raca"]');
+            racaRadios.forEach(radio => {
+              
+              if (radio.value === paciente.raca_cor) {
+                radio.checked = true;
+              } else {
+                radio.checked = false;
+              }
+            });
+            if (document.getElementById('raca_cor_outros')) { 
+                if (paciente.raca_cor === 'Indigena' && paciente.raca_cor_etnia) { 
+                    document.getElementById('raca_cor_outros').value = paciente.raca_cor_etnia;
+                } else if (paciente.raca_cor === 'Outros') {
+                    document.getElementById('raca_cor_outros').value = paciente.raca_cor;
+                } else {
+                    document.getElementById('raca_cor_outros').value = '';
+                }
+            }
+
+
+           
+            const escolaridadeRadios = document.querySelectorAll('input[name="escolaridade"]');
+            escolaridadeRadios.forEach(radio => {
+              
+              if (radio.value === paciente.escolaridade) {
+                radio.checked = true;
+              } else {
+                radio.checked = false;
+              }
+            });
+
           } catch (error) {
-            console.error(error);
+            console.error('Erro ao buscar paciente:', error);
+            alert('Ocorreu um erro ao buscar os dados do paciente. Verifique o console para mais detalhes.');
           }
         }
       });
 
+
       function preencherInputsCharInput(idCampo, valor = '') {
         const inputs = document.querySelectorAll(`#${idCampo} input`);
-        const arrChars = valor ? valor.toString().split('') : [];
-        inputs.forEach((input, i) => input.value = arrChars[i] || '');
+        const valorLimpo = String(valor).replace(/\D/g, ''); 
+        const arrChars = valorLimpo.split('');
+        inputs.forEach((input, i) => {
+          input.value = arrChars[i] || ''; 
+        });
       }
-    });
-  </script>
 
-  <script>
-    document.querySelectorAll('.char-input input').forEach((input, index, inputs) => {
-      input.addEventListener('input', () => {
-        if (input.value.length === input.maxLength) {
-          const next = inputs[index + 1];
-          if (next) next.focus();
-        }
+     
+      function limparDadosPessoaisFicha() {
+          pacienteIdGlobal = null; 
+          document.getElementById('nome_completo').value = '';
+          document.getElementById('nome_mae').value = '';
+          document.getElementById('nome_social').value = '';
+          preencherInputsCharInput('cpf', '');
+          document.getElementById('nacionalidade').value = '';
+          preencherInputsCharInput('data_nascimento', '');
+          preencherInputsCharInput('idade', '');
+          if (document.getElementById('raca_cor_outros')) { 
+              document.getElementById('raca_cor_outros').value = '';
+          }
+          document.getElementById('logradouro').value = '';
+          document.getElementById('numero_residencia').value = '';
+          document.getElementById('complemento').value = '';
+          document.getElementById('bairro').value = '';
+          preencherInputsCharInput('uf', '');
+          preencherInputsCharInput('cod_municipio', '');
+          document.getElementById('municipio').value = '';
+          preencherInputsCharInput('cep', '');
+          preencherInputsCharInput('ddd', '');
+          preencherInputsCharInput('telefone', '');
+          document.getElementById('ponto_referencia').value = '';
+
+          document.querySelectorAll('input[name="raca"]').forEach(radio => radio.checked = false);
+          document.querySelectorAll('input[name="escolaridade"]').forEach(radio => radio.checked = false);
+          document.querySelectorAll('#cartao_sus input').forEach(input => input.value = '');
+      }
+
+     
+      const fichaCitopatologicaForm = document.getElementById('fichaCitopatologicaForm');
+      fichaCitopatologicaForm.addEventListener('submit', async (event) => {
+          event.preventDefault(); 
+          if (!pacienteIdGlobal) {
+              alert('Por favor, preencha o Cartão SUS e busque o paciente antes de salvar a ficha.');
+              return;
+          }
+
+          
+          const ubsInfoData = {
+              uf: lerInputsCharInput('ubs_uf'),
+              protocolo: lerInputsCharInput('ubs_protocolo'),
+              cnes: lerInputsCharInput('ubs_cnes'),
+              unidade: document.getElementById('ubs_unidade').value,
+              municipios_ubs: document.getElementById('ubs_municipio').value,
+              
+          };
+
+         
+          const exameData = {
+              paciente_id: pacienteIdGlobal,
+              motivo_exame: document.querySelector('input[name="motivo_exame"]:checked')?.value || '',
+              primeira_vez_exame: document.querySelector('input[name="primeira_vez_exame"]:checked')?.value || '',
+              usa_diu: document.querySelector('input[name="usa_diu"]:checked')?.value || '',
+              esta_gestante: document.querySelector('input[name="esta_gestante"]:checked')?.value || '',
+              usa_anticoncepcional: document.querySelector('input[name="usa_anticoncepcional"]:checked')?.value || '',
+              usa_hormonio: document.querySelector('input[name="usa_hormonio"]:checked')?.value || '',
+              ja_fez_radioterapia: document.querySelector('input[name="ja_fez_radioterapia"]:checked')?.value || '',
+              data_ultima_menstruacao: document.getElementById('data_ultima_menstruacao').value, // DD/MM/YYYY
+              esta_menopausa: document.querySelector('input[name="esta_menopausa"]:checked')?.value || '', 
+              teve_corrimento: document.querySelector('input[name="teve_corrimento"]:checked')?.value || '', 
+              teve_sangramento_anormal: document.querySelector('input[name="teve_sangramento_anormal"]:checked')?.value || '',
+             
+          };
+          
+          
+          if (exameData.motivo_exame === 'Repeticao') {
+            exameData.motivo_exame = 'Rastreamento'; 
+          }
+          
+          
+          const sangramentoMenopausaExtraRadio = document.querySelector('input[name="sangramento_menopausa_extra"]:checked');
+          if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao esta em menopausa') {
+            exameData.teve_sangramento_anormal = 'Não está em menopausa';
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Sim') {
+              exameData.teve_sangramento_anormal = 'Sim';
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao') {
+              exameData.teve_sangramento_anormal = 'Não';
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao sabe') {
+              exameData.teve_sangramento_anormal = 'Não sabe'; 
+          } else if (sangramentoMenopausaExtraRadio && sangramentoMenopausaExtraRadio.value === 'Nao lembra') {
+              exameData.teve_sangramento_anormal = 'Não lembra'; 
+          }
+
+          
+          if (exameData.data_ultima_menstruacao) {
+              const parts = exameData.data_ultima_menstruacao.split('/');
+              if (parts.length === 3) {
+                  exameData.data_ultima_menstruacao = `${parts[2]}-${parts[1]}-${parts[0]}`; 
+              } else {
+                  console.warn('Formato de data da última menstruação inválido, esperado DD/MM/YYYY. Enviando como está (pode causar erro no backend).');
+              }
+          }
+
+       
+          const payload = {
+              ubs_info_data: ubsInfoData,
+              exame_data: exameData,
+          };
+
+          try {
+             
+              const response = await fetch('http://localhost:3000/submit_ficha_citopatologica', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(payload),
+              });
+
+              if (response.ok) {
+                  alert('Ficha citopatológica salva com sucesso!');
+                  fichaCitopatologicaForm.reset(); 
+                  limparDadosPessoaisFicha(); 
+              } else {
+                  const errorText = await response.text();
+                  alert(`Erro ao salvar ficha citopatológica: ${errorText}`);
+                  console.error('Erro ao salvar ficha:', errorText);
+              }
+          } catch (error) {
+              console.error('Erro de rede ao tentar salvar a ficha:', error);
+              alert('Erro de conexão ao servidor. Verifique se o backend está rodando.');
+          }
       });
 
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && input.value === '') {
-          const prev = inputs[index - 1];
-          if (prev) prev.focus();
-        }
+     
+      function lerInputsCharInput(idCampo) {
+        const inputs = document.querySelectorAll(`#${idCampo} input`);
+        return Array.from(inputs).map(input => input.value).join('');
+      }
+
+      
+      document.querySelectorAll('.char-input input').forEach((input, index, inputs) => {
+        input.addEventListener('input', () => {
+          if (input.value.length === input.maxLength) {
+            const next = inputs[index + 1];
+            if (next) next.focus();
+          }
+        });
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && input.value === '') {
+            const prev = inputs[index - 1];
+            if (prev) prev.focus();
+          }
+        });
       });
+
+      
+      const btnProntuario = document.getElementById("btnProntuario");
+      const btnFichaCitopatologica = document.getElementById("btnFichaCitopatologica");
+      const prontuarioFormContainer = document.getElementById("prontuarioFormContainer");
+      const fichaCitopatologicaFormContainer = document.getElementById("fichaCitopatologicaFormContainer");
+
+      function showProntuarioForm() {
+        prontuarioFormContainer.classList.remove("hidden");
+        fichaCitopatologicaFormContainer.classList.add("hidden");
+        btnProntuario.classList.add("ativo");
+        btnFichaCitopatologica.classList.remove("ativo");
+      }
+
+      function showFichaCitopatologicaForm() {
+        fichaCitopatologicaFormContainer.classList.remove("hidden");
+        prontuarioFormContainer.classList.add("hidden");
+        btnFichaCitopatologica.classList.add("ativo");
+        btnProntuario.classList.remove("ativo");
+      }
+
+      btnProntuario.addEventListener("click", showProntuarioForm);
+      btnFichaCitopatologica.addEventListener("click", showFichaCitopatologicaForm);
+
+     
+      document.addEventListener("DOMContentLoaded", showProntuarioForm);
     });
-
-   
-    const btnProntuario = document.getElementById("btnProntuario");
-    const btnFichaCitopatologica = document.getElementById("btnFichaCitopatologica");
-    const prontuarioFormContainer = document.getElementById("prontuarioFormContainer");
-    const fichaCitopatologicaFormContainer = document.getElementById("fichaCitopatologicaFormContainer");
-
-    function showProntuarioForm() {
-      prontuarioFormContainer.classList.remove("hidden");
-      fichaCitopatologicaFormContainer.classList.add("hidden");
-      btnProntuario.classList.add("ativo");
-      btnFichaCitopatologica.classList.remove("ativo");
-    }
-
-    function showFichaCitopatologicaForm() {
-      fichaCitopatologicaFormContainer.classList.remove("hidden");
-      prontuarioFormContainer.classList.add("hidden");
-      btnFichaCitopatologica.classList.add("ativo");
-      btnProntuario.classList.remove("ativo");
-    }
-
-    btnProntuario.addEventListener("click", showProntuarioForm);
-    btnFichaCitopatologica.addEventListener("click", showFichaCitopatologicaForm);
-
-    document.addEventListener("DOMContentLoaded", showProntuarioForm);
   </script>
 
 </body>
