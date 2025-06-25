@@ -1,4 +1,30 @@
+package main
 
+import (
+	"database/sql"
+	"html/template"
+	"log"
+	"net/http"
+
+	_ "github.com/lib/pq"
+)
+
+var db *sql.DB
+var tpl *template.Template
+
+func conectar() (*sql.DB, error) {
+	connStr := "host=localhost port=5432 user=postgres password=postgres dbname=ProjetoIntegrador sslmode=disable"
+	return sql.Open("postgres", connStr)
+}
+
+func init() {
+
+	var err error
+	tpl, err = template.ParseFiles("inicio.html")
+	if err != nil {
+		log.Fatal("Erro ao carregar templates: ", err)
+	}
+}
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
@@ -26,13 +52,12 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			
 			var paciente struct {
-				NomeCompleto    string
-				CPF             string
-				CartaoSUS       string
-				DataNascimento  string
-				CEP             string
+				NomeCompleto   string
+				CPF            string
+				CartaoSUS      string
+				DataNascimento string
+				CEP            string
 			}
 
 			err = db.QueryRow(`
@@ -46,7 +71,6 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			
 			err = tpl.ExecuteTemplate(w, "inicio.html", map[string]interface{}{
 				"Paciente": paciente,
 			})
@@ -86,5 +110,5 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
 	}
-	
+
 }
