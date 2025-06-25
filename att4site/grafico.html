@@ -1,16 +1,331 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gráfico - Em Criação</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIDCC</title>
+    <link rel="stylesheet" href="graficos.css">
+    <link rel="stylesheet" href="inicio.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-  <div class="container">
-    <a href="iniciomedico.html" class="voltar">&lt; Voltar</a>
-    <div class="gear"></div>
-    <p>Em processo de criação...</p>
-  </div>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Logo SIDCC" /> 
+                <span class="logo-text-sidcc"> <span class="char-s">S</span><span class="char-i">I</span><span class="char-d">D</span><span class="char-c1">C</span><span class="char-c2">C</span></span>
+            </div>
+            <nav class="menu">
+                <div class="links-e-perfil">
+                    <a href="iniciomedico.html">Início</a>
+                    <a href="#">Sobre</a>
+                    <a href="sac-logado.html">SAC</a>
+                </div>
+                <a href="javascript:void(0);" id="headerIconePerfilTrigger" class="icone-perfil">
+                    <img src="ruiva.png" alt="Perfil" class="icone-perfil" />
+                </a>
+                <div id="perfilDropdownOverlay" class="perfil-dropdown-card">
+                    <button id="fecharDropdownBtn" class="fechar-dropdown-btn" aria-label="Fechar menu perfil"></button>
+                    <img src="ruiva.png" alt="Foto do Paciente" id="dropdownFotoPerfil" class="dropdown-foto">
+                    <h3 id="dropdownNomeCompletoMedico" class="dropdown-nome">Dra. Joana</h3>
+                    <div class="dropdown-dados">
+                        <p><strong>CRM:</strong> <span id="dropdownCRMMedico">123456-SP</span></p>
+                        <p><strong>Especialidade:</strong> <span id="dropdownEspecialidadeMedico">Ginecologia</span></p>
+                    </div>
+                    <div class="dropdown-actions">
+                        <a href="alterardadosmedico.html" id="linkVerMeuPerfilDropdown" class="btn-action btn-alterar">Alterar Dados</a>
+                        <a href="escolher-tipo-usuario.html" id="linkSairDaConta" class="btn-action btn-sair">Sair da Conta</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="graficos">
+            <div class="flex align-center justify-between mb5">
+                <h2 class="graficos__titulo graficos__titulo--texto">Gráficos e Estatísticas</h2>
+                <li class="graficos__titulo graficos__titulo--voltar ">
+                <a href="iniciomedico.html" class="link">
+                    <i class="graficos__titulo graficos__titulo--voltar fa-solid fa-angle-left"></i>
+                    Voltar
+                </a>
+                </li>
+            </div>>
+            
+            <div class="grid2">
+                    <h2 class="graphic">
+                        Primeiro Exame
+                        <canvas id="first-exam"></canvas>
+                    </h2>
+
+                    <h2 class="graphic">
+                        Raça/Cor
+                        <canvas id="race"></canvas>
+                    </h2>
+            </div>
+                
+                <h2 class="graphic">
+                    Resultados
+                    <canvas id="results"></canvas>
+                </h2>
+
+            <div class="grid3">
+                    <h2 class="graphic">
+                        Idade
+                        <canvas id="age"></canvas>
+                    </h2>
+
+                    <h2 class="graphic">
+                        Escolaridade
+                        <canvas id="education"></canvas>
+                    </h2>
+            </div>
+
+                <h2 class="graphic">
+                    Outras Informações
+                    <canvas id="other-infos"></canvas>
+                </h2>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-logo-social">
+                <div class="logo">
+                    SIDCC
+                </div>
+                <div class="social-icons">
+                    <a href="https://facebook.com/seuperfil"><img src="facebook.svg" alt="Facebook"></a>
+                    <a href="https://www.youtube.com/@sidcc.cancercervical"><img src="youtube.svg" alt="YouTube"></a>
+                    <a href="https://instagram.com/seuperfil11"><img src="instagram.svg" alt="Instagram"></a>
+                    </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a href="sac-logado.html">SAC</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Ajuda</h4>
+                    <ul>
+                        <li><a href="faq-logado.html">Dúvidas frequentes</a></li>
+                        <li><a href="#">Acessibilidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="termos-de-uso-logado.html">Termos de uso</a></li>
+                        <li><a href="politica-de-privacidade-logado.html">Política de privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="confirmLogoutModal" class="modal-logout-overlay">
+            <div class="modal-logout-content">
+                <p>Tem certeza que deseja sair da conta?</p>
+                <div class="modal-logout-actions">
+                    <button id="confirmLogoutModalButton" class="btn-modal-confirmar">Sim, Sair</button>
+                    <button id="cancelLogoutModalButton" class="btn-modal-cancelar">Cancelar</button>
+                </div>
+            </div>
+         </div>       
+     </div>
+     <script src="frontend.js"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+     <!-- Gráficos -->
+    <script>
+        const firstExam = document.getElementById('first-exam');
+        const race = document.getElementById('race');
+        const results = document.getElementById('results');
+        const age = document.getElementById('age');
+        const education = document.getElementById('education');
+        const otherInfos = document.getElementById('other-infos');
+
+        const ChartFirsExam = new Chart(firstExam, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [
+                    {
+                    label: 'Sim',
+                    data: firstExamData[0],
+                    fill: false,
+                    borderColor: '#f9bd14',
+                    backgroundColor: '#f9bd14'
+                    },
+                    {
+                    label: 'Não',
+                    data: firstExamData[1],
+                    fill: false,
+                    borderColor: '#2864ae',
+                    backgroundColor: '#2864ae'
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });     
+    
+        const ChartRace = new Chart(race, {
+            type: 'pie',
+            data: {
+                labels: ['Branca', 'Preta', 'Parda', 'Amarela', 'Indígena/etnia'],
+                datasets: [{
+                    data: raceData,
+                    backgroundColor: ['#48ad45', '#6dbd6a', '#91ce8f', '#b6deb5', '#daefda']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        })
+    
+        const ChartResults = new Chart(results, {
+            type: 'pie',
+            data: {
+                labels: ['Normal', 'Lesão de baixo grau', 'Lesão de grau moderado', 'Lesão de alto grau', 'Colo alterado (encaminhamento à colposcopia)'],
+                datasets: [{
+                    data: resultsData,
+                    backgroundColor: ['#3a923f', '#2864ae', '#faca43', '#f47648', '#e60606']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+                   
+            }
+        })
+
+        const ChartAge = new Chart(age, {
+            type: 'bar',
+            data: {
+                labels: ['Mais de 60', '55-60', '50-54', '45-49', '40-44', '35-39', '30-34', '25-29', 'Menos de 25'],
+                datasets: [{
+                    label: 'Idade',
+                    data: ageData,
+                    backgroundColor: ['#48ad45', '#f9bd14', '#2864ae']
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        })
+
+        const ChartEducation = new Chart(education, {
+            type: 'bar',
+            data: {
+                labels: ['Analfabeta', 'Ensino fundamental incompleto', 'Ensino fundamental completo', 'Ensino médio completo', 'Ensino superior completo'],
+                datasets: [{
+                    label: "Escolaridade",
+                    data: educationData,
+                    backgroundColor: ['#48ad45', '#f9bd14', '#2864ae']
+                    }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        })
+
+        const ChartOtherInfos = new Chart(otherInfos, {
+            type: 'bar',
+            data: {
+                labels: ['Usa Diu?', 'Está grávida?', 'Usa pílula anticoncepcional?', 'Usa hormônio', 'Já fez radioterapia?', 'Sangramento após relações sexuais?'],
+                datasets: [
+                    {
+                        label: 'Sim',
+                        data: otherInfosData[0],
+                        backgroundColor: '#6dbd64'
+                    },
+                    {
+                        label: 'Não',
+                        data: otherInfosData[1],
+                        backgroundColor: '#5383be'
+                    },
+                    {
+                        label: 'Não sabe',
+                        data: otherInfosData[2],
+                        backgroundColor: '#faca43'
+                    }
+                ]
+            }
+        })
+    
+        fetch('/primeiro-exame')
+        .then(res=> res.json())        
+        .then(data => {
+            ChartFirsExam.data.datasets[0].data = data[0]
+            ChartFirsExam.data.datasets[1].data = data[1]
+
+            ChartFirsExam.update()
+        })
+
+        fetch('/raça-cor')
+        .then(res=> res.json())        
+        .then(data => {
+            ChartRace.data.datasets.data = data
+
+            ChartRace.update()
+        })
+
+        fetch('/resultados')
+        .then(res=> res.json())        
+        .then(data => {
+            ChartResults.data.datasets.data = data
+
+            ChartResults.update()
+        })
+
+        fetch('/idade')
+        .then(res=> res.json())        
+        .then(data => {
+            ChartAge.data.datasets.data = data
+
+            ChartAge.update()
+        })
+
+        fetch('/escolaridade')
+        .then(res=> res.json())        
+        .then(data => {
+            ChartEducation.data.datasets.data = data
+
+            ChartEducation.update()
+        })
+
+        fetch('/outras-informações')
+        .then(res=> res.json())        
+        .then(data => {
+            ChartOtherInfos.data.datasets[0].data = data[0]
+            ChartOtherInfos.data.datasets[1].data = data[1]
+            ChartOtherInfos.data.datasets[2].data = data[2]
+
+            ChartOtherInfos.update()
+        })
+        
+    </script>
+
 </body>
 </html>
