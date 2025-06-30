@@ -68,5 +68,10 @@ Conexão de APIs para possibilidade de agendamento de exames e consultas
 
 Criado, desenvolvido e produzido por Elisa Correia, Emilly Ranny, Gabriela Brasileiro, Jolie Pavan e Júlia Fideles.
 
-vídeo explicativo: https://drive.google.com/file/d/1B1ly7U1YJ9YmBtaQnLs0OrOb3L-x0BBI/view?usp=drive_link
+Vídeos explicativos: 
+
+demonstração- https://drive.google.com/file/d/1YxltQEkeaNG1-Py1TDBjOKb4GlDfDGHL/view?usp=sharing
+updates(gráficos e estatísticas)- https://drive.google.com/file/d/119YybSHMAQmdo24bQkyZsZ8CI3XpUPw7/view?usp=sharing
+banco de dados- https://drive.google.com/file/d/1rk3R08Kk7I3yAtfw7UXM-jW0gIs0D1PB/view?usp=drive_link
+
 
