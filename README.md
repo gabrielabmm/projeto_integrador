@@ -51,22 +51,6 @@ JavaScript
 PostgreSQL
 
 
-📁 Estrutura do Projeto
-
-SIDCC/
-├── index.html
-
-├── style.css
-
-├── script.js
-
-├── assets/
-
-│   └── images/
-
-│       └── background.jpg
-
-
 
 🔒 Segurança e Privacidade
 O SIDCC foi desenvolvido com foco na segurança e privacidade dos dados das pacientes, alinhando-se às diretrizes da Lei Geral de Proteção de Dados (LGPD).
@@ -74,9 +58,7 @@ O SIDCC foi desenvolvido com foco na segurança e privacidade dos dados das paci
 
 📈 Planejamento Futuro
 
-Geração de relatórios e dashboards para análise de dados
-
-Exportação de dados em formatos como PDF e CSV
+Exportação e importação de dados em formatos como PDF e CSV
 
 Desenvolvimento de ferramentas de acessibilidade
 
@@ -87,3 +69,4 @@ Conexão de APIs para possibilidade de agendamento de exames e consultas
 Criado, desenvolvido e produzido por Elisa Correia, Emilly Ranny, Gabriela Brasileiro, Jolie Pavan e Júlia Fideles.
 
 vídeo explicativo: https://drive.google.com/file/d/1B1ly7U1YJ9YmBtaQnLs0OrOb3L-x0BBI/view?usp=drive_link
+
